@@ -1,3 +1,4 @@
+import Background_Settings from '../background_settings/background_settings';
 import './invitation_editor.css';
 
 function Ivitation_editor() {
@@ -13,7 +14,7 @@ function Ivitation_editor() {
                 
             </div>
             <div className="column" id='image_settings'>
-                
+                <Background_Settings />
             </div>
         </>
     )
