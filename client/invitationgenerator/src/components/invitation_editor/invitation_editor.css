@@ -10,6 +10,7 @@
     float: left;
     width: 20vw;
     height: 90vh;
+    overflow: auto;
 }
 
 #invitation_appearance {

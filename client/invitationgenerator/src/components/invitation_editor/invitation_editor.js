@@ -14,7 +14,7 @@ function Ivitation_editor() {
                 
             </div>
             <div className="column" id='image_settings'>
-                <Background_Settings />
+                <Background_Settings type="wedding" />
             </div>
         </>
     )
