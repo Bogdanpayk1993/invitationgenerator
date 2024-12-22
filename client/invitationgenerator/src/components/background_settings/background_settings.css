@@ -1,4 +1,10 @@
 .background_settings {
+    height: 87vh;
+    overflow: auto;
+}
+
+.background_images{
+    width: 46%;
     height: 25vh;
     margin: 2%;
     float: left;

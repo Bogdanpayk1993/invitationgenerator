@@ -1,24 +1,29 @@
+import React, { useState } from 'react';
 import Background_Settings from '../background_settings/background_settings';
+import Invitation_Viewing from '../invitation_viewing';
 import './invitation_editor.css';
 
 function Ivitation_editor() {
 
     const path_to_server = "http://localhost:8000"
+    const [background_image, set_background_image] = useState("")
 
     return (
         <>
             <div className='header'>
                 <h1> Сервіс масової розсилки запрошень "Приходь" </h1>
             </div>
-            <div className="column" id='text_settings'>
-                
-            </div>
-            <div className="column" id='invitation_appearance'>
-                
-            </div>
-            <div className="column" id='image_settings'>
-                <Background_Settings path_to_server={path_to_server} type="wedding" />
-            </div>
+            <diw>
+                <div className="column">
+                    
+                </div>
+                <div className="column">
+                    <Invitation_Viewing background_image={background_image} />
+                </div>
+                <div className="column">
+                    <Background_Settings path_to_server={path_to_server} type="wedding" set_background_image={set_background_image} />
+                </div>
+            </diw>
         </>
     )
 }

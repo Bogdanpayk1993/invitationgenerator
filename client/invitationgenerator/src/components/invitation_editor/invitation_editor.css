@@ -10,11 +10,18 @@
     float: left;
     width: 20vw;
     height: 90vh;
-    overflow: auto;
 }
 
-#invitation_appearance {
+.column:nth-child(2) {
     width: 60vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column h3 {
+    height: 3vh;
+    margin: 0px;
 }
 
 h1 {
