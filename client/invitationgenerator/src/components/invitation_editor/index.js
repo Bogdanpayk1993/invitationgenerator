@@ -1,2 +1,2 @@
-import Ivitation_editor from "./invitation_editor";
-export default Ivitation_editor;
+import Invitation_Editor from "./invitation_editor";
+export default Invitation_Editor;

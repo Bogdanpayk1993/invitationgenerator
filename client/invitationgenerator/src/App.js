@@ -1,10 +1,10 @@
-import Ivitation_editor from './components/invitation_editor/invitation_editor';
+import Invitation_Editor from './components/invitation_editor';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Ivitation_editor />
+      <Invitation_Editor />
     </div>
   );
 }

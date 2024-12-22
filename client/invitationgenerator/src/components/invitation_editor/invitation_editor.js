@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import Background_Settings from '../background_settings/background_settings';
+import Background_Settings from '../background_settings';
 import Invitation_Viewing from '../invitation_viewing';
-import './invitation_editor.css';
 
-function Ivitation_editor() {
+function Invitation_Editor() {
 
     const path_to_server = "http://localhost:8000"
     const [background_image, set_background_image] = useState("")
@@ -28,4 +27,4 @@ function Ivitation_editor() {
     )
 }
 
-export default Ivitation_editor;
+export default Invitation_Editor;
