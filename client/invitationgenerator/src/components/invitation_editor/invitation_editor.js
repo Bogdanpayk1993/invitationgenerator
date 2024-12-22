@@ -2,6 +2,9 @@ import Background_Settings from '../background_settings/background_settings';
 import './invitation_editor.css';
 
 function Ivitation_editor() {
+
+    const path_to_server = "http://localhost:8000"
+
     return (
         <>
             <div className='header'>
@@ -14,7 +17,7 @@ function Ivitation_editor() {
                 
             </div>
             <div className="column" id='image_settings'>
-                <Background_Settings type="wedding" />
+                <Background_Settings path_to_server={path_to_server} type="wedding" />
             </div>
         </>
     )
