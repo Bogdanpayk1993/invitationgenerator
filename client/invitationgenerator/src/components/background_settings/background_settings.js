@@ -24,7 +24,7 @@ function Background_Settings(props) {
 
     return (
         <>
-            <h3> Фонові зображення </h3>
+            <h3> Налаштування фону </h3>
             <div className='background_settings'>
                 {
                     Object.keys(background_images).length != 0 ?

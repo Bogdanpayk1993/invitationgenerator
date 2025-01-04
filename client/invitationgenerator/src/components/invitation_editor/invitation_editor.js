@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Background_Settings from '../background_settings';
 import Invitation_Viewing from '../invitation_viewing';
+import Text_Settings from '../text_settings/text_settings';
 import './invitation_editor.css'
 
 function Invitation_Editor() {
@@ -15,7 +16,7 @@ function Invitation_Editor() {
             </div>
             <diw>
                 <div className="column">
-                    
+                    <Text_Settings background_image={background_image} set_background_image={set_background_image} />
                 </div>
                 <div className="column">
                     <Invitation_Viewing background_image={background_image} />
