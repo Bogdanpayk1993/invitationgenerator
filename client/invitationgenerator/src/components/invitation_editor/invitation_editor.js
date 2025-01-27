@@ -14,7 +14,7 @@ function Invitation_Editor() {
             <div className='header'>
                 <h1> Сервіс масової розсилки запрошень "Приходь" </h1>
             </div>
-            <diw>
+            <div>
                 <div className="column">
                     <Settings background_image={background_image} path_to_server={path_to_server} type="wedding" />
                 </div>
@@ -24,7 +24,7 @@ function Invitation_Editor() {
                 <div className="column">
                     <Background_Settings path_to_server={path_to_server} type="wedding" set_background_image={set_background_image} />
                 </div>
-            </diw>
+            </div>
         </>
     )
 }

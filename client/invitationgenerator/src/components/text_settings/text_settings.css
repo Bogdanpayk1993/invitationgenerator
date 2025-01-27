@@ -1,0 +1,11 @@
+.SelectContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Select {
+    width: 40%;
+    float: right;
+    margin-left: 5px;
+}
