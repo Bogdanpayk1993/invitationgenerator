@@ -1,11 +1,19 @@
-.SelectContainer {
+.Text_Settings > div {
+    width: 50%;
+    height: 4vh;
+    float: left;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
 }
 
-.Select {
-    width: 40%;
-    float: right;
-    margin-left: 5px;
+.Text_Settings > div > div {
+    width: 90%;
+}
+
+.Text_Settings > div > button {
+    width: 90%;
+}
+.Text_Settings > div > input {
+    width: 86%;
 }

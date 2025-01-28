@@ -11,11 +11,11 @@ function Settings(props) {
     return (
         background_image != "" ?
         <>         
-            <div className="first">
+            <div className="settings">
                 <h3> Налаштування тексту </h3>
                 <Text_Settings background_image={background_image} path_to_server={path_to_server} type={type} />
             </div>
-            <div className="second">
+            <div className="settings">
                 <h3> Отримання запрошення </h3>
             </div>
         </>
