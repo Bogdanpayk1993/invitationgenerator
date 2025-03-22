@@ -1,4 +1,4 @@
-import React, { useState, useId } from "react";
+import React, { useState, useRef } from "react";
 import Select from "react-select";
 import Send_Request_For_Database from "../send_request_for_database/send_request_for_database";
 import './text_settings.css';
@@ -32,6 +32,15 @@ async function get_invitation_texts(path_to_server, type, set_invitation_texts) 
 
 function Text_Settings(props) {
 
+    const inviting_names = useRef()
+    const invitees_names = useRef()
+    const first_place = useRef()
+    const first_date = useRef()
+    const first_time = useRef()
+    const second_place = useRef()
+    const second_date = useRef()
+    const second_time = useRef()
+
     const type = props.type
     const path_to_server = props.path_to_server
     const [invitation_texts, set_invitation_texts] = useState("")
@@ -40,70 +49,126 @@ function Text_Settings(props) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
     }
 
-    console.log(invitation_texts)
+    function generating_invitation() {
+        let invitation_details = {
+            inviting_names: inviting_names.current.value,
+            invitees_names: invitees_names.current.value,
+            first_place: first_place.current.value,
+            first_date: first_date.current.value,
+            first_time: first_time.current.value,
+            second_place: second_place.current.value,
+            second_date: second_date.current.value,
+            second_time: second_time.current.value
+        }
+    }
 
     return (
         <>
             {
                 Object.keys(invitation_texts).length != 0 ?
                     <div className="Text_Settings">
+                        <h3> Налаштування тексту </h3>
                         <div>
-                            Оберіть шаблон -
+                            <div>
+                                Оберіть шаблон -
+                            </div>
+                            <div>
+                                <Select options={invitation_texts} defaultValue={[invitation_texts[0]]} />
+                            </div>
                         </div>
                         <div>
-                            <Select options={invitation_texts} defaultValue={[invitation_texts[0]]} className="Select" />
-                        </div>
-                        <div>
+                            <div>
 
-                        </div>
-                        <div>
-                            <button> Редагувати шаблон </button>
-                        </div>
-                        <hr />
-                        <div>
-                            Імена запрошуючих -
-                        </div>
-                        <div>
-                            <input />
-                        </div>
-                        <div>
-                            Імена запрошених -
-                        </div>
-                        <div>
-                            <input />
+                            </div>
+                            <div>
+                                <button> Редагувати шаблон </button>
+                            </div>
                         </div>
                         <hr />
                         <div>
-                            Місце офіційної частини -
+                            <div>
+                                Імена запрошуючих -
+                            </div>
+                            <div>
+                                <input ref={inviting_names} />
+                            </div>
                         </div>
                         <div>
-                            <input />
-                        </div>
-                        <div>
-                            Дата офіційної частини -
-                        </div>
-                        <div>
-                            <input />
-                        </div>
-                        <hr />
-                        <div>
-                            Місце банкету -
-                        </div>
-                        <div>
-                            <input />
-                        </div>
-                        <div>
-                            Дата банкету -
-                        </div>
-                        <div>
-                            <input />
+                            <div>
+                                Імена запрошених -
+                            </div>
+                            <div>
+                                <input ref={invitees_names} />
+                            </div>
                         </div>
                         <hr />
                         <div>
+                            <div className="Part_Name">
+                                Офіційна частина
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                Адреса проведення -
+                            </div>
+                            <div>
+                                <input ref={first_place} />
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                Дата -
+                            </div>
+                            <div>
+                                <input type="date" ref={first_date} />
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                Час -
+                            </div>
+                            <div>
+                                <input type="time" ref={first_time} />
+                            </div>
+                        </div>
+                        <hr />
+                        <div>
+                            <div className="Part_Name">
+                                Банкет
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                Адреса проведення -
+                            </div>
+                            <div>
+                                <input ref={second_place} />
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                Дата -
+                            </div>
+                            <div>
+                                <input type="date" ref={second_date} />
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                Час -
+                            </div>
+                            <div>
+                                <input type="time" ref={second_time} />
+                            </div>
+                        </div>
+                        <hr />
+                        <div>
+                            <div>
 
-                        </div>
-                        <div>
-                            <button> Згенерувати запрошення </button>
+                            </div>
+                            <div>
+                                <button onClick={() => generating_invitation()}> Згенерувати запрошення </button>
+                            </div>
                         </div>
                     </div>
                     :

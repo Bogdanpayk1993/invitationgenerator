@@ -12,7 +12,6 @@ function Settings(props) {
         background_image != "" ?
         <>         
             <div className="settings">
-                <h3> Налаштування тексту </h3>
                 <Text_Settings background_image={background_image} path_to_server={path_to_server} type={type} />
             </div>
             <div className="settings">
