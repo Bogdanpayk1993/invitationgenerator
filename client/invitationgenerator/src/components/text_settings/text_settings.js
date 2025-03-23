@@ -44,13 +44,23 @@ function Text_Settings(props) {
     const type = props.type
     const path_to_server = props.path_to_server
     const [invitation_texts, set_invitation_texts] = useState("")
+    const [template_type, set_template_type] = useState("")
+
 
     if (Object.keys(invitation_texts).length == 0) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
     }
 
+    if (template_type == "" && Object.keys(invitation_texts).length !== 0) {
+        set_template_type(invitation_texts[0]["label"])
+    }
+
     function generating_invitation() {
+
+        let index = invitation_texts.findIndex(el => el["label"] === template_type)
+
         let invitation_details = {
+            ...invitation_texts[index],
             inviting_names: inviting_names.current.value,
             invitees_names: invitees_names.current.value,
             first_place: first_place.current.value,
@@ -60,6 +70,7 @@ function Text_Settings(props) {
             second_date: second_date.current.value,
             second_time: second_time.current.value
         }
+
     }
 
     return (
@@ -73,7 +84,7 @@ function Text_Settings(props) {
                                 Оберіть шаблон -
                             </div>
                             <div>
-                                <Select options={invitation_texts} defaultValue={[invitation_texts[0]]} />
+                                <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} defaultValue={[invitation_texts[0]]} />
                             </div>
                         </div>
                         <div>
