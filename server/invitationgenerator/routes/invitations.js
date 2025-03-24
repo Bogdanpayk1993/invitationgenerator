@@ -8,4 +8,8 @@ router.post('/getType', function (req, res) {
     res.send(result)
 })
 
+router.post('/getInvitation', function (req, res) {
+    console.log(req['body']['invitation_details']['inviting_names'])
+})
+
 module.exports = router;

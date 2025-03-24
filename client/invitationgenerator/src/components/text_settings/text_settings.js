@@ -18,6 +18,7 @@ async function get_invitation_texts(path_to_server, type, set_invitation_texts) 
                 type: json[el]["type"],
                 greeting: json[el]["greeting"],
                 message: json[el]["message"],
+                who: json[el]["who"],
                 body: json[el]["body"],
                 event_title: json[el]["eventtitle"],
                 party_title: json[el]["partytitle"],
@@ -46,7 +47,6 @@ function Text_Settings(props) {
     const [invitation_texts, set_invitation_texts] = useState("")
     const [template_type, set_template_type] = useState("")
 
-
     if (Object.keys(invitation_texts).length == 0) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
     }
@@ -55,7 +55,7 @@ function Text_Settings(props) {
         set_template_type(invitation_texts[0]["label"])
     }
 
-    function generating_invitation() {
+    async function generating_invitation() {
 
         let index = invitation_texts.findIndex(el => el["label"] === template_type)
 
@@ -70,6 +70,8 @@ function Text_Settings(props) {
             second_date: second_date.current.value,
             second_time: second_time.current.value
         }
+
+        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, invitation_details: invitation_details })
 
     }
 
