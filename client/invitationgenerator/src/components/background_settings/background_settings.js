@@ -31,7 +31,7 @@ function Background_Settings(props) {
                         (
                             Object.keys(background_images).map(el => (
                                 <>
-                                    <img src={`${path_to_server}/images/${background_images[el]['name']}.jpg`} className='background_images' onClick={() => set_background_image(`${path_to_server}/images/${background_images[el]['name']}.jpg`)} />
+                                    <img src={`${path_to_server}/images/${background_images[el]['name']}.jpg`} className='background_images' onClick={() => set_background_image(`${background_images[el]['name']}.jpg`)} />
                                 </>
                             ))
                         ) : <p> Немає фонових зображень </p>

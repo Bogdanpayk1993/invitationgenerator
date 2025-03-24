@@ -44,6 +44,7 @@ function Text_Settings(props) {
 
     const type = props.type
     const path_to_server = props.path_to_server
+    const background_image = props.background_image
     const [invitation_texts, set_invitation_texts] = useState("")
     const [template_type, set_template_type] = useState("")
 
@@ -61,6 +62,7 @@ function Text_Settings(props) {
 
         let invitation_details = {
             ...invitation_texts[index],
+            background_image: background_image,
             inviting_names: inviting_names.current.value,
             invitees_names: invitees_names.current.value,
             first_place: first_place.current.value,
@@ -70,7 +72,7 @@ function Text_Settings(props) {
             second_date: second_date.current.value,
             second_time: second_time.current.value
         }
-
+        
         let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, invitation_details: invitation_details })
 
     }
@@ -103,7 +105,7 @@ function Text_Settings(props) {
                                 Імена запрошуючих -
                             </div>
                             <div>
-                                <input ref={inviting_names} />
+                                <input value={"Сергій та Богдана"} ref={inviting_names} />
                             </div>
                         </div>
                         <div>
@@ -111,7 +113,7 @@ function Text_Settings(props) {
                                 Імена запрошених -
                             </div>
                             <div>
-                                <input ref={invitees_names} />
+                                <input value={"Юрій та Катерина"} ref={invitees_names} />
                             </div>
                         </div>
                         <hr />
@@ -125,7 +127,7 @@ function Text_Settings(props) {
                                 Адреса проведення -
                             </div>
                             <div>
-                                <input ref={first_place} />
+                                <input value={"Ужгород"} ref={first_place} />
                             </div>
                         </div>
                         <div>
@@ -155,7 +157,7 @@ function Text_Settings(props) {
                                 Адреса проведення -
                             </div>
                             <div>
-                                <input ref={second_place} />
+                                <input value={"Ужгород"}  ref={second_place} />
                             </div>
                         </div>
                         <div>

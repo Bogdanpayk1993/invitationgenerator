@@ -19,7 +19,7 @@ function Invitation_Editor() {
                     <Settings background_image={background_image} path_to_server={path_to_server} type="wedding" />
                 </div>
                 <div className="column">
-                    <Invitation_Viewing background_image={background_image} />
+                    <Invitation_Viewing path_to_server={path_to_server} background_image={background_image} />
                 </div>
                 <div className="column">
                     <Background_Settings path_to_server={path_to_server} type="wedding" set_background_image={set_background_image} />
