@@ -9,7 +9,7 @@ router.post('/getType', function (req, res) {
 })
 
 router.post('/getInvitation', function (req, res) {
-    console.log(req['body']['invitation_details']['inviting_names'])
+    console.log(req['body']['invitation_details'])
 })
 
 module.exports = router;

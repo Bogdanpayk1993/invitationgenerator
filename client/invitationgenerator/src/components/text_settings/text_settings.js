@@ -58,10 +58,10 @@ function Text_Settings(props) {
 
     async function generating_invitation() {
 
-        let index = invitation_texts.findIndex(el => el["label"] === template_type)
+        let invitation_index = invitation_texts.findIndex(el => el["label"] === template_type)
 
         let invitation_details = {
-            ...invitation_texts[index],
+            ...invitation_texts[invitation_index],
             background_image: background_image,
             inviting_names: inviting_names.current.value,
             invitees_names: invitees_names.current.value,

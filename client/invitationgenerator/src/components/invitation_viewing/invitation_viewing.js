@@ -7,7 +7,7 @@ function Invitation_Viewing(props) {
 
     return (
         background_image != "" ?
-            <img src={`${path_to_server}/images/${background_image}`} className='invitation' />
+            <img src={`${path_to_server}/images/backgrounds/${background_image}`} className='invitation' />
             :
             <p> Оберіть фонове зображення </p>
     )
