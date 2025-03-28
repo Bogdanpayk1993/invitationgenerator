@@ -20,16 +20,18 @@ router.post('/getType', function (req, res) {
 router.post('/getInvitation', async function (req, res) {
     const file = await readFile(`${path}\\public\\images\\backgrounds\\${req['body']['invitation_details']['background_image']}`)
     const img = sharp(file)
-    const textSVG = Buffer.from(`<svg width="500" height="700">
-                        <text x="50%" y="30" text-anchor="middle"> ${req['body']['invitation_details']['greeting']} ${req['body']['invitation_details']['invitees_names']} </text>
-                        <text x="50%" y="60" text-anchor="middle"> ${req['body']['invitation_details']['message']} </text>
-                        <text x="50%" y="90" text-anchor="middle"> ${req['body']['invitation_details']['who']}, ${req['body']['invitation_details']['inviting_names']}, ${req['body']['invitation_details']['body']} </text>
-                        <text x="50%" y="120" text-anchor="middle"> ${req['body']['invitation_details']['event_title']} </text>
-                        <text x="50%" y="150" text-anchor="middle"> Дата: ${req['body']['invitation_details']['first_date']} Час: ${req['body']['invitation_details']['first_time']} Місце: ${req['body']['invitation_details']['first_place']}  </text>
-                        <text x="50%" y="180" text-anchor="middle"> ${req['body']['invitation_details']['party_title']} </text>
-                        <text x="50%" y="210" text-anchor="middle"> Дата: ${req['body']['invitation_details']['second_date']} Час: ${req['body']['invitation_details']['second_time']} Місце: ${req['body']['invitation_details']['second_place']}  </text>
-                        <text x="50%" y="240" text-anchor="middle"> ${req['body']['invitation_details']['assurance']} </text>
-                        <text x="50%" y="270" text-anchor="middle"> ${req['body']['invitation_details']['farewell']}, ${req['body']['invitation_details']['inviting_names']}. </text>
+    const textSVG = Buffer.from(`<svg width="600" height="600">
+                        <text x="50%" y="100" text-anchor="middle" font-size="20"> ${req['body']['invitation_details']['greeting']} ${req['body']['invitation_details']['invitees_names']} </text>
+                        <text x="50%" y="160" text-anchor="middle" font-size="20"> ${req['body']['invitation_details']['message']} </text>
+                        <text x="50%" y="200" text-anchor="middle" font-size="20"> ${req['body']['invitation_details']['who']}, ${req['body']['invitation_details']['inviting_names']}, ${req['body']['invitation_details']['body']} </text>
+                        <text x="50%" y="260" text-anchor="middle" font-size="20"> ${req['body']['invitation_details']['event_title']} </text>
+                        <text x="50%" y="300" text-anchor="middle" font-size="20"> Дата: ${req['body']['invitation_details']['first_date']} Час: ${req['body']['invitation_details']['first_time']} </text>
+                        <text x="50%" y="340" text-anchor="middle" font-size="20"> Адреса: ${req['body']['invitation_details']['first_place']} </text>
+                        <text x="50%" y="400" text-anchor="middle" font-size="20"> ${req['body']['invitation_details']['party_title']} </text>
+                        <text x="50%" y="440" text-anchor="middle" font-size="20"> Дата: ${req['body']['invitation_details']['second_date']} Час: ${req['body']['invitation_details']['second_time']} </text>
+                        <text x="50%" y="480" text-anchor="middle" font-size="20"> Адреса: ${req['body']['invitation_details']['second_place']} </text>
+                        <text x="50%" y="540" text-anchor="middle" font-size="20"> ${req['body']['invitation_details']['assurance']} </text>
+                        <text x="50%" y="580" text-anchor="middle" font-size="20"> ${req['body']['invitation_details']['farewell']}, ${req['body']['invitation_details']['inviting_names']}. </text>
                     </svg>`)
     const result = await img.composite([{ input: textSVG }]).toBuffer()
     await writeFile(`${path}\\public\\images\\invitations\\res.png`, result)
