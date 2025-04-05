@@ -81,7 +81,43 @@ function Text_Settings(props) {
             third_time: "18:00"
         }
         
-        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, invitation_details: invitation_details })
+        let invitation_text = []
+        let y = 100
+
+        invitation_text.push({ text: `${invitation_details['greeting']} ${invitation_details['invitees_names']}`, position: y})
+        
+        y += 60
+        invitation_text.push({ text: `${invitation_details['message']}`, position: y})
+        y += 40
+        invitation_text.push({ text: `${invitation_details['who']}, ${invitation_details['inviting_names']}, ${invitation_details['body']}`, position: y})
+
+        y += 60
+        invitation_text.push({ text: `${invitation_details['event_first_title']}`, position: y})
+        y += 40
+        invitation_text.push({ text: `Дата: ${invitation_details['first_date']} Час: ${invitation_details['first_time']}`, position: y})
+        y += 40
+        invitation_text.push({ text: `Адреса: ${invitation_details['first_place']}`, position: y})
+
+        y += 60
+        invitation_text.push({ text: `${invitation_details['event_second_title']}`, position: y})
+        y += 40
+        invitation_text.push({ text: `Дата: ${invitation_details['second_date']} Час: ${invitation_details['second_time']}`, position: y})
+        y += 40
+        invitation_text.push({ text: `Адреса: ${invitation_details['second_place']}`, position: y})
+
+        y += 60 
+        invitation_text.push({ text: `${invitation_details['event_third_title']}`, position: y})
+        y += 40
+        invitation_text.push({ text: `Дата: ${invitation_details['third_date']} Час: ${invitation_details['third_time']}`, position: y})
+        y += 40
+        invitation_text.push({ text: `Адреса: ${invitation_details['third_place']}`, position: y})
+
+        y += 60
+        invitation_text.push({ text: `${invitation_details['assurance']}`, position: y})
+        y += 40
+        invitation_text.push({ text: `${invitation_details['farewell']}, ${invitation_details['inviting_names']}.`, position: y})
+
+        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image,  invitation_text: invitation_text })
 
     }
 
