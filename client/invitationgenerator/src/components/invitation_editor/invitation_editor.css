@@ -1,29 +1,32 @@
 .header {
-    width: 100vw;
     height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    line-height: 10vh;
+    text-align: center;
 }
 
-.column {
+.header h1 {
+    margin: 0px;
+}
+
+.invitation_editor {
+    width: 100vw;
+    height: 90vh;
+}
+
+.invitation_editor .column {
     float: left;
     width: 20vw;
     height: 90vh;
 }
 
-.column:nth-child(2) {
+.invitation_editor .column:nth-child(2) {
     width: 60vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.column h3 {
+.invitation_editor .column h3 {
     height: 3vh;
-    margin: 0px;
-}
-
-h1 {
     margin: 0px;
 }

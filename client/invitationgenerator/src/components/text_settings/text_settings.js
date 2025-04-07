@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Select from "react-select";
 import Send_Request_For_Database from "../send_request_for_database/send_request_for_database";
 import './text_settings.css';
@@ -48,11 +48,16 @@ function Text_Settings(props) {
     const type = props.type
     const path_to_server = props.path_to_server
     const background_image = props.background_image
+    const set_edit_template_regime = props.set_edit_template_regime
+    const invitation_text = props.invitation_text
+    const set_invitation_text = props.set_invitation_text
+
     const [invitation_texts, set_invitation_texts] = useState("")
     const [template_type, set_template_type] = useState("")
+    const [text_statys, set_text_statys] = useState(false)
 
     let invitation_index = 0;
-
+    
     if (Object.keys(invitation_texts).length == 0) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
     }
@@ -61,8 +66,7 @@ function Text_Settings(props) {
         set_template_type(invitation_texts[0]["label"])
     }
 
-    async function generating_invitation() {
-
+    function generating_invitation_text() {
         invitation_index = invitation_texts.findIndex(el => el["label"] === template_type)
 
         let invitation_details = {
@@ -80,46 +84,72 @@ function Text_Settings(props) {
             third_date: "27.04.2025",
             third_time: "18:00"
         }
-        
-        let invitation_text = []
+
         let y = 100
 
-        invitation_text.push({ text: `${invitation_details['greeting']} ${invitation_details['invitees_names']}`, position: y})
-        
-        y += 60
-        invitation_text.push({ text: `${invitation_details['message']}`, position: y})
-        y += 40
-        invitation_text.push({ text: `${invitation_details['who']}, ${invitation_details['inviting_names']}, ${invitation_details['body']}`, position: y})
+        let buf_invitation_text = []
+
+        buf_invitation_text.push({ text: `${invitation_details['greeting']} ${invitation_details['invitees_names']}`, position: y })
 
         y += 60
-        invitation_text.push({ text: `${invitation_details['event_first_title']}`, position: y})
+        buf_invitation_text.push({ text: `${invitation_details['message']}`, position: y })
         y += 40
-        invitation_text.push({ text: `Дата: ${invitation_details['first_date']} Час: ${invitation_details['first_time']}`, position: y})
-        y += 40
-        invitation_text.push({ text: `Адреса: ${invitation_details['first_place']}`, position: y})
+        buf_invitation_text.push({ text: `${invitation_details['who']}, ${invitation_details['inviting_names']}, ${invitation_details['body']}`, position: y })
 
         y += 60
-        invitation_text.push({ text: `${invitation_details['event_second_title']}`, position: y})
+        buf_invitation_text.push({ text: `${invitation_details['event_first_title']}`, position: y })
         y += 40
-        invitation_text.push({ text: `Дата: ${invitation_details['second_date']} Час: ${invitation_details['second_time']}`, position: y})
+        buf_invitation_text.push({ text: `Дата: ${invitation_details['first_date']} Час: ${invitation_details['first_time']}`, position: y })
         y += 40
-        invitation_text.push({ text: `Адреса: ${invitation_details['second_place']}`, position: y})
-
-        y += 60 
-        invitation_text.push({ text: `${invitation_details['event_third_title']}`, position: y})
-        y += 40
-        invitation_text.push({ text: `Дата: ${invitation_details['third_date']} Час: ${invitation_details['third_time']}`, position: y})
-        y += 40
-        invitation_text.push({ text: `Адреса: ${invitation_details['third_place']}`, position: y})
+        buf_invitation_text.push({ text: `Адреса: ${invitation_details['first_place']}`, position: y })
 
         y += 60
-        invitation_text.push({ text: `${invitation_details['assurance']}`, position: y})
+        buf_invitation_text.push({ text: `${invitation_details['event_second_title']}`, position: y })
         y += 40
-        invitation_text.push({ text: `${invitation_details['farewell']}, ${invitation_details['inviting_names']}.`, position: y})
+        buf_invitation_text.push({ text: `Дата: ${invitation_details['second_date']} Час: ${invitation_details['second_time']}`, position: y })
+        y += 40
+        buf_invitation_text.push({ text: `Адреса: ${invitation_details['second_place']}`, position: y })
 
-        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image,  invitation_text: invitation_text })
+        y += 60
+        buf_invitation_text.push({ text: `${invitation_details['event_third_title']}`, position: y })
+        y += 40
+        buf_invitation_text.push({ text: `Дата: ${invitation_details['third_date']} Час: ${invitation_details['third_time']}`, position: y })
+        y += 40
+        buf_invitation_text.push({ text: `Адреса: ${invitation_details['third_place']}`, position: y })
+
+        y += 60
+        buf_invitation_text.push({ text: `${invitation_details['assurance']}`, position: y })
+        y += 40
+        buf_invitation_text.push({ text: `${invitation_details['farewell']}, ${invitation_details['inviting_names']}.`, position: y })
+
+        set_invitation_text(buf_invitation_text)
+    }
+
+    function edit_template() {
+
+        generating_invitation_text()
+        set_edit_template_regime(true)
 
     }
+
+    function generating_invitation() {
+
+        generating_invitation_text()
+        set_text_statys(!text_statys)
+
+    }
+
+    async function appeal_to_server () {
+        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: invitation_text })        
+    }
+
+    useEffect(() => {
+        if (text_statys == true)
+        {
+            appeal_to_server()
+            set_text_statys(!text_statys)
+        }
+    }, [text_statys])
 
     return (
         <>
@@ -131,16 +161,8 @@ function Text_Settings(props) {
                             <div>
                                 Оберіть шаблон -
                             </div>
-                            <div>
+                            <div className="Select">
                                 <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} defaultValue={[invitation_texts[0]]} />
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-
-                            </div>
-                            <div>
-                                <button> Редагувати шаблон </button>
                             </div>
                         </div>
                         <hr />
@@ -201,7 +223,7 @@ function Text_Settings(props) {
                                 Адреса проведення -
                             </div>
                             <div>
-                                <input value={"Ужгород"}  ref={second_place} />
+                                <input value={"Ужгород"} ref={second_place} />
                             </div>
                         </div>
                         <div>
@@ -231,7 +253,7 @@ function Text_Settings(props) {
                                 Адреса проведення -
                             </div>
                             <div>
-                                <input value={"Ужгород"}  ref={third_place} />
+                                <input value={"Ужгород"} ref={third_place} />
                             </div>
                         </div>
                         <div>
@@ -248,6 +270,15 @@ function Text_Settings(props) {
                             </div>
                             <div>
                                 <input type="time" ref={third_time} />
+                            </div>
+                        </div>
+                        <hr />
+                        <div>
+                            <div>
+
+                            </div>
+                            <div>
+                                <button onClick={() => edit_template()}> Редагувати шаблон </button>
                             </div>
                         </div>
                         <hr />
