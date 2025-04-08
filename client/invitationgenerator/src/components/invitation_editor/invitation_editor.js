@@ -12,7 +12,6 @@ function Invitation_Editor() {
     const [invitation_text, set_invitation_text] = useState([])
     const [edit_template_regime, set_edit_template_regime] = useState(false)
 
-
     return (
         <>
             <div className='header'>

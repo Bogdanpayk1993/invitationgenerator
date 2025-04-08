@@ -54,10 +54,9 @@ function Text_Settings(props) {
 
     const [invitation_texts, set_invitation_texts] = useState("")
     const [template_type, set_template_type] = useState("")
-    const [text_statys, set_text_statys] = useState(false)
 
     let invitation_index = 0;
-    
+
     if (Object.keys(invitation_texts).length == 0) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
     }
@@ -126,30 +125,18 @@ function Text_Settings(props) {
     }
 
     function edit_template() {
-
-        generating_invitation_text()
         set_edit_template_regime(true)
-
     }
 
-    function generating_invitation() {
-
-        generating_invitation_text()
-        set_text_statys(!text_statys)
-
-    }
-
-    async function appeal_to_server () {
-        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: invitation_text })        
+    async function generating_invitation() {
+        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: invitation_text })
     }
 
     useEffect(() => {
-        if (text_statys == true)
-        {
-            appeal_to_server()
-            set_text_statys(!text_statys)
+        if (template_type != "") {
+            generating_invitation_text()
         }
-    }, [text_statys])
+    }, [template_type])
 
     return (
         <>
