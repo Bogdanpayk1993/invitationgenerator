@@ -1,7 +1,6 @@
 .edit_template {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.4);
     text-align: center;
     position: absolute;
     top: 0;
@@ -10,7 +9,22 @@
 
 .edit_template > div:nth-child(1) {
     width: 100vw;
-    height: 90vh;
+    height: 65vh;
+    padding-top: 25vh;
+}
+
+.edit_template > div:nth-child(1) input {
+    width: 32vw;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+    margin-bottom: 1vw;
+    border: 0px;
+    font-size: 11pt;
+}
+
+.edit_template > div:nth-child(1) input:focus {
+    outline: 0;
+    outline-offset: 0;
 }
 
 .edit_template > div:nth-child(2) {

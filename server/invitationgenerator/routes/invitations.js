@@ -24,7 +24,7 @@ router.post('/getInvitation', async function (req, res) {
                                     <defs>
                                         <style>
                                             .text {
-                                                font-size: 20;
+                                                font-size: 20pt;
                                             }
                                         </style>
                                     </defs>

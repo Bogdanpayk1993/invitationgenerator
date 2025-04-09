@@ -48,9 +48,9 @@ function Text_Settings(props) {
     const type = props.type
     const path_to_server = props.path_to_server
     const background_image = props.background_image
-    const set_edit_template_regime = props.set_edit_template_regime
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
+    const set_edit_template_regime = props.set_edit_template_regime
 
     const [invitation_texts, set_invitation_texts] = useState("")
     const [template_type, set_template_type] = useState("")
