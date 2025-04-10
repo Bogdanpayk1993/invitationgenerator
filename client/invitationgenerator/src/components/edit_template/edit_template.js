@@ -25,7 +25,8 @@ function Edit_Template(props) {
                 }
             </div>
             <div>
-                <button onClick={() => set_edit_template_regime(false)}> Зберігти </button>
+                <button onClick={() => set_invitation_text([])} > Відхилити зміни </button>
+                <button onClick={() => set_edit_template_regime(false)}> Зберігти зміни </button>
             </div>
         </div>
     )

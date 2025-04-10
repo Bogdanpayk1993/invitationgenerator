@@ -138,6 +138,12 @@ function Text_Settings(props) {
         }
     }, [template_type])
 
+    useEffect(() => {
+        if (Object.keys(invitation_text).length == 0 && template_type != "") {
+            generating_invitation_text()
+        }
+    }, [invitation_text])
+
     return (
         <>
             {
