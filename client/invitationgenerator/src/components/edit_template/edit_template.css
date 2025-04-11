@@ -7,33 +7,76 @@
     left: 0;
 }
 
-.edit_template > div:nth-child(1) {
-    width: 100vw;
-    height: 65vh;
-    padding-top: 25vh;
-}
-
-.edit_template > div:nth-child(1) input {
-    width: 32vw;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0);
-    margin-bottom: 1vw;
-    border: 0px;
-    font-size: 11pt;
-}
-
-.edit_template > div:nth-child(1) input:focus {
-    outline: 0;
-    outline-offset: 0;
-}
-
-.edit_template > div:nth-child(2) {
+.edit_template .edit_template_menu {
     width: 100vw;
     height: 10vh;
     line-height: 10vh;
 }
 
-.edit_template > div:nth-child(2) button {
-    margin-left: 1vw;
-    margin-right: 1vw;
+.edit_template .edit_template_menu div:nth-child(1) {
+    width: 48vw;
+    height: 10vh;
+    line-height: 10vh;
+    float: left;
+    text-align: left;
+    padding-left: 2vw;
+}
+
+.edit_template .edit_template_menu div:nth-child(2) {
+    width: 48vw;
+    height: 10vh;
+    line-height: 10vh;
+    float: left;
+    text-align: right;
+    padding-right: 2vw;
+}
+
+.edit_template .edit_template_container {
+    width: 100vw;
+    height: 60vh;
+    padding-top: 20vh;
+}
+
+.edit_template .edit_template_container .with {
+    margin-top: 1.5vw;
+}
+
+.edit_template .edit_template_container .without {
+    margin-top: 0.2vw;
+}
+
+.edit_template .edit_template_container div .input_row input  {
+    width: 32vw;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    font-size: 11pt;
+}
+
+.edit_template .edit_template_container div .input_row input:focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+.edit_template .edit_template_container div .menu {
+    width: 20vw;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    margin-left: 40vw;
+    margin-right: 40vw;
+    padding: 0.2vw;
+    border-radius: 0.4vw;
+    color: black;
+    background-color: lightgray;
+}
+
+.edit_template .edit_template_container div .menu input {
+    margin-left: 0.4vw;
+    margin-right: 0.4vw;
+}
+
+.edit_template .closed_menu {
+    width: 100vw;
+    height: 10vh;
+    line-height: 10vh;
 }

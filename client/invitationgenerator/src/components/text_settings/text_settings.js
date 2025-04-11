@@ -88,38 +88,38 @@ function Text_Settings(props) {
 
         let buf_invitation_text = []
 
-        buf_invitation_text.push({ text: `${invitation_details['greeting']} ${invitation_details['invitees_names']}`, position: y })
+        buf_invitation_text.push({ text: `${invitation_details['greeting']} ${invitation_details['invitees_names']}`, position: y, offset: 40 })
 
         y += 60
-        buf_invitation_text.push({ text: `${invitation_details['message']}`, position: y })
+        buf_invitation_text.push({ text: `${invitation_details['message']}`, position: y, offset: 60 })
         y += 40
-        buf_invitation_text.push({ text: `${invitation_details['who']}, ${invitation_details['inviting_names']}, ${invitation_details['body']}`, position: y })
+        buf_invitation_text.push({ text: `${invitation_details['who']}, ${invitation_details['inviting_names']}, ${invitation_details['body']}`, position: y, offset: 40 })
 
         y += 60
-        buf_invitation_text.push({ text: `${invitation_details['event_first_title']}`, position: y })
+        buf_invitation_text.push({ text: `${invitation_details['event_first_title']}`, position: y, offset: 60 })
         y += 40
-        buf_invitation_text.push({ text: `Дата: ${invitation_details['first_date']} Час: ${invitation_details['first_time']}`, position: y })
+        buf_invitation_text.push({ text: `Дата: ${invitation_details['first_date']} Час: ${invitation_details['first_time']}`, position: y, offset: 40 })
         y += 40
-        buf_invitation_text.push({ text: `Адреса: ${invitation_details['first_place']}`, position: y })
+        buf_invitation_text.push({ text: `Адреса: ${invitation_details['first_place']}`, position: y, offset: 40 })
 
         y += 60
-        buf_invitation_text.push({ text: `${invitation_details['event_second_title']}`, position: y })
+        buf_invitation_text.push({ text: `${invitation_details['event_second_title']}`, position: y, offset: 60 })
         y += 40
-        buf_invitation_text.push({ text: `Дата: ${invitation_details['second_date']} Час: ${invitation_details['second_time']}`, position: y })
+        buf_invitation_text.push({ text: `Дата: ${invitation_details['second_date']} Час: ${invitation_details['second_time']}`, position: y, offset: 40 })
         y += 40
-        buf_invitation_text.push({ text: `Адреса: ${invitation_details['second_place']}`, position: y })
+        buf_invitation_text.push({ text: `Адреса: ${invitation_details['second_place']}`, position: y, offset: 40 })
 
         y += 60
-        buf_invitation_text.push({ text: `${invitation_details['event_third_title']}`, position: y })
+        buf_invitation_text.push({ text: `${invitation_details['event_third_title']}`, position: y, offset: 60 })
         y += 40
-        buf_invitation_text.push({ text: `Дата: ${invitation_details['third_date']} Час: ${invitation_details['third_time']}`, position: y })
+        buf_invitation_text.push({ text: `Дата: ${invitation_details['third_date']} Час: ${invitation_details['third_time']}`, position: y, offset: 40 })
         y += 40
-        buf_invitation_text.push({ text: `Адреса: ${invitation_details['third_place']}`, position: y })
+        buf_invitation_text.push({ text: `Адреса: ${invitation_details['third_place']}`, position: y, offset: 40 })
 
         y += 60
-        buf_invitation_text.push({ text: `${invitation_details['assurance']}`, position: y })
+        buf_invitation_text.push({ text: `${invitation_details['assurance']}`, position: y, offset: 60 })
         y += 40
-        buf_invitation_text.push({ text: `${invitation_details['farewell']}, ${invitation_details['inviting_names']}.`, position: y })
+        buf_invitation_text.push({ text: `${invitation_details['farewell']}, ${invitation_details['inviting_names']}.`, position: y, offset: 40 })
 
         set_invitation_text(buf_invitation_text)
     }
