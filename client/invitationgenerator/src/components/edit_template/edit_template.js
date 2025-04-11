@@ -33,9 +33,9 @@ function Edit_Template(props) {
             <div className="edit_template_container">
                 {
                     invitation_text.map((el, i) => (
-                        <div className={invitation_text[i]["offset"] == 60 ? "with" : "without"} >
+                        <div className={invitation_text[i]['offset'] == 60 ? "with" : "without"} >
                             <div className="input_row">
-                                <input onClick={() => set_number_input(i)} onChange={(event) => change_invitation_text(event, i)} key={i} value={invitation_text[i]['text']} />
+                                <input onClick={() => set_number_input(i)} onChange={(event) => change_invitation_text(event, i)} value={invitation_text[i]['text']} key={i} />
                             </div>
                             {
                                 number_input == i ?
@@ -43,7 +43,7 @@ function Edit_Template(props) {
                                         <div className="menu">
                                             <input type="button" value="Додати" />
                                             <input type="button" value="Видалити" />
-                                            <input type="checkbox" checked={invitation_text[i]["offset"] == 60 ? true : false} /> <label> Відступ </label>
+                                            <input type="checkbox" checked={invitation_text[i]['offset'] == 60 ? true : false} /> <label> Відступ </label>
                                         </div>
                                     </div>
                                     : null
@@ -55,7 +55,7 @@ function Edit_Template(props) {
             <div className="closed_menu">
                 {
                     number_input != -1 ?
-                        <button onClick={() => set_number_input(-1)} > Сховати меню </button>
+                        <button onClick={() => set_number_input(-1)} > Приховати меню </button>
                         : null
                 }
             </div>
