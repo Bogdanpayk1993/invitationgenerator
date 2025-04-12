@@ -50,7 +50,6 @@ function Text_Settings(props) {
     const background_image = props.background_image
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
-    const set_edit_template_regime = props.set_edit_template_regime
 
     const [invitation_texts, set_invitation_texts] = useState("")
     const [template_type, set_template_type] = useState("")
@@ -109,10 +108,6 @@ function Text_Settings(props) {
         set_invitation_text(buf_invitation_text)
     }
 
-    function edit_template() {
-        set_edit_template_regime(true)
-    }
-
     async function generating_invitation() {
         let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: invitation_text })
     }
@@ -122,12 +117,6 @@ function Text_Settings(props) {
             generating_invitation_text()
         }
     }, [template_type])
-
-    useEffect(() => {
-        if (Object.keys(invitation_text).length == 0 && template_type != "") {
-            generating_invitation_text()
-        }
-    }, [invitation_text])
 
     return (
         <>
@@ -248,15 +237,6 @@ function Text_Settings(props) {
                             </div>
                             <div>
                                 <input type="time" ref={third_time} />
-                            </div>
-                        </div>
-                        <hr />
-                        <div>
-                            <div>
-
-                            </div>
-                            <div>
-                                <button onClick={() => edit_template()}> Редагувати шаблон </button>
                             </div>
                         </div>
                         <hr />

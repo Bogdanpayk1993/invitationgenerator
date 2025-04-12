@@ -1,3 +1,21 @@
-.invitation {
-    height: 85vh;
+.invitation_viewing_container {
+    position: relative;
+}
+
+.invitation_viewing_container .invitation_viewing {
+    width: 60vw;
+    position: absolute;
+}
+
+.invitation_viewing_container .invitation_viewing .invitation {
+    height: 89vh;
+}
+
+.invitation_message_container {
+    height: 90vh;
+    line-height: 90vh;
+}
+
+.invitation_message_container p {
+    margin: 0px;
 }

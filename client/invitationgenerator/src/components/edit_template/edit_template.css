@@ -1,10 +1,7 @@
 .edit_template {
-    width: 100vw;
-    height: 100vh;
-    text-align: center;
+    width: 60vw;
+    height: 90vh;
     position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .edit_template .edit_template_menu {
@@ -32,12 +29,9 @@
 }
 
 .edit_template > .edit_template_body {
-    width: 100vw;
-    height: 90vh;
-    margin-top: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 68vh;
+    margin-top: 22vh;
+    text-align: center;
 }
 
 .edit_template .edit_template_body .with {
@@ -65,8 +59,8 @@
     width: 20vw;
     margin-top: 0.5vw;
     margin-bottom: 0.5vw;
-    margin-left: 40vw;
-    margin-right: 40vw;
+    margin-left: 20vw;
+    margin-right: 20vw;
     border-radius: 0.4vw;
     color: black;
     background-color: lightgray;

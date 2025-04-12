@@ -21,9 +21,6 @@
 
 .invitation_editor .column:nth-child(2) {
     width: 60vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .invitation_editor .column h3 {

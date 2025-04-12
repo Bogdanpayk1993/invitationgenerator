@@ -5,7 +5,6 @@ function Edit_Template(props) {
 
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
-    const set_edit_template_regime = props.set_edit_template_regime
 
     const [number_input, set_number_input] = useState(-1)
 
