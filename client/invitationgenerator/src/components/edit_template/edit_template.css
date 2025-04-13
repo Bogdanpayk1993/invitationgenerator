@@ -4,45 +4,22 @@
     position: absolute;
 }
 
-.edit_template .edit_template_menu {
-    width: 100vw;
-    height: 10vh;
-    line-height: 10vh;
+.edit_template .edit_template_body {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.edit_template .edit_template_menu div:nth-child(1) {
-    width: 48vw;
-    height: 10vh;
-    line-height: 10vh;
-    float: left;
-    text-align: left;
-    padding-left: 2vw;
-}
-
-.edit_template .edit_template_menu div:nth-child(2) {
-    width: 48vw;
-    height: 10vh;
-    line-height: 10vh;
-    float: left;
-    text-align: right;
-    padding-right: 2vw;
-}
-
-.edit_template > .edit_template_body {
-    height: 68vh;
-    margin-top: 22vh;
-    text-align: center;
-}
-
-.edit_template .edit_template_body .with {
+.edit_template .edit_template_body div .with {
     margin-top: 3vh;
 }
 
-.edit_template .edit_template_body .without {
+.edit_template .edit_template_body div .without {
     margin-top: 0.2vh;
 }
 
-.edit_template .edit_template_body div .input_row input  {
+.edit_template .edit_template_body div div .input_row input  {
     width: 32vw;
     text-align: center;
     background-color: rgba(0, 0, 0, 0);
@@ -50,12 +27,12 @@
     font-size: 11pt;
 }
 
-.edit_template .edit_template_body div .input_row input:focus {
+.edit_template .edit_template_body div div .input_row input:focus {
     outline: 0;
     outline-offset: 0;
 }
 
-.edit_template .edit_template_body div .menu {
+.edit_template .edit_template_body div div .menu {
     width: 20vw;
     margin-top: 0.5vw;
     margin-bottom: 0.5vw;
@@ -66,7 +43,7 @@
     background-color: lightgray;
 }
 
-.edit_template .edit_template_body .menu input {
+.edit_template .edit_template_body div div .menu input {
     margin-left: 0.4vw;
     margin-right: 0.4vw;
     margin-top: 0.2vw;
