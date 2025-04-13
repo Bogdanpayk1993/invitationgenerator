@@ -91,10 +91,10 @@ function Settings(props) {
     }, [template_type])
 
     useEffect(() => {
-        if (Object.keys(invitation_texts).length != 0 && template_type != "") {
+        if (Object.keys(invitation_text).length == 0 && template_type != "") {
             generating_invitation_text()
         }
-    }, [invitation_texts])
+    }, [invitation_text])
 
     return (
         <>
@@ -103,7 +103,7 @@ function Settings(props) {
                     <div>
                         <div className="Text_settings">
                             <h3> Налаштування тексту </h3>
-                            <div className="Select_container">
+                            <div className="Input_container">
                                 <label>
                                     Шаблон -
                                     <div className="Input">
@@ -111,9 +111,12 @@ function Settings(props) {
                                     </div>
                                 </label>
                             </div>
+                            <div className="Button_container">
+                                <button onClick={() => set_invitation_text([])}> Відмінити зміни шаблону </button>
+                            </div>
                         </div>
                         <div className="Download_invitation">
-                            <div>
+                            <div className="Button_container"> 
                                 <button onClick={() => generating_invitation()}> Завантажити запрошення </button>
                             </div>
                         </div>

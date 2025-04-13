@@ -2,22 +2,32 @@
     height: 80vh;
 }
 
-.Text_settings .Select_container {
+.Download_invitation {
+    height: 8vh;
+    line-height: 8vh;
+}
+
+.Button_container {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.Button_container button {
+    width: 60%;
+}
+
+.Input_container {
     height: 4vh;
     line-height: 4vh;
     margin-top: 1vh;
-    text-align: right
+    margin-bottom: 1vh;
+    text-align: right;
 }
 
-.Text_settings .Select_container .Input {
+.Input_container .Input {
     width: 50%;
     margin-left: 2%;
     line-height: normal;
     text-align: center;
     float: right;
-}
-
-.Download_invitation {
-    height: 10vh;
-    line-height: 10vh;
 }
