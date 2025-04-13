@@ -17,7 +17,11 @@ function Invitation_Editor() {
             </div>
             <div className='invitation_editor'>
                 <div className="column">
-                    <Settings path_to_server={path_to_server} type="wedding" background_image={background_image} invitation_text={invitation_text} set_invitation_text={set_invitation_text} />
+                    {
+                        background_image != "" ?
+                            <Settings path_to_server={path_to_server} type="wedding" background_image={background_image} invitation_text={invitation_text} set_invitation_text={set_invitation_text} />
+                            : null
+                    }
                 </div>
                 <div className="column">
                     <Invitation_Viewing path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} set_invitation_text={set_invitation_text} />

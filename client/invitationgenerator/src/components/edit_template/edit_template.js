@@ -68,7 +68,7 @@ function Edit_Template(props) {
                                 </div>
                             ))
                             :
-                            <button onClick={() => add_input_row(0)} > Створити рядок </button>
+                            <button onClick={() => add_input_row(0)} > Додати рядок </button>
                     }
                 </div>
             </div>

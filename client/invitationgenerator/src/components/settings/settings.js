@@ -1,6 +1,35 @@
-import React from "react";
-import Text_Settings from "../text_settings/text_settings";
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
+import Send_Request_For_Database from "../send_request_for_database/send_request_for_database";
 import './settings.css';
+
+async function get_invitation_texts(path_to_server, type, set_invitation_texts) {
+
+    let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getType`, type: type })
+
+    if (JSON.stringify(json) !== '{}') {
+
+        let json1 = []
+
+        Object.keys(json).map(el => (
+            json1.push({
+                value: json[el]["Id"],
+                label: json[el]["name"],
+                type: json[el]["type"],
+                greeting: json[el]["greeting"],
+                message: json[el]["message"],
+                who: json[el]["who"],
+                body: json[el]["body"],
+                event_first_title: json[el]["eventfirsttitle"],
+                event_second_title: json[el]["eventsecondtitle"],
+                event_third_title: json[el]["eventthirdtitle"],
+                assurance: json[el]["assurance"],
+                farewell: json[el]["farewell"]
+            })
+        ))
+        set_invitation_texts(json1)
+    }
+}
 
 function Settings(props) {
 
@@ -10,19 +39,91 @@ function Settings(props) {
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
 
+    const [template_type, set_template_type] = useState("")
+    const [invitation_texts, set_invitation_texts] = useState([])
+
+    let invitation_index = 0;
+
+    if (Object.keys(invitation_texts).length == 0) {
+        get_invitation_texts(path_to_server, type, set_invitation_texts)
+    }
+
+    if (template_type == "" && Object.keys(invitation_texts).length !== 0) {
+        set_template_type(invitation_texts[0]["label"])
+    }
+
+    function generating_invitation_text() {
+        invitation_index = invitation_texts.findIndex(el => el["label"] === template_type)
+
+        let buf_invitation_text = []
+
+        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['greeting']} _`, offset: 30 })
+
+        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['message']}`, offset: 60 })
+        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['who']}, _ , ${invitation_texts[invitation_index]['body']}`, offset: 30 })
+
+        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_first_title']}`, offset: 60 })
+        buf_invitation_text.push({ text: `_ о _`, offset: 30 })
+        buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
+
+        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_second_title']}`, offset: 60 })
+        buf_invitation_text.push({ text: `_ о _`, offset: 30 })
+        buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
+
+        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_third_title']}`, offset: 60 })
+        buf_invitation_text.push({ text: `_ о _`, offset: 30 })
+        buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
+
+        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['assurance']}`, offset: 60 })
+        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['farewell']}, _.`, offset: 30 })
+
+        set_invitation_text(buf_invitation_text)
+    }
+
+    async function generating_invitation() {
+        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: invitation_text })
+    }
+
+    useEffect(() => {
+        if (template_type != "") {
+            generating_invitation_text()
+        }
+    }, [template_type])
+
+    useEffect(() => {
+        if (Object.keys(invitation_texts).length != 0 && template_type != "") {
+            generating_invitation_text()
+        }
+    }, [invitation_texts])
+
     return (
-        background_image != "" ?
-        <>         
-            <div className="settings">
-                <Text_Settings background_image={background_image} path_to_server={path_to_server} type={type} invitation_text={invitation_text} set_invitation_text={set_invitation_text} />
-            </div>
-            <div className="settings">
-                <h3> Отримання запрошення </h3>
-            </div>
+        <>
+            {
+                Object.keys(invitation_texts).length != 0 ?
+                    <div>
+                        <div className="Text_settings">
+                            <h3> Налаштування тексту </h3>
+                            <div className="Select_container">
+                                <label>
+                                    Шаблон -
+                                    <div className="Input">
+                                        <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} defaultValue={[invitation_texts[0]]} />
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div className="Download_invitation">
+                            <div>
+                                <button onClick={() => generating_invitation()}> Завантажити запрошення </button>
+                            </div>
+                        </div>
+                    </div>
+                    :
+                    null
+            }
         </>
-        :
-        null
     )
+
 }
 
 export default Settings;
