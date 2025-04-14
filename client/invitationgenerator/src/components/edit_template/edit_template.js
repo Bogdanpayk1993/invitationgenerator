@@ -44,31 +44,34 @@ function Edit_Template(props) {
             <div className="edit_template_body">
                 <div>
                     {
-                        Object.keys(invitation_text).length != 0 ?
-                            invitation_text.map((el, i) => (
-                                <div className={invitation_text[i]['offset'] == 60 ? "with" : "without"} >
-                                    <div className="input_row">
-                                        <input onClick={() => set_number_input(i)} onChange={(event) => change_invitation_text(event, i)} placeholder="____________________________" value={invitation_text[i]['text']} key={i} />
-                                    </div>
-                                    {
-                                        number_input == i ?
-                                            <div>
-                                                <div className="menu">
-                                                    <input type="button" onClick={() => add_input_row(i)} value="Додати рядок" />
-                                                    <input type="button" onClick={() => delete_input_row(i)} value="Видалити рядок" />
-                                                    <label>
-                                                        <input type="checkbox" onChange={() => change_offset(i)} checked={invitation_text[i]['offset'] == 60 ? true : false} />
-                                                        Відступ
-                                                    </label>
-                                                    <input type="button" onClick={() => set_number_input(-1)} value="X" />
+                        invitation_text != null ?
+                            Object.keys(invitation_text).length != 0 ?
+                                invitation_text.map((el, i) => (
+                                    <div className={invitation_text[i]['offset'] == 60 ? "with" : "without"} >
+                                        <div className="input_row">
+                                            <input onClick={() => set_number_input(i)} onChange={(event) => change_invitation_text(event, i)} placeholder="____________________________" value={invitation_text[i]['text']} key={i} />
+                                        </div>
+                                        {
+                                            number_input == i ?
+                                                <div>
+                                                    <div className="menu">
+                                                        <input type="button" onClick={() => add_input_row(i)} value="Додати рядок" />
+                                                        <input type="button" onClick={() => delete_input_row(i)} value="Видалити рядок" />
+                                                        <label>
+                                                            <input type="checkbox" onChange={() => change_offset(i)} checked={invitation_text[i]['offset'] == 60 ? true : false} />
+                                                            Відступ
+                                                        </label>
+                                                        <input type="button" onClick={() => set_number_input(-1)} value="X" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            : null
-                                    }
-                                </div>
-                            ))
+                                                : null
+                                        }
+                                    </div>
+                                ))
+                                :
+                                <button onClick={() => add_input_row(0)} > Додати рядок </button>
                             :
-                            <button onClick={() => add_input_row(0)} > Додати рядок </button>
+                            null
                     }
                 </div>
             </div>

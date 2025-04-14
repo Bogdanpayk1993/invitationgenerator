@@ -40,15 +40,15 @@ function Settings(props) {
     const set_invitation_text = props.set_invitation_text
 
     const [template_type, set_template_type] = useState("")
-    const [invitation_texts, set_invitation_texts] = useState([])
+    const [invitation_texts, set_invitation_texts] = useState(null)
 
     let invitation_index = 0;
 
-    if (Object.keys(invitation_texts).length == 0) {
+    if (invitation_texts == null) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
     }
 
-    if (template_type == "" && Object.keys(invitation_texts).length !== 0) {
+    if (template_type == "" && invitation_texts !== null) {
         set_template_type(invitation_texts[0]["label"])
     }
 
@@ -91,7 +91,7 @@ function Settings(props) {
     }, [template_type])
 
     useEffect(() => {
-        if (Object.keys(invitation_text).length == 0 && template_type != "") {
+        if (invitation_text == null && template_type != "") {
             generating_invitation_text()
         }
     }, [invitation_text])
@@ -99,7 +99,7 @@ function Settings(props) {
     return (
         <>
             {
-                Object.keys(invitation_texts).length != 0 ?
+                invitation_texts != null ?
                     <div>
                         <div className="Text_settings">
                             <h3> Налаштування тексту </h3>
@@ -112,7 +112,7 @@ function Settings(props) {
                                 </label>
                             </div>
                             <div className="Button_container">
-                                <button onClick={() => set_invitation_text([])}> Відмінити зміни шаблону </button>
+                                <button onClick={() => set_invitation_text(null)}> Відмінити зміни шаблону </button>
                             </div>
                         </div>
                         <div className="Download_invitation">
