@@ -27,6 +27,9 @@ async function get_invitation_texts(path_to_server, type, set_invitation_texts) 
                 farewell: json[el]["farewell"]
             })
         ))
+
+        json1.push({ value: Object.keys(json).length + 1, label: "Професійний" })
+
         set_invitation_texts(json1)
     }
 }
@@ -53,31 +56,35 @@ function Settings(props) {
     }
 
     function generating_invitation_text() {
-        invitation_index = invitation_texts.findIndex(el => el["label"] === template_type)
+        if (template_type != "Професійний") {
+            invitation_index = invitation_texts.findIndex(el => el["label"] === template_type)
 
-        let buf_invitation_text = []
+            let buf_invitation_text = []
 
-        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['greeting']} _`, offset: 30 })
+            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['greeting']} _`, offset: 30 })
+            
+            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['message']}`, offset: 60 })
+            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['who']}, _ , ${invitation_texts[invitation_index]['body']}`, offset: 30 })
 
-        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['message']}`, offset: 60 })
-        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['who']}, _ , ${invitation_texts[invitation_index]['body']}`, offset: 30 })
+            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_first_title']}`, offset: 60 })
+            buf_invitation_text.push({ text: `_ о _`, offset: 30 })
+            buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
 
-        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_first_title']}`, offset: 60 })
-        buf_invitation_text.push({ text: `_ о _`, offset: 30 })
-        buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
+            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_second_title']}`, offset: 60 })
+            buf_invitation_text.push({ text: `_ о _`, offset: 30 })
+            buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
 
-        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_second_title']}`, offset: 60 })
-        buf_invitation_text.push({ text: `_ о _`, offset: 30 })
-        buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
+            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_third_title']}`, offset: 60 })
+            buf_invitation_text.push({ text: `_ о _`, offset: 30 })
+            buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
 
-        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_third_title']}`, offset: 60 })
-        buf_invitation_text.push({ text: `_ о _`, offset: 30 })
-        buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
-
-        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['assurance']}`, offset: 60 })
-        buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['farewell']}, _.`, offset: 30 })
-
-        set_invitation_text(buf_invitation_text)
+            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['assurance']}`, offset: 60 })
+            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['farewell']}, _.`, offset: 30 })
+            
+            set_invitation_text(buf_invitation_text)
+        } else {
+            set_invitation_text([])
+        }
     }
 
     async function generating_invitation() {
@@ -93,6 +100,10 @@ function Settings(props) {
     useEffect(() => {
         if (invitation_text == null && template_type != "") {
             generating_invitation_text()
+        } else {
+            if (Object.keys(invitation_text).length == 0 && template_type != "") {
+                set_template_type('Професійний')
+            }
         }
     }, [invitation_text])
 
@@ -107,7 +118,7 @@ function Settings(props) {
                                 <label>
                                     Шаблон -
                                     <div className="Input">
-                                        <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} defaultValue={[invitation_texts[0]]} />
+                                        <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} value={invitation_texts[invitation_texts.findIndex(el => el["label"] === template_type)]} />
                                     </div>
                                 </label>
                             </div>
@@ -116,7 +127,7 @@ function Settings(props) {
                             </div>
                         </div>
                         <div className="Download_invitation">
-                            <div className="Button_container"> 
+                            <div className="Button_container">
                                 <button onClick={() => generating_invitation()}> Завантажити запрошення </button>
                             </div>
                         </div>
