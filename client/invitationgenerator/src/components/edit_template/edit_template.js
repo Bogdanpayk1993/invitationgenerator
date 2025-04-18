@@ -39,6 +39,12 @@ function Edit_Template(props) {
         set_invitation_text(new_invitation_text)
     }
 
+    function cleaning_input_row(i) {
+        let new_invitation_text = invitation_text.slice()
+        new_invitation_text[i]['text'] = ""
+        set_invitation_text(new_invitation_text)
+    }
+
     return (
         <div className="edit_template">
             <div className="edit_template_body">
@@ -61,7 +67,8 @@ function Edit_Template(props) {
                                                             <input type="checkbox" onChange={() => change_offset(i)} checked={invitation_text[i]['offset'] == 60 ? true : false} />
                                                             Відступ
                                                         </label>
-                                                        <input type="button" onClick={() => set_number_input(-1)} value="X" />
+                                                        <input type="button" onClick={() => cleaning_input_row(i)} value="Відчистити рядок" /> 
+                                                        <input type="button" onClick={() => set_number_input(-1)} value="Зберігти рядок" />
                                                     </div>
                                                 </div>
                                                 : null

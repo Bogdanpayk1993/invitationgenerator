@@ -33,7 +33,7 @@
 }
 
 .edit_template .edit_template_body div div .menu {
-    width: 20vw;
+    width: 31vw;
     margin-top: 0.5vw;
     margin-bottom: 0.5vw;
     margin-left: 20vw;
@@ -48,4 +48,8 @@
     margin-right: 0.4vw;
     margin-top: 0.2vw;
     margin-bottom: 0.2vw;
+}
+
+.edit_template .edit_template_body div div .menu label {
+    margin-right: 0.4vw;
 }
