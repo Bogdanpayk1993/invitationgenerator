@@ -68,7 +68,7 @@ function Edit_Template(props) {
                                                             Відступ
                                                         </label>
                                                         <input type="button" onClick={() => cleaning_input_row(i)} value="Відчистити рядок" /> 
-                                                        <input type="button" onClick={() => set_number_input(-1)} value="Зберігти рядок" />
+                                                        <input type="button" onClick={() => set_number_input(-1)} value="Зберегти рядок" />
                                                     </div>
                                                 </div>
                                                 : null
