@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Send_Request_For_Database from '../send_request_for_database/send_request_for_database';
 import './background_settings.css';
 
-async function get_background_images(path_to_server, type, set_background_images) {
+async function get_background_images(path_to_server, type, set_background_image, set_background_images) {
 
     let json = await Send_Request_For_Database({ link: `${path_to_server}/background_images/getType`, type: type })
 
     if (JSON.stringify(json) !== '{}') {
         set_background_images({ ...json })
+        set_background_image(`${json[0]['name']}.jpg`)
     }
 }
 
@@ -19,7 +20,7 @@ function Background_Settings(props) {
     const [background_images, set_background_images] = useState("")
 
     if (Object.keys(background_images).length == 0) {
-        get_background_images(path_to_server, type, set_background_images)
+        get_background_images(path_to_server, type, set_background_image, set_background_images)
     }
 
     return (
