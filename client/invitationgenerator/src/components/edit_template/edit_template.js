@@ -8,16 +8,17 @@ function Edit_Template(props) {
 
     const [number_input, set_number_input] = useState(-1)
 
-    function change_invitation_text(event, i) {
+    function change_invitation_text(event, number_input) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text[i]['text'] = event.target.value
+        new_invitation_text[number_input['i']]['text'][number_input['j']] = event.target.value
         set_invitation_text(new_invitation_text)
     }
 
     function add_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text.splice(i + 1, 0, { text: "", offset: 30 })
+        new_invitation_text.splice(i + 1, 0, { text: [], offset: 30 })
         set_invitation_text(new_invitation_text)
+        set_number_input(i + 1)
     }
 
     function delete_input_row(i) {
@@ -41,7 +42,7 @@ function Edit_Template(props) {
 
     function cleaning_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text[i]['text'] = ""
+        new_invitation_text[i]['text'] = []
         set_invitation_text(new_invitation_text)
     }
 
@@ -66,7 +67,7 @@ function Edit_Template(props) {
                                                     <div>
                                                         <div className="menu">
                                                             <div>
-                                                                <input type="input" className="input" />
+                                                                <input type="input" className="input" onChange={(event) => change_invitation_text(event, number_input)} placeholder={invitation_text[number_input["i"]]['text'][number_input["j"]]} />
                                                             </div>
                                                             <input type="button" onClick={() => add_input_row(i)} value="Додати рядок" />
                                                             <input type="button" onClick={() => delete_input_row(i)} value="Видалити рядок" />

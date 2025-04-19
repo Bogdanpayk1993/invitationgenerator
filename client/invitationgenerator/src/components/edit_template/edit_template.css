@@ -34,15 +34,16 @@
     background-color: lightgray;
 }
 
+.edit_template .edit_template_body div div .menu .input {
+    width: 29vw;
+    text-align: center;
+}
+
 .edit_template .edit_template_body div div .menu input {
     margin-left: 0.3vw;
     margin-right: 0.3vw;
     margin-top: 0.2vw;
     margin-bottom: 0.2vw;
-}
-
-.edit_template .edit_template_body div div .menu .input {
-    width: 30vw;
 }
 
 .edit_template .edit_template_body div div .menu label {
