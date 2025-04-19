@@ -16,7 +16,7 @@ function Edit_Template(props) {
 
     function add_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text.splice(i + 1, 0, { text: [], offset: 30 })
+        new_invitation_text.splice(i + 1, 0, { text: ["______________________________"], offset: 30 })
         set_invitation_text(new_invitation_text)
         set_number_input(i + 1)
     }
@@ -42,8 +42,9 @@ function Edit_Template(props) {
 
     function cleaning_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text[i]['text'] = []
+        new_invitation_text[i]['text'] = ["______________________________"]
         set_invitation_text(new_invitation_text)
+        set_number_input({ i: i, j: 0 })
     }
 
     return (
