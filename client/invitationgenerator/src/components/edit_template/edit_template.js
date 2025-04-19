@@ -52,27 +52,35 @@ function Edit_Template(props) {
                     {
                         invitation_text != null ?
                             Object.keys(invitation_text).length != 0 ?
-                                invitation_text.map((el, i) => (
+                                invitation_text.map((el_i, i) => (
                                     <div className={invitation_text[i]['offset'] == 60 ? "with" : "without"} >
-                                        <div className="input_row">
-                                            <input onClick={() => set_number_input(i)} onChange={(event) => change_invitation_text(event, i)} placeholder="____________________________" value={invitation_text[i]['text']} key={i} />
-                                        </div>
-                                        {
-                                            number_input == i ?
-                                                <div>
-                                                    <div className="menu">
-                                                        <input type="button" onClick={() => add_input_row(i)} value="Додати рядок" />
-                                                        <input type="button" onClick={() => delete_input_row(i)} value="Видалити рядок" />
-                                                        <label>
-                                                            <input type="checkbox" onChange={() => change_offset(i)} checked={invitation_text[i]['offset'] == 60 ? true : false} />
-                                                            Відступ
-                                                        </label>
-                                                        <input type="button" onClick={() => cleaning_input_row(i)} value="Відчистити рядок" /> 
-                                                        <input type="button" onClick={() => set_number_input(-1)} value="Зберегти рядок" />
+                                        <div className="row">
+                                            {
+                                                invitation_text[i]['text'].map((el_j, j) => (
+                                                    <span onClick={() => set_number_input({ i: i, j: j })}>{invitation_text[i]['text'][j]}</span>
+                                                ))
+
+                                            }
+                                            {
+                                                number_input["i"] == i ?
+                                                    <div>
+                                                        <div className="menu">
+                                                            <div>
+                                                                <input type="input" className="input" />
+                                                            </div>
+                                                            <input type="button" onClick={() => add_input_row(i)} value="Додати рядок" />
+                                                            <input type="button" onClick={() => delete_input_row(i)} value="Видалити рядок" />
+                                                            <label>
+                                                                <input type="checkbox" onChange={() => change_offset(i)} checked={invitation_text[i]['offset'] == 60 ? true : false} />
+                                                                Відступ
+                                                            </label>
+                                                            <input type="button" onClick={() => cleaning_input_row(i)} value="Відчистити рядок" />
+                                                            <input type="button" onClick={() => set_number_input(-1)} value="Зберегти рядок" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                : null
-                                        }
+                                                    : null
+                                            }
+                                        </div>
                                     </div>
                                 ))
                                 :

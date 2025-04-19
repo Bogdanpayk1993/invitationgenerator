@@ -19,17 +19,8 @@
     margin-top: 0.2vh;
 }
 
-.edit_template .edit_template_body div div .input_row input  {
-    width: 32vw;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px;
-    font-size: 11pt;
-}
-
-.edit_template .edit_template_body div div .input_row input:focus {
-    outline: 0;
-    outline-offset: 0;
+.edit_template .edit_template_body div div .row span {
+    color: black;
 }
 
 .edit_template .edit_template_body div div .menu {
@@ -48,6 +39,10 @@
     margin-right: 0.3vw;
     margin-top: 0.2vw;
     margin-bottom: 0.2vw;
+}
+
+.edit_template .edit_template_body div div .menu .input {
+    width: 30vw;
 }
 
 .edit_template .edit_template_body div div .menu label {

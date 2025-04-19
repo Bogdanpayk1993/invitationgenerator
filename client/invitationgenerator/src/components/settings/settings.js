@@ -8,7 +8,6 @@ async function get_invitation_texts(path_to_server, type, set_invitation_texts) 
     let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getType`, type: type })
 
     if (JSON.stringify(json) !== '{}') {
-
         let json1 = []
 
         Object.keys(json).map(el => (
@@ -45,8 +44,6 @@ function Settings(props) {
     const [template_type, set_template_type] = useState("")
     const [invitation_texts, set_invitation_texts] = useState(null)
 
-    let invitation_index = 0;
-
     if (invitation_texts == null) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
     }
@@ -57,29 +54,29 @@ function Settings(props) {
 
     function generating_invitation_text() {
         if (template_type != "Професійний") {
-            invitation_index = invitation_texts.findIndex(el => el["label"] === template_type)
+            let invitation_index = invitation_texts.findIndex(el => el["label"] === template_type)
 
             let buf_invitation_text = []
 
-            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['greeting']} _`, offset: 30 })
+            buf_invitation_text.push({ text: [[invitation_texts[invitation_index]['greeting']], [", "], ["(імена запрошених)"]], offset: 30 })
             
-            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['message']}`, offset: 60 })
-            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['who']}, _ , ${invitation_texts[invitation_index]['body']}`, offset: 30 })
+            buf_invitation_text.push({ text: [[invitation_texts[invitation_index]['message']]], offset: 60 })
+            buf_invitation_text.push({ text: [[invitation_texts[invitation_index]['who']], [", "], ["(імена запрошуючих)"], [", "], [invitation_texts[invitation_index]['body']]], offset: 30 })
 
-            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_first_title']}`, offset: 60 })
-            buf_invitation_text.push({ text: `_ о _`, offset: 30 })
-            buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
+            buf_invitation_text.push({ text: [[invitation_texts[invitation_index]['event_first_title']]], offset: 60 })
+            buf_invitation_text.push({ text: [["(дата)"], [" о "], ["(час)"]], offset: 30 })
+            buf_invitation_text.push({ text: [["За адресою: "], ["(адреса)"]], offset: 30 })
 
-            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_second_title']}`, offset: 60 })
-            buf_invitation_text.push({ text: `_ о _`, offset: 30 })
-            buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
+            buf_invitation_text.push({ text: [[invitation_texts[invitation_index]['event_second_title']]], offset: 60 })
+            buf_invitation_text.push({ text: [["(дата)"], [" о "], ["(час)"]], offset: 30 })
+            buf_invitation_text.push({ text: [["За адресою: "], ["(адреса)"]], offset: 30 })
 
-            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['event_third_title']}`, offset: 60 })
-            buf_invitation_text.push({ text: `_ о _`, offset: 30 })
-            buf_invitation_text.push({ text: `За адресою: _`, offset: 30 })
+            buf_invitation_text.push({ text: [[invitation_texts[invitation_index]['event_third_title']]], offset: 60 })
+            buf_invitation_text.push({ text: [["(дата)"], [" о "], ["(час)"]], offset: 30 })
+            buf_invitation_text.push({ text: [["За адресою: "], ["(адреса)"]], offset: 30 })
 
-            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['assurance']}`, offset: 60 })
-            buf_invitation_text.push({ text: `${invitation_texts[invitation_index]['farewell']}, _.`, offset: 30 })
+            buf_invitation_text.push({ text: [[invitation_texts[invitation_index]['assurance']]], offset: 60 })
+            buf_invitation_text.push({ text: [[invitation_texts[invitation_index]['farewell']], [", "], ["(імена запрошуючих)"], ["."]], offset: 30 })
             
             set_invitation_text(buf_invitation_text)
         } else {
