@@ -58,7 +58,7 @@ function Settings(props) {
 
             let buf_invitation_text = []
 
-            buf_invitation_text.push({ text: [[ { body: `${invitation_texts[invitation_index]['greeting']}, `, placeholder: "_____" } ], [ { body: "", placeholder: "(імена запрошених)" } ]], offset: 30 })
+            buf_invitation_text.push({ text: [[ { body: `${invitation_texts[invitation_index]['greeting']} `, placeholder: "_____" } ], [ { body: "", placeholder: "(імена запрошених)" } ]], offset: 30 })
             
             buf_invitation_text.push({ text: [[ { body: invitation_texts[invitation_index]['message'], placeholder: "_____" } ]], offset: 60 })
             buf_invitation_text.push({ text: [[ { body: `${invitation_texts[invitation_index]['who']}, `, placeholder: "_____" } ], [ { body: "", placeholder: "(імена запрошуючих)" } ], [ { body: `, ${invitation_texts[invitation_index]['body']}`, placeholder: "_____" } ]], offset: 30 })
@@ -85,7 +85,17 @@ function Settings(props) {
     }
 
     async function generating_invitation() {
-        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: invitation_text })
+        let buf_invitation_text = [];
+
+        invitation_text.forEach((el_i, i) => (
+            buf_invitation_text[i] = "",
+            el_i['text'].forEach((el_j, j) => (
+                buf_invitation_text[i] += el_i['text'][j][0]['body']
+            )),
+            buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] } 
+        ))
+
+        let json = await Send_Request_For_Database({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text })
     }
 
     useEffect(() => {

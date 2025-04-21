@@ -10,7 +10,11 @@ function Edit_Template(props) {
 
     function change_invitation_text(event, number_input) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text[number_input['i']]['text'][number_input['j']][0]['body'] = event.target.value
+        if (event.target.value != " ") {
+            new_invitation_text[number_input['i']]['text'][number_input['j']][0]['body'] = event.target.value
+        } else {
+            new_invitation_text[number_input['i']]['text'][number_input['j']][0]['body'] = ""
+        }
         set_invitation_text(new_invitation_text)
     }
 
@@ -42,7 +46,7 @@ function Edit_Template(props) {
 
     function cleaning_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text[i]['text'] = [[ { body: "", placeholder: "_____" } ]]
+        new_invitation_text[i]['text'] = [[{ body: "", placeholder: "_____" }]]
         set_invitation_text(new_invitation_text)
         set_number_input({ i: i, j: 0 })
     }
