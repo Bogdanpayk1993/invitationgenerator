@@ -10,13 +10,13 @@ function Edit_Template(props) {
 
     function change_invitation_text(event, number_input) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text[number_input['i']]['text'][number_input['j']] = event.target.value
+        new_invitation_text[number_input['i']]['text'][number_input['j']][0]['body'] = event.target.value
         set_invitation_text(new_invitation_text)
     }
 
     function add_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text.splice(i + 1, 0, { text: ["______________________________"], offset: 30 })
+        new_invitation_text.splice(i + 1, 0, { text: [[ { body: "", placeholder: "_____" } ]], offset: 30 })
         set_invitation_text(new_invitation_text)
         set_number_input(i + 1)
     }
@@ -42,7 +42,7 @@ function Edit_Template(props) {
 
     function cleaning_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text[i]['text'] = ["______________________________"]
+        new_invitation_text[i]['text'] = [[ { body: "", placeholder: "_____" } ]]
         set_invitation_text(new_invitation_text)
         set_number_input({ i: i, j: 0 })
     }
@@ -59,7 +59,7 @@ function Edit_Template(props) {
                                         <div className="row">
                                             {
                                                 invitation_text[i]['text'].map((el_j, j) => (
-                                                    <span onClick={() => set_number_input({ i: i, j: j })}>{invitation_text[i]['text'][j]}</span>
+                                                    <span onClick={() => set_number_input({ i: i, j: j })}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
                                                 ))
 
                                             }
@@ -68,7 +68,7 @@ function Edit_Template(props) {
                                                     <div>
                                                         <div className="menu">
                                                             <div>
-                                                                <input type="input" className="input" onChange={(event) => change_invitation_text(event, number_input)} placeholder={invitation_text[number_input["i"]]['text'][number_input["j"]]} />
+                                                                <input type="input" className="input" onChange={(event) => change_invitation_text(event, number_input)} value={invitation_text[number_input["i"]]['text'][number_input["j"]][0]['body']} placeholder={invitation_text[number_input["i"]]['text'][number_input["j"]][0]['placeholder']} />
                                                             </div>
                                                             <input type="button" onClick={() => add_input_row(i)} value="Додати рядок" />
                                                             <input type="button" onClick={() => delete_input_row(i)} value="Видалити рядок" />
