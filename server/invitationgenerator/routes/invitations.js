@@ -18,10 +18,14 @@ router.post('/getType', function (req, res) {
 })
 
 router.post('/getInvitation', async function (req, res) {
-    let position = 100
+    let position = 0
+    let height = 0 
+    req['body']['invitation_text'].forEach(el => (
+        height += el['offset']
+    ))
     const file = await readFile(`${path}\\public\\images\\backgrounds\\${req['body']['background_image']}`)
     const img = sharp(file)
-    const textSVG = Buffer.from(`<svg width="600" height="800">
+    const textSVG = Buffer.from(`<svg width="600" height="${height}">
                                     <defs>
                                         <style>
                                             .text {

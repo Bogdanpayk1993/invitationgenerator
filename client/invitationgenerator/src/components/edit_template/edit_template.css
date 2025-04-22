@@ -11,15 +11,14 @@
     justify-content: center;
 }
 
-.edit_template .edit_template_body div .with {
-    margin-top: 3vh;
+.edit_template .edit_template_body div div .row .with {
+    height: 60px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
 }
 
-.edit_template .edit_template_body div .without {
-    margin-top: 0.2vh;
-}
-
-.edit_template .edit_template_body div div .row span {
+.edit_template .edit_template_body div div .row div div span {
     color: black;
 }
 

@@ -20,7 +20,7 @@ function Edit_Template(props) {
 
     function add_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text.splice(i + 1, 0, { text: [[ { body: "", placeholder: "_____" } ]], offset: 30 })
+        new_invitation_text.splice(i + 1, 0, { text: [[{ body: "", placeholder: "_____" }]], offset: 30 })
         set_invitation_text(new_invitation_text)
         set_number_input(i + 1)
     }
@@ -59,14 +59,17 @@ function Edit_Template(props) {
                         invitation_text != null ?
                             Object.keys(invitation_text).length != 0 ?
                                 invitation_text.map((el_i, i) => (
-                                    <div className={invitation_text[i]['offset'] == 60 ? "with" : "without"} >
+                                    <div>
                                         <div className="row">
-                                            {
-                                                invitation_text[i]['text'].map((el_j, j) => (
-                                                    <span onClick={() => set_number_input({ i: i, j: j })}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
-                                                ))
-
-                                            }
+                                            <div className={invitation_text[i]['offset'] == 60 ? "with" : "without"}>
+                                                <div>
+                                                    {
+                                                        invitation_text[i]['text'].map((el_j, j) => (
+                                                            <span onClick={() => set_number_input({ i: i, j: j })}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div>
                                             {
                                                 number_input["i"] == i ?
                                                     <div>
