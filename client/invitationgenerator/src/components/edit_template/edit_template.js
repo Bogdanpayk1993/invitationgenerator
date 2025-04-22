@@ -20,7 +20,7 @@ function Edit_Template(props) {
 
     function add_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text.splice(i + 1, 0, { text: [[{ body: "", placeholder: "_____" }]], offset: 30 })
+        new_invitation_text.splice(i + 1, 0, { text: [[{ body: "", placeholder: "_____" }]], offset: 25 })
         set_invitation_text(new_invitation_text)
         set_number_input(i + 1)
     }
