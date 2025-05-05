@@ -1,4 +1,4 @@
-async function Send_Request_For_Database(request) {
+async function Get_data_from_server(request) {
     let reple
     await fetch(`${request['link']}`,{
         method: "POST",
@@ -18,4 +18,4 @@ async function Send_Request_For_Database(request) {
     return json1
 }
 
-export default Send_Request_For_Database;
+export default Get_data_from_server;

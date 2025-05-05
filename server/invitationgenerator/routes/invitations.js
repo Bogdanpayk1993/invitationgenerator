@@ -41,7 +41,8 @@ router.post('/getInvitation', async function (req, res) {
                                     }
                                 </svg>`)
     const result = await img.composite([{ input: textSVG }]).toBuffer()
-    await writeFile(`${path}\\public\\images\\invitations\\res.png`, result)
+    await writeFile(`${path}\\public\\images\\invitations\\res.jpg`, result)
+    res.send(Buffer.from(result))
 })
 
 module.exports = router;
