@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import        { saveAs } from "file-saver";
 import Select from "react-select";
 import Get_data_from_server from '../get_data_from_server/get_data_from_server';
 import Get_file_from_server from "../get_file_from_server/get_file_from_server";
@@ -97,6 +98,7 @@ function Settings(props) {
         ))
 
         let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text })
+        saveAs(`http://localhost:8000/${json}`)
     }
 
     useEffect(() => {
