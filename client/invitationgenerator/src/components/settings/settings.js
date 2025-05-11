@@ -98,7 +98,7 @@ function Settings(props) {
         ))
 
         let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text })
-        saveAs(`http://localhost:8000/${json}`)
+        saveAs(`${path_to_server}/${json}`)
     }
 
     useEffect(() => {
