@@ -6,6 +6,7 @@ var db = new BetterSqlite3('invitation.db');
 var fsPromises = require('fs/promises');
 var readFile = fsPromises.readFile;
 var writeFile = fsPromises.writeFile;
+var mkdir = fsPromises.mkdir;
 
 var appRootPath = require('app-root-path');
 var path = appRootPath.path;
@@ -18,6 +19,11 @@ router.post('/getType', function (req, res) {
 })
 
 router.post('/getInvitation', async function (req, res) {
+    mkdir(`${path}/public/images/invitations/${req['body']['folder_name']}/`).then(() => {
+    }).catch((err) => {
+        console.log(err)
+    })
+    
     let position = 0
     let height = 0 
     req['body']['invitation_text'].forEach(el => (
@@ -41,8 +47,8 @@ router.post('/getInvitation', async function (req, res) {
                                     }
                                 </svg>`)
     const result = await img.composite([{ input: textSVG }]).toBuffer()
-    await writeFile(`${path}\\public\\images\\invitations\\res.jpg`, result)
-    res.send(`images\\invitations\\res.jpg`)
+    await writeFile(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\res.jpg`, result)
+    res.send(`images\\invitations\\${req['body']['folder_name']}\\res.jpg`)
 })
 
 module.exports = router;

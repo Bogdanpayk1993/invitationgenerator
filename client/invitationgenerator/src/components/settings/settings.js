@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import        { saveAs } from "file-saver";
+import { useState, useEffect } from "react";
+import { saveAs } from "file-saver";
 import Select from "react-select";
 import Get_data_from_server from '../get_data_from_server/get_data_from_server';
 import Get_file_from_server from "../get_file_from_server/get_file_from_server";
@@ -60,26 +60,26 @@ function Settings(props) {
 
             let buf_invitation_text = []
 
-            buf_invitation_text.push({ text: [[ { body: `${invitation_texts[invitation_index]['greeting']} `, placeholder: "_____" } ], [ { body: "Юрій та Катерина", placeholder: "(імена запрошених)" } ]], offset: 25 })
-            
-            buf_invitation_text.push({ text: [[ { body: invitation_texts[invitation_index]['message'], placeholder: "_____" } ]], offset: 60 })
-            buf_invitation_text.push({ text: [[ { body: `${invitation_texts[invitation_index]['who']}, `, placeholder: "_____" } ], [ { body: "Сергій та Богдана", placeholder: "(імена запрошуючих)" } ], [ { body: `, ${invitation_texts[invitation_index]['body']}`, placeholder: "_____" } ]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['greeting']} `, placeholder: "_____" }], [{ body: "Юрій та Катерина", placeholder: "(імена запрошених)" }]], offset: 25 })
 
-            buf_invitation_text.push({ text: [[ { body: invitation_texts[invitation_index]['event_first_title'], placeholder: "_____" } ]], offset: 60 })
-            buf_invitation_text.push({ text: [[ { body: "11.05.2025", placeholder: "(дата)" } ], [ { body: " о ", placeholder: "_____" } ], [ { body: "10:00", placeholder: "(час)" } ]], offset: 25 })
-            buf_invitation_text.push({ text: [[ { body: "За адресою: ", placeholder: "_____" } ], [ { body: "м.Ужгород", placeholder: "(адреса)" } ]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['message'], placeholder: "_____" }]], offset: 60 })
+            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['who']}, `, placeholder: "_____" }], [{ body: "Сергій та Богдана", placeholder: "(імена запрошуючих)" }], [{ body: `, ${invitation_texts[invitation_index]['body']}`, placeholder: "_____" }]], offset: 25 })
 
-            buf_invitation_text.push({ text: [[ { body: invitation_texts[invitation_index]['event_second_title'], placeholder: "_____" } ]], offset: 60 })
-            buf_invitation_text.push({ text: [[ { body: "11.05.2025", placeholder: "(дата)" } ], [ { body: " о ", placeholder: "_____" } ], [ { body: "12:00", placeholder: "(час)" } ]], offset: 25 })
-            buf_invitation_text.push({ text: [[ { body: "За адресою: ", placeholder: "_____" } ], [ { body: "м.Ужгород", placeholder: "(адреса)" } ]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['event_first_title'], placeholder: "_____" }]], offset: 60 })
+            buf_invitation_text.push({ text: [[{ body: "11.05.2025", placeholder: "(дата)" }], [{ body: " о ", placeholder: "_____" }], [{ body: "10:00", placeholder: "(час)" }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "За адресою: ", placeholder: "_____" }], [{ body: "м.Ужгород", placeholder: "(адреса)" }]], offset: 25 })
 
-            buf_invitation_text.push({ text: [[ { body: invitation_texts[invitation_index]['event_third_title'], placeholder: "_____" } ]], offset: 60 })
-            buf_invitation_text.push({ text: [[ { body: "11.05.2025", placeholder: "(дата)" } ], [ { body: " о ", placeholder: "_____" } ], [ { body: "18:00", placeholder: "(час)" } ]], offset: 25 })
-            buf_invitation_text.push({ text: [[ { body: "За адресою: ", placeholder: "_____" } ], [ { body: "м.Ужгород", placeholder: "(адреса)" } ]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['event_second_title'], placeholder: "_____" }]], offset: 60 })
+            buf_invitation_text.push({ text: [[{ body: "11.05.2025", placeholder: "(дата)" }], [{ body: " о ", placeholder: "_____" }], [{ body: "12:00", placeholder: "(час)" }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "За адресою: ", placeholder: "_____" }], [{ body: "м.Ужгород", placeholder: "(адреса)" }]], offset: 25 })
 
-            buf_invitation_text.push({ text: [[ { body: invitation_texts[invitation_index]['assurance'], placeholder: '_____' } ]], offset: 60 })
-            buf_invitation_text.push({ text: [[ { body: `${invitation_texts[invitation_index]['farewell']}, `, placeholder: "_____" } ], [ { body: "Сергій та Богдана", placeholder: "(імена запрошуючих)" } ], [ { body: ".", placeholder: "_____" } ]], offset: 25 })
-            
+            buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['event_third_title'], placeholder: "_____" }]], offset: 60 })
+            buf_invitation_text.push({ text: [[{ body: "11.05.2025", placeholder: "(дата)" }], [{ body: " о ", placeholder: "_____" }], [{ body: "18:00", placeholder: "(час)" }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "За адресою: ", placeholder: "_____" }], [{ body: "м.Ужгород", placeholder: "(адреса)" }]], offset: 25 })
+
+            buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['assurance'], placeholder: '_____' }]], offset: 60 })
+            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['farewell']}, `, placeholder: "_____" }], [{ body: "Сергій та Богдана", placeholder: "(імена запрошуючих)" }], [{ body: ".", placeholder: "_____" }]], offset: 25 })
+
             set_invitation_text(buf_invitation_text)
         } else {
             set_invitation_text([])
@@ -94,10 +94,14 @@ function Settings(props) {
             el_i['text'].forEach((el_j, j) => (
                 buf_invitation_text[i] += el_i['text'][j][0]['body']
             )),
-            buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] } 
+            buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] }
         ))
 
-        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text })
+        let folder_name = invitation_text[0]['text'][1][0]['body']
+        folder_name = folder_name.replaceAll(" та ", "Та")
+        folder_name = folder_name.replaceAll(", ", "") 
+
+        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: folder_name })
         saveAs(`${path_to_server}/${json}`)
     }
 
