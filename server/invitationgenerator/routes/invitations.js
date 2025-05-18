@@ -19,7 +19,10 @@ router.post('/getType', function (req, res) {
 })
 
 router.post('/getInvitation', async function (req, res) {
-    mkdir(`${path}/public/images/invitations/${req['body']['folder_name']}/`).then(() => {
+    let date = new Date()
+    let folder_name = `${req['body']['folder_name']}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
+    
+    mkdir(`${path}/public/images/invitations/${folder_name}/`).then(() => {
     }).catch((err) => {
         console.log(err)
     })
@@ -31,6 +34,7 @@ router.post('/getInvitation', async function (req, res) {
     ))
     height += 5
     const file = await readFile(`${path}\\public\\images\\backgrounds\\${req['body']['background_image']}`)
+    
     const img = sharp(file)
     const textSVG = Buffer.from(`<svg width="600" height="${height}">
                                     <defs>
@@ -47,8 +51,9 @@ router.post('/getInvitation', async function (req, res) {
                                     }
                                 </svg>`)
     const result = await img.composite([{ input: textSVG }]).toBuffer()
-    await writeFile(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\res.jpg`, result)
-    res.send(`images\\invitations\\${req['body']['folder_name']}\\res.jpg`)
+    await writeFile(`${path}\\public\\images\\invitations\\${folder_name}\\res.jpg`, result)
+    
+    res.send(`images\\invitations\\${folder_name}\\res.jpg`)
 })
 
 module.exports = router;

@@ -97,9 +97,9 @@ function Settings(props) {
             buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] }
         ))
 
-        let folder_name = invitation_text[0]['text'][1][0]['body']
+        let folder_name = invitation_text[2]['text'][1][0]['body']
         folder_name = folder_name.replaceAll(" та ", "Та")
-        folder_name = folder_name.replaceAll(", ", "") 
+        folder_name = folder_name.replaceAll(", ", "")
 
         let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: folder_name })
         saveAs(`${path_to_server}/${json}`)
