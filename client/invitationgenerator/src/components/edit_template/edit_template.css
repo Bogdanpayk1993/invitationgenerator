@@ -2,6 +2,7 @@
     width: 60vw;
     height: 90vh;
     position: absolute;
+    color: black;
 }
 
 .edit_template .edit_template_body {
@@ -19,7 +20,6 @@
 }
 
 .edit_template .edit_template_body div div .row div div span {
-    color: black;
     font-size: 17px;
 }
 
@@ -30,7 +30,6 @@
     margin-left: 20vw;
     margin-right: 20vw;
     border-radius: 0.4vw;
-    color: black;
     background-color: lightgray;
 }
 

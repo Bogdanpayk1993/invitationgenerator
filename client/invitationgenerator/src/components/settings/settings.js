@@ -40,18 +40,15 @@ function Settings(props) {
     const type = props.type
     const path_to_server = props.path_to_server
     const background_image = props.background_image
+    const template_type = props.template_type
+    const set_template_type = props.set_template_type
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
 
-    const [template_type, set_template_type] = useState("")
     const [invitation_texts, set_invitation_texts] = useState(null)
 
     if (invitation_texts == null) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
-    }
-
-    if (template_type == "" && invitation_texts !== null) {
-        set_template_type(invitation_texts[0]["label"])
     }
 
     function generating_invitation_text() {
@@ -127,23 +124,22 @@ function Settings(props) {
                 invitation_texts != null ?
                     <div>
                         <div className="Text_settings">
-                            <h3> Налаштування тексту </h3>
+                            <h3> Налаштування шаблону </h3>
                             <div className="Input_container">
-                                <label>
-                                    Шаблон -
-                                    <div className="Input">
-                                        <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} value={invitation_texts[invitation_texts.findIndex(el => el["label"] === template_type)]} />
-                                    </div>
-                                </label>
+                                <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} placeholder="Оберіть тип" value={invitation_texts[invitation_texts.findIndex(el => el["label"] === template_type)]} />
                             </div>
                             <div className="Button_container">
                                 <button onClick={() => set_invitation_text(null)}> Відмінити зміни шаблону </button>
                             </div>
-                        </div>
-                        <div className="Download_invitation">
-                            <div className="Button_container">
-                                <button onClick={() => generating_invitation()}> Завантажити запрошення </button>
+                            <div className="Textarea_container">
+                                <textarea placeholder="Введіть групи імен запрошених розділені знаком крапки з комою:" />
                             </div>
+                        </div>
+                        <div className="Style_settings">
+
+                        </div>
+                        <div className="Button_container">
+                            <button onClick={() => generating_invitation()}> Завантажити запрошення </button>
                         </div>
                     </div>
                     :

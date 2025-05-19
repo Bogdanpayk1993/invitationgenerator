@@ -8,6 +8,7 @@ function Invitation_Editor() {
 
     const path_to_server = "http://localhost:8000"
     const [background_image, set_background_image] = useState("")
+    const [template_type, set_template_type] = useState("")
     const [invitation_text, set_invitation_text] = useState([])
 
     return (
@@ -19,12 +20,12 @@ function Invitation_Editor() {
                 <div className="column">
                     {
                         background_image != "" ?
-                            <Settings path_to_server={path_to_server} type="wedding" background_image={background_image} invitation_text={invitation_text} set_invitation_text={set_invitation_text} />
+                            <Settings path_to_server={path_to_server} type="wedding" background_image={background_image} template_type={template_type} set_template_type={set_template_type} invitation_text={invitation_text} set_invitation_text={set_invitation_text} />
                             : null
                     }
                 </div>
                 <div className="column">
-                    <Invitation_Viewing path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} set_invitation_text={set_invitation_text} />
+                    <Invitation_Viewing path_to_server={path_to_server} background_image={background_image} template_type={template_type} invitation_text={invitation_text} set_invitation_text={set_invitation_text} />
                 </div>
                 <div className="column">
                     <Background_Settings path_to_server={path_to_server} type="wedding" set_background_image={set_background_image} />

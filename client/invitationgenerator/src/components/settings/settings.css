@@ -1,34 +1,33 @@
 .Text_settings {
-    height: 80vh;
+    height: 50vh;
 }
 
-.Download_invitation {
-    height: 8vh;
-    line-height: 8vh;
+.Input_container {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: black;
+}
+
+.Textarea_container {
+    width: 100%;
+}
+
+.Textarea_container textarea {
+    width: 90%;
+    height: 34vh;
+}
+
+.Style_settings {
+    height: 34vh;
 }
 
 .Button_container {
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+    height: 6vh;
+    line-height: 6vh;
 }
 
 .Button_container button {
     width: 60%;
 }
 
-.Input_container {
-    height: 4vh;
-    line-height: 4vh;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    text-align: right;
-}
-
-.Input_container .Input {
-    width: 50%;
-    margin-left: 2%;
-    line-height: normal;
-    text-align: center;
-    float: right;
-    color: black;
-}

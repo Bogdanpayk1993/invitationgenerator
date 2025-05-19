@@ -3,6 +3,7 @@ import './edit_template.css';
 
 function Edit_Template(props) {
 
+    const template_type = props.template_type
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
 
@@ -93,7 +94,10 @@ function Edit_Template(props) {
                                     </div>
                                 ))
                                 :
-                                <button onClick={() => add_input_row(0)} > Додати рядок </button>
+                                template_type != "" ?
+                                    <button onClick={() => add_input_row(0)} > Додати рядок </button>
+                                    :
+                                    <p> Оберіть тип шаблону </p>
                             :
                             null
                     }
