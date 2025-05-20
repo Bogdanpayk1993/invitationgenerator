@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Get_data_from_server from '../get_data_from_server/get_data_from_server';
 import './background_settings.css';
 
-async function get_background_images(path_to_server, type, set_background_image, set_background_images) {
+async function get_background_images(path_to_server, type, set_background_images) {
 
     let json = await Get_data_from_server({ link: `${path_to_server}/background_images/getType`, type: type })
 
     if (JSON.stringify(json) !== '{}') {
         set_background_images({ ...json })
-        set_background_image(`${json[0]['name']}.jpg`)
     }
 }
 
@@ -20,7 +19,7 @@ function Background_Settings(props) {
     const [background_images, set_background_images] = useState("")
 
     if (Object.keys(background_images).length == 0) {
-        get_background_images(path_to_server, type, set_background_image, set_background_images)
+        get_background_images(path_to_server, type, set_background_images)
     }
 
     return (

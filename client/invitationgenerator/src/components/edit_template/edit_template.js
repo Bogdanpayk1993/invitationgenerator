@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import './edit_template.css';
 
 function Edit_Template(props) {
