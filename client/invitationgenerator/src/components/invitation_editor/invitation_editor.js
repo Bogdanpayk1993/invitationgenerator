@@ -14,7 +14,7 @@ function Invitation_Editor() {
     return (
         <>
             <div className='header'>
-                <h1> Сервіс масової розсилки запрошень "Приходь" </h1>
+                <h1> Сервіс масової генерації запрошень "Приходь" </h1>
             </div>
             <div className='invitation_editor'>
                 <div className="column">

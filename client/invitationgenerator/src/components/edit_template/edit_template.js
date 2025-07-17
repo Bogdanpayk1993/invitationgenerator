@@ -6,7 +6,7 @@ function Edit_Template(props) {
     const template_type = props.template_type
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
-
+    
     const [number_input, set_number_input] = useState(-1)
 
     function change_invitation_text(event, number_input) {
@@ -66,7 +66,7 @@ function Edit_Template(props) {
                                                 <div>
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <span onClick={() => set_number_input({ i: i, j: j })}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                            <span onClick={() => invitation_text[i]['text'][j][0]['permission'] == true ? set_number_input({ i: i, j: j }) : set_number_input(-1) }>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
                                                         ))
                                                     }
                                                 </div>
