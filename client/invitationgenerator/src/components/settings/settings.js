@@ -84,7 +84,7 @@ function Settings(props) {
     }
 
     async function generating_invitation() {
-        let buf_invitation_text = [];
+        let buf_invitation_text = []
 
         invitation_text.forEach((el_i, i) => (
             buf_invitation_text[i] = "",
