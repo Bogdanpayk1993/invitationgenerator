@@ -57,7 +57,7 @@ function Settings(props) {
 
             let buf_invitation_text = []
 
-            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['greeting']} `, type:"", placeholder: "_____", permission: true }], [{ body: "", type:"", placeholder: "(перша група імен запрошених)", permission: false }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['greeting']} `, type:"", placeholder: "_____", permission: true }], [{ body: "", type:"", placeholder: "(імена запрошених)", permission: false }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['message'], type:"", placeholder: "_____", permission: true }]], offset: 60 })
             buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['who']}, `, type:"", placeholder: "_____", permission: true }], [{ body: "", type:"inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: `, ${invitation_texts[invitation_index]['body']}`, type:"", placeholder: "_____", permission: true }]], offset: 25 })
@@ -75,7 +75,7 @@ function Settings(props) {
             buf_invitation_text.push({ text: [[{ body: "За адресою: ", type:"", placeholder: "_____", permission: true }], [{ body: "", type:"", placeholder: "(адреса)" , permission: true }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['assurance'], type:"", placeholder: '_____', permission: true }]], offset: 60 })
-            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['farewell']}, `, type:"", placeholder: "_____", permission: true }], [{ body: "", type:"inviting names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: ".",  type:"", placeholder: "_____" , permission: false }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['farewell']}, `, type:"", placeholder: "_____", permission: true }], [{ body: "", type:"inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: ".",  type:"", placeholder: "_____" , permission: false }]], offset: 25 })
 
             set_invitation_text(buf_invitation_text)
         } else {
