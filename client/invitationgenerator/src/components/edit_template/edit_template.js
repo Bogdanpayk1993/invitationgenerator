@@ -21,7 +21,7 @@ function Edit_Template(props) {
             for (let i = 0; i < new_invitation_text.length; i++) {
                 for (let j = 0; j < new_invitation_text[i]['text'].length; j++) {
                     if (new_invitation_text[number_input['i']]['text'][number_input['j']][0]['type'] == new_invitation_text[i]['text'][j][0]['type']) {
-                        if (number_input['i'] != i || number_input['j'] != j) {
+                        if (!(number_input['i'] != i && number_input['j'] != j)) {
                             if (event.target.value != " ") {
                                 new_invitation_text[i]['text'][j][0]['body'] = event.target.value
                             } else {
@@ -70,7 +70,7 @@ function Edit_Template(props) {
             for (var k = 0; k < new_invitation_text.length; k++) {
                 for (var l = 0; l < new_invitation_text[k]['text'].length; l++) {
                     if (new_invitation_text[i]['text'][j][0]['type'] == new_invitation_text[k]['text'][l][0]['type']) {
-                        if (number_input['i'] != k || number_input['j'] != l) {
+                        if (!(number_input['i'] != k && number_input['j'] != l)) {
                             new_invitation_text[k]['text'][l][0]['body'] = ""
                         }
                     }
