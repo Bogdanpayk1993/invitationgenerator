@@ -1,5 +1,5 @@
 .Text_settings {
-    height: 50vh;
+    height: 45vh;
 }
 
 .Input_container {
@@ -9,17 +9,15 @@
     color: black;
 }
 
-.Textarea_container {
-    width: 100%;
-}
-
-.Textarea_container textarea {
-    width: 90%;
-    height: 34vh;
+.Name_container {
+    width: 96%;
+    height: 32vh;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .Style_settings {
-    height: 34vh;
+    height: 39vh;
 }
 
 .Button_container {

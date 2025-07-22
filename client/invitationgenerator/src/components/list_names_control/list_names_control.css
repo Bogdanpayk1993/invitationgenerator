@@ -1,0 +1,22 @@
+.List_names_control {
+    height: 32vh;
+}
+
+.List_names_control h4 {
+    margin: 0px;
+}
+
+.List_names_control .Menu {
+    text-align: start;
+}
+
+.List_names_control .Menu button {
+    width: 4vw;
+    margin-left: 0.5vw;
+}
+
+.List_names_control .List_names {
+    height: 27vh;
+    overflow-y: auto;
+    text-align: start;
+}
