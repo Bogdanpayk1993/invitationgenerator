@@ -10,7 +10,7 @@ function Invitation_Editor() {
     const [background_image, set_background_image] = useState("")
     const [template_type, set_template_type] = useState("")
     const [invitation_text, set_invitation_text] = useState([])
-    const [list_names, set_list_names] = useState([])
+    const [greetings_list, set_greetings_list] = useState([])
 
     return (
         <>
@@ -21,7 +21,7 @@ function Invitation_Editor() {
                 <div className="column">
                     {
                         background_image != "" ?
-                            <Settings path_to_server={path_to_server} type="wedding" background_image={background_image} template_type={template_type} set_template_type={set_template_type} invitation_text={invitation_text} set_invitation_text={set_invitation_text} list_names={list_names} set_list_names={set_list_names} />
+                            <Settings path_to_server={path_to_server} type="wedding" background_image={background_image} template_type={template_type} set_template_type={set_template_type} invitation_text={invitation_text} set_invitation_text={set_invitation_text} greetings_list={greetings_list} set_greetings_list={set_greetings_list} />
                             : null
                     }
                 </div>

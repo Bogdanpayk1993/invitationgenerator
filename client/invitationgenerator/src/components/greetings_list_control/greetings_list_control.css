@@ -1,0 +1,26 @@
+.Greetings_list_control {
+    height: 32vh;
+}
+
+.Greetings_list_control h4 {
+    margin: 0px;
+}
+
+.Greetings_list_control .Menu input {
+    width: 80%;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    text-align: center;
+}
+
+.Greetings_list_control .Menu button {
+    width: 4vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.Greetings_list_control .Greetings_list {
+    height: 27vh;
+    overflow-y: auto;
+    text-align: start;
+}

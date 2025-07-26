@@ -3,7 +3,7 @@ import { saveAs } from "file-saver";
 import Select from "react-select";
 import Get_data_from_server from '../get_data_from_server/get_data_from_server';
 import Get_file_from_server from "../get_file_from_server/get_file_from_server";
-import List_names_control from "../list_names_control";
+import Greetings_list_control from "../greetings_list_control";
 import './settings.css';
 
 async function get_invitation_texts(path_to_server, type, set_invitation_texts) {
@@ -18,7 +18,6 @@ async function get_invitation_texts(path_to_server, type, set_invitation_texts) 
                 value: json[el]["Id"],
                 label: json[el]["name"],
                 type: json[el]["type"],
-                greeting: json[el]["greeting"],
                 message: json[el]["message"],
                 who: json[el]["who"],
                 body: json[el]["body"],
@@ -45,8 +44,8 @@ function Settings(props) {
     const set_template_type = props.set_template_type
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
-    const list_names = props.list_names
-    const set_list_names = props.set_list_names
+    const greetings_list = props.greetings_list
+    const set_greetings_list = props.set_greetings_list
 
     const [invitation_texts, set_invitation_texts] = useState(null)
 
@@ -60,7 +59,7 @@ function Settings(props) {
 
             let buf_invitation_text = []
 
-            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['greeting']} `, type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(імена запрошених)", permission: false }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: greetings_list.length != 0 ? greetings_list[0] : "", type: "", placeholder: "(звернення до групи запрошених)", permission: false }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['message'], type: "", placeholder: "_____", permission: true }]], offset: 60 })
             buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['who']}, `, type: "", placeholder: "_____", permission: true }], [{ body: "", type: "inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: `, ${invitation_texts[invitation_index]['body']}`, type: "", placeholder: "_____", permission: true }]], offset: 25 })
@@ -82,7 +81,11 @@ function Settings(props) {
 
             set_invitation_text(buf_invitation_text)
         } else {
-            set_invitation_text([])
+            let buf_invitation_text = []
+
+            buf_invitation_text.push({ text: [[{ body: greetings_list.length != 0 ? greetings_list[0] : "", type: "", placeholder: "(звернення до групи запрошених)", permission: false }]], offset: 25 })
+
+            set_invitation_text(buf_invitation_text)
         }
     }
 
@@ -97,10 +100,7 @@ function Settings(props) {
             buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] }
         ))
 
-        let folder_name = invitation_text[2]['text'][1][0]['body']
-        folder_name = folder_name.replaceAll(" та ", "Та")
-
-        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: folder_name })
+        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text })
         saveAs(`${path_to_server}/${json}`)
     }
 
@@ -111,7 +111,7 @@ function Settings(props) {
     }, [template_type])
 
     useEffect(() => {
-        if (invitation_text == null && template_type != "") {
+        if (template_type != "" && invitation_text == null) {
             generating_invitation_text()
         } else {
             if (Object.keys(invitation_text).length == 0 && template_type != "") {
@@ -119,6 +119,12 @@ function Settings(props) {
             }
         }
     }, [invitation_text])
+
+    useEffect(() => {
+        if (template_type != "") {
+            generating_invitation_text()
+        }
+    }, [greetings_list[0]])
 
     return (
         <>
@@ -137,7 +143,7 @@ function Settings(props) {
                                             <button onClick={() => set_invitation_text(null)}> Відмінити зміни шаблону </button>
                                         </div>
                                         <div className="Name_container">
-                                            <List_names_control list_names={list_names} set_list_names={set_list_names} />
+                                            <Greetings_list_control greetings_list={greetings_list} set_greetings_list={set_greetings_list} />
                                         </div>
                                     </> : null
                             }
@@ -149,9 +155,9 @@ function Settings(props) {
 
                                     </div>
                                     {
-                                        list_names.length != 0 ?
+                                        greetings_list.length != 0 ?
                                             <div className="Button_container">
-                                                <button onClick={() => generating_invitation()}> Завантажити запрошення </button>
+                                                <button onClick={() => generating_invitation()}> Завантажити {greetings_list.length} запрошення </button>
                                             </div>
                                             : null
                                     }
