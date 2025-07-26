@@ -96,7 +96,7 @@ function Edit_Template(props) {
                                                 <div>
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <span onClick={() => invitation_text[i]['text'][j][0]['permission'] == true ? set_number_input({ i: i, j: j }) : set_number_input(-1)}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                            <span onClick={() => set_number_input({ i: i, j: j })}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
                                                         ))
                                                     }
                                                 </div>
@@ -105,17 +105,25 @@ function Edit_Template(props) {
                                                 number_input["i"] == i ?
                                                     <div>
                                                         <div className="menu">
-                                                            <div>
-                                                                <input type="input" className="input" onChange={(event) => change_invitation_text(event, number_input)} value={invitation_text[number_input["i"]]['text'][number_input["j"]][0]['body']} placeholder={invitation_text[number_input["i"]]['text'][number_input["j"]][0]['placeholder']} />
-                                                            </div>
+                                                            {
+                                                                invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
+                                                                    <div>
+                                                                        <input type="input" className="input" onChange={(event) => change_invitation_text(event, number_input)} value={invitation_text[number_input["i"]]['text'][number_input["j"]][0]['body']} placeholder={invitation_text[number_input["i"]]['text'][number_input["j"]][0]['placeholder']} />
+                                                                    </div> : null
+                                                            }
                                                             <input type="button" onClick={() => add_input_row(i)} value="Додати" />
-                                                            <input type="button" onClick={() => delete_input_row(i)} value="Видалити" />
-                                                            <label>
-                                                                <input type="checkbox" onChange={() => change_offset(i)} checked={invitation_text[i]['offset'] == 60 ? true : false} />
-                                                                Відступ
-                                                            </label>
-                                                            <input type="button" onClick={() => cleaning_input_row(number_input["i"], number_input["j"])} value="Відчистити" />
-                                                            <input type="button" onClick={() => set_number_input(-1)} value="Зберегти" />
+                                                            {
+                                                                invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
+                                                                    <>
+                                                                        <input type="button" onClick={() => delete_input_row(i)} value="Видалити" />
+                                                                        <label>
+                                                                            <input type="checkbox" onChange={() => change_offset(i)} checked={invitation_text[i]['offset'] == 60 ? true : false} />
+                                                                            Відступ
+                                                                        </label>
+                                                                        <input type="button" onClick={() => cleaning_input_row(number_input["i"], number_input["j"])} value="Відчистити" />
+                                                                        <input type="button" onClick={() => set_number_input(-1)} value="Зберегти" />
+                                                                    </> : null
+                                                            }
                                                         </div>
                                                     </div>
                                                     : null
