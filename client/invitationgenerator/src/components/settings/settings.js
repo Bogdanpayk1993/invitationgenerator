@@ -48,6 +48,7 @@ function Settings(props) {
     const set_greetings_list = props.set_greetings_list
 
     const [invitation_texts, set_invitation_texts] = useState(null)
+    const [permission_generating_invitations, set_permission_generating_invitations] = useState(false)
 
     if (invitation_texts == null) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
@@ -89,6 +90,20 @@ function Settings(props) {
         }
     }
 
+    function get_permission_generating_invitations() {
+        let permission = true
+        
+        for (let i = 0; i < invitation_text.length; i++) {
+            for (let j = 0; j < invitation_text[i]['text'].length; j++) {
+                if (invitation_text[i]['text'][j][0]['body'] == "") {
+                    permission = false
+                }
+            }
+        }
+
+        set_permission_generating_invitations(permission)
+    }
+
     async function generating_invitation() {
         let buf_invitation_text = []
 
@@ -117,6 +132,7 @@ function Settings(props) {
             if (Object.keys(invitation_text).length == 0 && template_type != "") {
                 set_template_type('Професійний')
             }
+            get_permission_generating_invitations()
         }
     }, [invitation_text])
 
@@ -155,7 +171,7 @@ function Settings(props) {
 
                                     </div>
                                     {
-                                        greetings_list.length != 0 ?
+                                        greetings_list.length != 0 && permission_generating_invitations != false ?
                                             <div className="Button_container">
                                                 <button onClick={() => generating_invitation()}> Завантажити {greetings_list.length} запрошення </button>
                                             </div>

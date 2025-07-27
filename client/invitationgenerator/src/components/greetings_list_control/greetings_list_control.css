@@ -15,8 +15,8 @@
 
 .Greetings_list_control .Menu button {
     width: 4vw;
-    margin-left: 1vw;
-    margin-right: 1vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
 }
 
 .Greetings_list_control .Greetings_list {

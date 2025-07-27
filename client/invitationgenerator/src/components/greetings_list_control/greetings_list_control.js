@@ -51,7 +51,7 @@ function Greetings_list_control(props) {
         <div className='Greetings_list_control'>
             <h4> Список груп запрошених </h4>
             <div className='Menu'>
-                <input onChange={(event) => set_new_greeting(event.target.value)} placeholder='Звернення до групи запрошених' value={new_greeting} />
+                <input onChange={(event) => set_new_greeting(event.target.value)} placeholder='Вітання групи запрошених' value={new_greeting} />
                 {
                     index_new_greeting == -1 ?
                         <button onClick={() => Add()}> Додати </button>
