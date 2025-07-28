@@ -48,3 +48,7 @@
 .edit_template .edit_template_body div div .menu label {
     margin-right: 0.3vw;
 }
+
+.edit_template .edit_template_body div div .menu .button {
+    width: 5vw;
+}

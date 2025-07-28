@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './edit_template.css';
 
 function Edit_Template(props) {
@@ -7,10 +7,12 @@ function Edit_Template(props) {
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
 
+    const [local_invitation_text, set_local_invitation_text] = useState()
     const [number_input, set_number_input] = useState(-1)
 
-    function change_invitation_text(event, number_input) {
-        let new_invitation_text = invitation_text.slice()
+    function change_local_invitation_text(event, number_input) {
+        let new_invitation_text = local_invitation_text.slice()
+
         if (event.target.value != " ") {
             new_invitation_text[number_input['i']]['text'][number_input['j']][0]['body'] = event.target.value
         } else {
@@ -33,12 +35,12 @@ function Edit_Template(props) {
             }
         }
 
-        set_invitation_text(new_invitation_text)
+        set_local_invitation_text(new_invitation_text)
     }
 
     function add_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text.splice(i + 1, 0, { text: [[{ body: "", placeholder: "_____", permission: true }]], offset: 25 })
+        new_invitation_text.splice(i + 1, 0, { text: [[{ body: "", type: "", placeholder: "_____", permission: true }]], offset: 25 })
         set_invitation_text(new_invitation_text)
         set_number_input(i + 1)
     }
@@ -52,35 +54,35 @@ function Edit_Template(props) {
 
     function change_offset(i) {
         let offset
-        let new_invitation_text = invitation_text.slice()
-        if (invitation_text[i]['offset'] == 30) {
+        let new_invitation_text = local_invitation_text.slice()
+        if (new_invitation_text[i]['offset'] == 30) {
             offset = 60
         } else {
             offset = 30
         }
         new_invitation_text[i]['offset'] = offset
-        set_invitation_text(new_invitation_text)
+        set_local_invitation_text(new_invitation_text)
     }
 
-    function cleaning_input_row(i, j) {
-        let new_invitation_text = invitation_text.slice()
-        new_invitation_text[i]['text'][j][0]['body'] = ""
+    function cancel_changes() {
+        set_local_invitation_text(structuredClone(invitation_text))
+    }
 
-        if (new_invitation_text[number_input['i']]['text'][number_input['j']][0]['type'] != "") {
-            for (var k = 0; k < new_invitation_text.length; k++) {
-                for (var l = 0; l < new_invitation_text[k]['text'].length; l++) {
-                    if (new_invitation_text[i]['text'][j][0]['type'] == new_invitation_text[k]['text'][l][0]['type']) {
-                        if (!(number_input['i'] != k && number_input['j'] != l)) {
-                            new_invitation_text[k]['text'][l][0]['body'] = ""
-                        }
-                    }
-                }
-            }
+    function change_invitation_text() {
+        set_invitation_text(structuredClone(local_invitation_text))
+        set_number_input(-1)
+    }
+
+    function change_position(i, j) {
+        set_number_input({ i: i, j: j})
+        set_local_invitation_text(structuredClone(invitation_text))
+    }
+
+    useEffect(() => {
+        if (invitation_text.label != 0) {
+            set_local_invitation_text(structuredClone(invitation_text))
         }
-
-        set_invitation_text(new_invitation_text)
-        set_number_input({ i: i, j: j })
-    }
+    }, [invitation_text])
 
     return (
         <div className="edit_template">
@@ -96,7 +98,7 @@ function Edit_Template(props) {
                                                 <div>
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <span onClick={() => set_number_input({ i: i, j: j })}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                            <span onClick={() => change_position(i, j)}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
                                                         ))
                                                     }
                                                 </div>
@@ -108,22 +110,22 @@ function Edit_Template(props) {
                                                             {
                                                                 invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
                                                                     <div>
-                                                                        <input type="input" className="input" onChange={(event) => change_invitation_text(event, number_input)} value={invitation_text[number_input["i"]]['text'][number_input["j"]][0]['body']} placeholder={invitation_text[number_input["i"]]['text'][number_input["j"]][0]['placeholder']} />
+                                                                        <input type="input" className="input" onChange={(event) => change_local_invitation_text(event, number_input)} value={local_invitation_text[number_input["i"]]['text'][number_input["j"]][0]['body']} placeholder={local_invitation_text[number_input["i"]]['text'][number_input["j"]][0]['placeholder']} />
                                                                     </div> : null
                                                             }
-                                                            <input type="button" onClick={() => add_input_row(i)} value="Додати" />
+                                                            <input type="button" className="button" onClick={() => add_input_row(i)} value="Додати" />
                                                             {
                                                                 invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
                                                                     <>
-                                                                        <input type="button" onClick={() => delete_input_row(i)} value="Видалити" />
+                                                                        <input type="button" className="button" onClick={() => delete_input_row(i)} value="Видалити" />
                                                                         <label>
-                                                                            <input type="checkbox" onChange={() => change_offset(i)} checked={invitation_text[i]['offset'] == 60 ? true : false} />
+                                                                            <input type="checkbox" onChange={() => change_offset(i)} checked={local_invitation_text[i]['offset'] == 60 ? true : false} />
                                                                             Відступ
                                                                         </label>
-                                                                        <input type="button" onClick={() => cleaning_input_row(number_input["i"], number_input["j"])} value="Відчистити" />
+                                                                        <input type="button" className="button" onClick={() => cancel_changes()} value="Скасувати" />
                                                                     </> : null
                                                             }
-                                                            <input type="button" onClick={() => set_number_input(-1)} value="Зберегти" />
+                                                            <input type="button" className="button" onClick={() => change_invitation_text()} value="Зберегти" />
                                                         </div>
                                                     </div>
                                                     : null

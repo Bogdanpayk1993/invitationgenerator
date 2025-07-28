@@ -132,8 +132,8 @@ function Settings(props) {
             if (Object.keys(invitation_text).length == 0 && template_type != "") {
                 set_template_type('Професійний')
             }
-            get_permission_generating_invitations()
         }
+        get_permission_generating_invitations()
     }, [invitation_text])
 
     useEffect(() => {
