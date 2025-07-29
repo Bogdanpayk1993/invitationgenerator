@@ -54,14 +54,14 @@ function Edit_Template(props) {
 
     function change_offset(i) {
         let offset
-        let new_invitation_text = local_invitation_text.slice()
+        let new_invitation_text = invitation_text.slice()
         if (new_invitation_text[i]['offset'] == 30) {
             offset = 60
         } else {
             offset = 30
         }
         new_invitation_text[i]['offset'] = offset
-        set_local_invitation_text(new_invitation_text)
+        set_invitation_text(new_invitation_text)
     }
 
     function cancel_changes() {
