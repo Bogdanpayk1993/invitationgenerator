@@ -40,13 +40,12 @@ function Settings(props) {
     const type = props.type
     const path_to_server = props.path_to_server
     const background_image = props.background_image
-    const template_type = props.template_type
-    const set_template_type = props.set_template_type
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
     const greetings_list = props.greetings_list
     const set_greetings_list = props.set_greetings_list
 
+    const [template_type, set_template_type] = useState("")
     const [invitation_texts, set_invitation_texts] = useState(null)
     const [permission_generating_invitations, set_permission_generating_invitations] = useState(false)
 
@@ -115,7 +114,7 @@ function Settings(props) {
             buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] }
         ))
 
-        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text })
+        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: invitation_text[2]['text'][1][0]['body'], greetings_list: greetings_list })
         saveAs(`${path_to_server}/${json}`)
     }
 

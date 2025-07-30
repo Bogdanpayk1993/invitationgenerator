@@ -20,7 +20,8 @@ router.post('/getType', function (req, res) {
 
 router.post('/getInvitation', async function (req, res) {
     let date = new Date()
-    let folder_name = `${req['body']['folder_name']}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
+
+    let folder_name = `${req['body']['folder_name'].replaceAll(" та ", "_та_")}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
     
     mkdir(`${path}/public/images/invitations/${folder_name}/`).then(() => {
     }).catch((err) => {

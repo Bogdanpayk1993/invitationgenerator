@@ -3,7 +3,6 @@ import './edit_template.css';
 
 function Edit_Template(props) {
 
-    const template_type = props.template_type
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
 
@@ -74,7 +73,7 @@ function Edit_Template(props) {
     }
 
     function change_position(i, j) {
-        set_number_input({ i: i, j: j})
+        set_number_input({ i: i, j: j })
         set_local_invitation_text(structuredClone(invitation_text))
     }
 
@@ -134,10 +133,7 @@ function Edit_Template(props) {
                                     </div>
                                 ))
                                 :
-                                template_type != "" ?
-                                    <button onClick={() => add_input_row(0)} > Додати рядок </button>
-                                    :
-                                    <p> Оберіть тип шаблону </p>
+                                <p> Оберіть тип шаблону </p>
                             :
                             null
                     }
