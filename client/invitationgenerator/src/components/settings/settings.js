@@ -84,7 +84,7 @@ function Settings(props) {
             let buf_invitation_text = []
 
             buf_invitation_text.push({ text: [[{ body: greetings_list.length != 0 ? greetings_list[0] : "", type: "", placeholder: "(звернення до групи запрошених)", permission: false }]], offset: 25 })
-            buf_invitation_text.push({ text: [[{ body: "", type: "", placeholder: "_____", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "", type: "", placeholder: "_____", permission: true }]], offset: 60 })
 
             set_invitation_text(buf_invitation_text)
         }
