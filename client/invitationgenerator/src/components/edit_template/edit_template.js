@@ -19,21 +19,21 @@ function Edit_Template(props) {
         }
 
         if (new_invitation_text[number_input['i']]['text'][number_input['j']][0]['type'] != "") {
-            for (let i = 0; i < new_invitation_text.length; i++) {
-                for (let j = 0; j < new_invitation_text[i]['text'].length; j++) {
-                    if (new_invitation_text[number_input['i']]['text'][number_input['j']][0]['type'] == new_invitation_text[i]['text'][j][0]['type']) {
-                        if (!(number_input['i'] != i && number_input['j'] != j)) {
-                            if (event.target.value != " ") {
-                                new_invitation_text[i]['text'][j][0]['body'] = event.target.value
-                            } else {
-                                new_invitation_text[i]['text'][j][0]['body'] = ""
-                            }
-                        }
-                    }
-                }
-            }
+            new_invitation_text.forEach((el_i, i) => (
+                el_i['text'].forEach((el_j, j) => (
+                    new_invitation_text[number_input['i']]['text'][number_input['j']][0]['type'] == el_j[0]['type'] ?
+                        !(number_input['i'] != i && number_input['j'] != j) ?
+                            event.target.value != " " ?
+                                el_j[0]['body'] = event.target.value
+                                :
+                                el_j[0]['body'] = ""
+                            :
+                            null
+                        : null
+                ))
+            ))
         }
-
+        
         set_local_invitation_text(new_invitation_text)
     }
 

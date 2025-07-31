@@ -13,7 +13,7 @@ async function get_invitation_texts(path_to_server, type, set_invitation_texts) 
     if (JSON.stringify(json) !== '{}') {
         let json1 = []
 
-        Object.keys(json).map(el => (
+        Object.keys(json).forEach(el => (
             json1.push({
                 value: json[el]["Id"],
                 label: json[el]["name"],
@@ -65,7 +65,7 @@ function Settings(props) {
             buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['who']}, `, type: "", placeholder: "_____", permission: true }], [{ body: "", type: "inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: `, ${invitation_texts[invitation_index]['body']}`, type: "", placeholder: "_____", permission: true }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['event_first_title'], type: "", placeholder: "_____", permission: true }]], offset: 60 })
-            buf_invitation_text.push({ text: [[{ body: "", placeholder: "(дата)", type: "", permission: true }], [{ body: " о ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(час)", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "", type: "", placeholder: "(дата)", permission: true }], [{ body: " о ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(час)", permission: true }]], offset: 25 })
             buf_invitation_text.push({ text: [[{ body: "За адресою: ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(адреса)", permission: true }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['event_second_title'], type: "", placeholder: "_____", permission: true }]], offset: 60 })
@@ -84,6 +84,7 @@ function Settings(props) {
             let buf_invitation_text = []
 
             buf_invitation_text.push({ text: [[{ body: greetings_list.length != 0 ? greetings_list[0] : "", type: "", placeholder: "(звернення до групи запрошених)", permission: false }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "", type: "", placeholder: "_____", permission: true }]], offset: 25 })
 
             set_invitation_text(buf_invitation_text)
         }
@@ -91,14 +92,15 @@ function Settings(props) {
 
     function get_permission_generating_invitations() {
         let permission = true
-        
-        for (let i = 0; i < invitation_text.length; i++) {
-            for (let j = 0; j < invitation_text[i]['text'].length; j++) {
-                if (invitation_text[i]['text'][j][0]['body'] == "") {
+
+        invitation_text.forEach((el_i) => (
+            el_i['text'].forEach((el_j) => (
+                el_j[0]['body'] == "" ?
                     permission = false
-                }
-            }
-        }
+                    :
+                    null
+            ))
+        ))
 
         set_permission_generating_invitations(permission)
     }
@@ -109,7 +111,7 @@ function Settings(props) {
         invitation_text.forEach((el_i, i) => (
             buf_invitation_text[i] = "",
             el_i['text'].forEach((el_j, j) => (
-                buf_invitation_text[i] += el_i['text'][j][0]['body']
+                buf_invitation_text[i] += el_j[0]['body']
             )),
             buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] }
         ))
@@ -155,7 +157,7 @@ function Settings(props) {
                                 template_type != "" ?
                                     <>
                                         <div className="Button_container">
-                                            <button onClick={() => set_invitation_text(null)}> Відмінити зміни шаблону </button>
+                                            <button onClick={() => generating_invitation_text(null)}> Відмінити зміни шаблону </button>
                                         </div>
                                         <div className="Name_container">
                                             <Greetings_list_control greetings_list={greetings_list} set_greetings_list={set_greetings_list} />
