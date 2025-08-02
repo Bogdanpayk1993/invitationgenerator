@@ -122,9 +122,9 @@ function Edit_Template(props) {
                                                                             Відступ
                                                                         </label>
                                                                         <input type="button" className="button" onClick={() => cancel_changes()} value="Скасувати" />
+                                                                        <input type="button" className="button" onClick={() => change_invitation_text()} value="Зберегти" />
                                                                     </> : null
                                                             }
-                                                            <input type="button" className="button" onClick={() => change_invitation_text()} value="Зберегти" />
                                                         </div>
                                                     </div>
                                                     : null

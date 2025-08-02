@@ -22,22 +22,44 @@ router.post('/getInvitation', async function (req, res) {
     let date = new Date()
 
     let folder_name = `${req['body']['folder_name'].replaceAll(" та ", "_та_")}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
-    
+
     mkdir(`${path}/public/images/invitations/${folder_name}/`).then(() => {
     }).catch((err) => {
         console.log(err)
     })
-    
+
+    const file = await readFile(`${path}\\public\\images\\backgrounds\\${req['body']['background_image']}`)
+
     let position = 0
-    let height = 0 
+    let height = 0
     req['body']['invitation_text'].forEach(el => (
         height += el['offset']
     ))
     height += 5
-    const file = await readFile(`${path}\\public\\images\\backgrounds\\${req['body']['background_image']}`)
-    
-    const img = sharp(file)
-    const textSVG = Buffer.from(`<svg width="600" height="${height}">
+
+    req['body']['greetings_list'].forEach(async el => {
+
+        req['body']['invitation_text'][0]['text'] = el
+        let string = el.split("")
+        let string_size = []
+        let found_index = 0
+
+        string.forEach((el, i) => {
+            let exp = /[A-ZА-ЯІ]/
+            string_size[i] = exp.test(el)
+        })
+
+        string_size.forEach((el, i) => {
+            el == true && i != 0 && found_index == 0 ?
+                found_index = i
+                :
+                null
+        })
+
+        let invitation_name = el.slice(found_index).replaceAll(" ", "_")
+
+        const img = sharp(file)
+        const textSVG = Buffer.from(`<svg width="600" height="${height}">
                                     <defs>
                                         <style>
                                             .text {
@@ -45,15 +67,15 @@ router.post('/getInvitation', async function (req, res) {
                                             }
                                         </style>
                                     </defs>
-                                    ${
-                                        req['body']['invitation_text'].map(el =>
-                                           `<text x="50%" y="${position += el['offset']}" text-anchor="middle" class="text"> ${el['text']} </text>`
-                                        )
-                                    }
-                                </svg>`)
-    const result = await img.composite([{ input: textSVG }]).toBuffer()
-    await writeFile(`${path}\\public\\images\\invitations\\${folder_name}\\res.jpg`, result)
-    
+                                    ${req['body']['invitation_text'].map(el => `<text x="50%" y="${position += el['offset']}" text-anchor="middle" class="text"> ${el['text']} </text>`)}
+                                    </svg>`)
+
+        position = 0
+
+        const result = await img.composite([{ input: textSVG }]).toBuffer()
+        await writeFile(`${path}\\public\\images\\invitations\\${folder_name}\\${invitation_name}.jpg`, result)
+    })
+
     res.send(`images\\invitations\\${folder_name}\\res.jpg`)
 })
 
