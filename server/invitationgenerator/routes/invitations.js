@@ -30,7 +30,6 @@ router.post('/getInvitation', async function (req, res) {
 
     const file = await readFile(`${path}\\public\\images\\backgrounds\\${req['body']['background_image']}`)
 
-    let position = 0
     let height = 0
     req['body']['invitation_text'].forEach(el => (
         height += el['offset']
@@ -39,24 +38,10 @@ router.post('/getInvitation', async function (req, res) {
 
     req['body']['greetings_list'].forEach(async el => {
 
+        let position = 0
+        let invitation_name = el.replaceAll(" ", "_")
+
         req['body']['invitation_text'][0]['text'] = el
-        let string = el.split("")
-        let string_size = []
-        let found_index = 0
-
-        string.forEach((el, i) => {
-            let exp = /[A-ZА-ЯІ]/
-            string_size[i] = exp.test(el)
-        })
-
-        string_size.forEach((el, i) => {
-            el == true && i != 0 && found_index == 0 ?
-                found_index = i
-                :
-                null
-        })
-
-        let invitation_name = el.slice(found_index).replaceAll(" ", "_")
 
         const img = sharp(file)
         const textSVG = Buffer.from(`<svg width="600" height="${height}">
@@ -69,8 +54,6 @@ router.post('/getInvitation', async function (req, res) {
                                     </defs>
                                     ${req['body']['invitation_text'].map(el => `<text x="50%" y="${position += el['offset']}" text-anchor="middle" class="text"> ${el['text']} </text>`)}
                                     </svg>`)
-
-        position = 0
 
         const result = await img.composite([{ input: textSVG }]).toBuffer()
         await writeFile(`${path}\\public\\images\\invitations\\${folder_name}\\${invitation_name}.jpg`, result)
