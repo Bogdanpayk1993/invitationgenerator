@@ -116,7 +116,7 @@ function Settings(props) {
             buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] }
         ))
 
-        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitation`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: invitation_text[2]['text'][1][0]['body'], greetings_list: greetings_list })
+        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitations`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: invitation_text[2]['text'][1][0]['body'], greetings_list: greetings_list })
         saveAs(`${path_to_server}/${json}`)
     }
 

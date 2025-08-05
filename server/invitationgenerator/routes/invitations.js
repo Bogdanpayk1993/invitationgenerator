@@ -20,7 +20,7 @@ router.post('/getType', function (req, res) {
     res.send(result)
 })
 
-router.post('/getInvitation', async function (req, res) {
+router.post('/getInvitations', async function (req, res) {
     let date = new Date()
 
     let folder_name = `${req['body']['folder_name'].replaceAll(" та ", "_та_")}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
@@ -67,7 +67,7 @@ router.post('/getInvitation', async function (req, res) {
 
     invitationPaths.forEach((el, i) => {
         const invitationData = fs.readFileSync(el)
-        const fileName = `${req['body']['greetings_list'][i]}.jpg`
+        const fileName = `запрошення\\${req['body']['greetings_list'][i]}.jpg`
         zip.file(fileName, invitationData)
     })
 
