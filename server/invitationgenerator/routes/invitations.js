@@ -3,6 +3,7 @@ var router = express.Router();
 var BetterSqlite3 = require('better-sqlite3');
 var db = new BetterSqlite3('invitation.db');
 
+var fs = require('fs');
 var fsPromises = require('fs/promises');
 var readFile = fsPromises.readFile;
 var writeFile = fsPromises.writeFile;
@@ -12,6 +13,7 @@ var appRootPath = require('app-root-path');
 var path = appRootPath.path;
 
 var sharp = require('sharp');
+var JSZip = require('jszip');
 
 router.post('/getType', function (req, res) {
     const result = db.prepare(`SELECT * FROM invitations WHERE type='${req['body']['type']}'`).all()
@@ -36,12 +38,15 @@ router.post('/getInvitation', async function (req, res) {
     ))
     height += 5
 
-    req['body']['greetings_list'].forEach(async el => {
+    var zip = new JSZip()
+    var invitationPaths = []
+
+    for (let i = 0; i < req['body']['greetings_list'].length; i++) {
 
         let position = 0
-        let invitation_name = el.replaceAll(" ", "_")
+        let invitation_name = req['body']['greetings_list'][i].replaceAll(" ", "_")
 
-        req['body']['invitation_text'][0]['text'] = el
+        req['body']['invitation_text'][0]['text'] = req['body']['greetings_list'][i]
 
         const img = sharp(file)
         const textSVG = Buffer.from(`<svg width="600" height="${height}">
@@ -57,9 +62,21 @@ router.post('/getInvitation', async function (req, res) {
 
         const result = await img.composite([{ input: textSVG }]).toBuffer()
         await writeFile(`${path}\\public\\images\\invitations\\${folder_name}\\${invitation_name}.jpg`, result)
+        invitationPaths.push(`${path}\\public\\images\\invitations\\${folder_name}\\${invitation_name}.jpg`)
+    }
+
+    invitationPaths.forEach((el, i) => {
+        const invitationData = fs.readFileSync(el)
+        const fileName = `${req['body']['greetings_list'][i]}.jpg`
+        zip.file(fileName, invitationData)
     })
 
-    res.send(`images\\invitations\\${folder_name}\\res.jpg`)
+    zip.generateAsync({ type: 'nodebuffer' })
+        .then(el => {
+            fs.writeFileSync(`${path}\\public\\images\\invitations\\${folder_name}\\${folder_name}.zip`, el)
+        })
+
+    res.send(`images\\invitations\\${folder_name}\\${folder_name}.zip`)
 })
 
 module.exports = router;
