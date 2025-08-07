@@ -1,4 +1,4 @@
-async function Get_file_from_server(request) {
+async function Set_command_for_server(request) {
     let reple
     await fetch(`${request['link']}`, {
         method: "POST",
@@ -11,4 +11,4 @@ async function Get_file_from_server(request) {
     return reple
 }
 
-export default Get_file_from_server;
+export default Set_command_for_server;

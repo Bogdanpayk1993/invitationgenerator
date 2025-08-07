@@ -42,7 +42,6 @@ router.post('/getInvitations', async function (req, res) {
     var invitationPaths = []
 
     for (let i = 0; i < req['body']['greetings_list'].length; i++) {
-
         let position = 0
         let invitation_name = req['body']['greetings_list'][i].replaceAll(" ", "_")
 
@@ -76,7 +75,20 @@ router.post('/getInvitations', async function (req, res) {
             fs.writeFileSync(`${path}\\public\\images\\invitations\\${folder_name}\\${folder_name}.zip`, el)
         })
 
-    res.send(`images\\invitations\\${folder_name}\\${folder_name}.zip`)
+    res.send({ folder_name: folder_name, archive_name: `${folder_name}.zip` })
+})
+
+router.post('/deleteInvitations', async function (req, res) {
+    res.end()
+
+    fs.rm(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}`, { recursive: true, force: true }, err => {
+        if (err) {
+            console.error('Помилка видалення: ', err);
+        } else {
+            console.log(`Папку видалено`)
+        }
+    })
+
 })
 
 module.exports = router;

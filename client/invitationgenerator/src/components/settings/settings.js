@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { saveAs } from "file-saver";
 import Select from "react-select";
 import Get_data_from_server from '../get_data_from_server/get_data_from_server';
-import Get_file_from_server from "../get_file_from_server/get_file_from_server";
+import Set_command_for_server from "../set_command_for_server/set_command_for_server";
 import Greetings_list_control from "../greetings_list_control";
 import './settings.css';
 
@@ -116,8 +116,9 @@ function Settings(props) {
             buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] }
         ))
 
-        let json = await Get_file_from_server({ link: `${path_to_server}/invitations/getInvitations`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: invitation_text[2]['text'][1][0]['body'], greetings_list: greetings_list })
-        saveAs(`${path_to_server}/${json}`)
+        let json = await Get_data_from_server({ link: `${path_to_server}/invitations/getInvitations`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: invitation_text[2]['text'][1][0]['body'], greetings_list: greetings_list }) 
+        saveAs(`${path_to_server}/images/invitations/${json['folder_name']}/${json['archive_name']}`, json['archive_name'])
+        await Set_command_for_server({ link: `${path_to_server}/invitations/deleteInvitations`, folder_name: `${json['folder_name']}` })
     }
 
     useEffect(() => {
