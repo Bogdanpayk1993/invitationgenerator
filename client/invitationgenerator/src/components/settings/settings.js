@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { saveAs } from "file-saver";
 import Select from "react-select";
 import Get_data_from_server from '../get_data_from_server/get_data_from_server';
-import Set_command_for_server from "../set_command_for_server/set_command_for_server";
 import Greetings_list_control from "../greetings_list_control";
 import './settings.css';
 
@@ -48,6 +47,7 @@ function Settings(props) {
     const [template_type, set_template_type] = useState("")
     const [invitation_texts, set_invitation_texts] = useState(null)
     const [permission_generating_invitations, set_permission_generating_invitations] = useState(false)
+    const [folder_names, set_folder_names] = useState([])
 
     if (invitation_texts == null) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
@@ -116,9 +116,15 @@ function Settings(props) {
             buf_invitation_text[i] = { text: buf_invitation_text[i], offset: el_i['offset'] }
         ))
 
-        let json = await Get_data_from_server({ link: `${path_to_server}/invitations/getInvitations`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: invitation_text[2]['text'][1][0]['body'], greetings_list: greetings_list }) 
+        let date = new Date()
+        let folder_name = `${invitation_text[2]['text'][1][0]['body'].replaceAll(" та ", "_та_")}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
+
+        let new_folder_names = folder_names.slice()
+        new_folder_names.push(folder_name)
+        set_folder_names(new_folder_names)
+
+        let json = await Get_data_from_server({ link: `${path_to_server}/invitations/getInvitations`, background_image: background_image, invitation_text: buf_invitation_text, folder_name: folder_name, greetings_list: greetings_list })
         saveAs(`${path_to_server}/images/invitations/${json['folder_name']}/${json['archive_name']}`, json['archive_name'])
-        await Set_command_for_server({ link: `${path_to_server}/invitations/deleteInvitations`, folder_name: `${json['folder_name']}` })
     }
 
     useEffect(() => {
@@ -143,6 +149,18 @@ function Settings(props) {
             generating_invitation_text()
         }
     }, [greetings_list[0]])
+
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            const formData = new FormData()
+            formData.append('folder_names', JSON.stringify(folder_names))
+            navigator.sendBeacon(`${path_to_server}/invitations/deleteInvitations`, formData)
+        }
+        window.addEventListener('beforeunload', handleBeforeUnload)
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+        }
+    }, [folder_names])
 
     return (
         <>

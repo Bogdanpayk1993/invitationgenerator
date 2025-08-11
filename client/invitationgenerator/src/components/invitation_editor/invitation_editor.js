@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Background_Settings from '../background_settings';
-import Invitation_Viewing from '../invitation_viewing';
 import Settings from '../settings';
+import Invitation_Viewing from '../invitation_viewing/invitation_viewing';
+import Background_Settings from '../background_settings/background_settings';
 import './invitation_editor.css'
 
 function Invitation_Editor() {
