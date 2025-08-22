@@ -5,9 +5,9 @@ var db = new BetterSqlite3('invitation.db');
 
 var fs = require('fs');
 var fsPromises = require('fs/promises');
+var mkdir = fsPromises.mkdir;
 var readFile = fsPromises.readFile;
 var writeFile = fsPromises.writeFile;
-var mkdir = fsPromises.mkdir;
 
 var appRootPath = require('app-root-path');
 var path = appRootPath.path;
@@ -86,8 +86,6 @@ router.post('/getInvitations', async function (req, res) {
             fs.rm(`${path}\\public\\images\\invitations\\${folder_name}`, { recursive: true, force: true }, err => {
                 if (err) {
                     console.error('Помилка видалення: ', err);
-                } else {
-                    console.log(`Папку видалено`)
                 }
             })
         })
