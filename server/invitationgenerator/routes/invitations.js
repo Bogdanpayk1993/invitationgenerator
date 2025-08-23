@@ -21,10 +21,7 @@ router.post('/getType', function (req, res) {
 })
 
 router.post('/getInvitations', async function (req, res) {
-    let date = new Date()
-    let folder_name = `${req['body']['folder_name'].replaceAll(" та ", "_та_")}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
-
-    mkdir(`${path}/public/images/invitations/${folder_name}/`).then(() => {
+    mkdir(`${path}/public/images/invitations/${req['body']['folder_name']}/`).then(() => {
     }).catch((err) => {
         console.log(err)
     })
@@ -59,8 +56,8 @@ router.post('/getInvitations', async function (req, res) {
                                     </svg>`)
 
         const result = await img.composite([{ input: textSVG }]).toBuffer()
-        await writeFile(`${path}\\public\\images\\invitations\\${folder_name}\\${invitation_name}.jpg`, result)
-        invitationPaths.push(`${path}\\public\\images\\invitations\\${folder_name}\\${invitation_name}.jpg`)
+        await writeFile(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\${invitation_name}.jpg`, result)
+        invitationPaths.push(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\${invitation_name}.jpg`)
     }
 
     invitationPaths.forEach((el, i) => {
@@ -71,10 +68,10 @@ router.post('/getInvitations', async function (req, res) {
 
     zip.generateAsync({ type: 'nodebuffer' })
         .then(el => {
-            fs.writeFileSync(`${path}\\public\\images\\invitations\\${folder_name}\\${folder_name}.zip`, el)
+            fs.writeFileSync(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\${req['body']['folder_name']}.zip`, el)
         })
         .then(() => {
-            const filePath = `${path}\\public\\images\\invitations\\${folder_name}\\${folder_name}.zip`
+            const filePath = `${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\${req['body']['folder_name']}.zip`
             const fileStream = fs.createReadStream(filePath)
 
             res.setHeader('Content-Disposition', 'attachment; filename="invitations.zip"')
@@ -83,7 +80,7 @@ router.post('/getInvitations', async function (req, res) {
             fileStream.pipe(res)
         })
         .then(() => {
-            fs.rm(`${path}\\public\\images\\invitations\\${folder_name}`, { recursive: true, force: true }, err => {
+            fs.rm(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}`, { recursive: true, force: true }, err => {
                 if (err) {
                     console.error('Помилка видалення: ', err);
                 }
