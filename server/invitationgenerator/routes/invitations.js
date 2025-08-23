@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var BetterSqlite3 = require('better-sqlite3');
-var db = new BetterSqlite3('invitation.db');
+var db = new BetterSqlite3('database/invitation.db');
 
 var fs = require('fs');
 var fsPromises = require('fs/promises');
