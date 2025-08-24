@@ -5,6 +5,7 @@ function Greetings_list_control(props) {
 
     const greetings_list = props.greetings_list
     const set_greetings_list = props.set_greetings_list
+    
     const [new_greeting, set_new_greeting] = useState("")
     const [index_new_greeting, set_index_new_greeting] = useState(-1)
 

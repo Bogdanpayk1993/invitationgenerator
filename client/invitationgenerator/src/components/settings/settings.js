@@ -5,35 +5,6 @@ import Get_archive_from_server from "../get_archive_from_server/get_archive_from
 import Greetings_list_control from "../greetings_list_control";
 import './settings.css';
 
-async function get_invitation_texts(path_to_server, type, set_invitation_texts) {
-
-    let json = await Get_data_from_server({ link: `${path_to_server}/invitations/getType`, type: type })
-
-    if (JSON.stringify(json) !== '{}') {
-        let json1 = []
-
-        Object.keys(json).forEach(el => (
-            json1.push({
-                value: json[el]["Id"],
-                label: json[el]["name"],
-                type: json[el]["type"],
-                message: json[el]["message"],
-                who: json[el]["who"],
-                body: json[el]["body"],
-                event_first_title: json[el]["eventfirsttitle"],
-                event_second_title: json[el]["eventsecondtitle"],
-                event_third_title: json[el]["eventthirdtitle"],
-                assurance: json[el]["assurance"],
-                farewell: json[el]["farewell"]
-            })
-        ))
-
-        json1.push({ value: Object.keys(json).length + 1, label: "Професійний" })
-
-        set_invitation_texts(json1)
-    }
-}
-
 function Settings(props) {
 
     const type = props.type
@@ -50,6 +21,35 @@ function Settings(props) {
 
     if (invitation_texts == null) {
         get_invitation_texts(path_to_server, type, set_invitation_texts)
+    }
+
+    async function get_invitation_texts(path_to_server, type, set_invitation_texts) {
+
+        let json = await Get_data_from_server({ link: `${path_to_server}/invitations/getType`, type: type })
+
+        if (JSON.stringify(json) !== '{}') {
+            let json1 = []
+
+            Object.keys(json).forEach(el => (
+                json1.push({
+                    value: json[el]["Id"],
+                    label: json[el]["name"],
+                    type: json[el]["type"],
+                    message: json[el]["message"],
+                    who: json[el]["who"],
+                    body: json[el]["body"],
+                    event_first_title: json[el]["eventfirsttitle"],
+                    event_second_title: json[el]["eventsecondtitle"],
+                    event_third_title: json[el]["eventthirdtitle"],
+                    assurance: json[el]["assurance"],
+                    farewell: json[el]["farewell"]
+                })
+            ))
+
+            json1.push({ value: Object.keys(json).length + 1, label: "Професійний" })
+
+            set_invitation_texts(json1)
+        }
     }
 
     function generating_invitation_text() {

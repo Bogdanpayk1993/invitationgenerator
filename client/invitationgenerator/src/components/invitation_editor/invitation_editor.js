@@ -7,6 +7,7 @@ import './invitation_editor.css'
 function Invitation_Editor() {
 
     const path_to_server = "http://localhost:8000"
+    
     const [background_image, set_background_image] = useState("")
     const [invitation_text, set_invitation_text] = useState([])
     const [greetings_list, set_greetings_list] = useState([])
