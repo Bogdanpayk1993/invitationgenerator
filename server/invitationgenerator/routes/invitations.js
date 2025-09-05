@@ -28,11 +28,11 @@ router.post('/getInvitations', async function (req, res) {
 
     const file = await readFile(`${path}\\public\\images\\backgrounds\\${req['body']['background_image']}`)
 
-    let height = 0
+    let text_height = 0
     req['body']['invitation_text'].forEach(el => (
-        height += el['offset']
+        text_height += el['offset']
     ))
-    height += 5
+    text_height += 5
 
     var zip = new JSZip()
     var invitationPaths = []
@@ -44,7 +44,12 @@ router.post('/getInvitations', async function (req, res) {
         req['body']['invitation_text'][0]['text'] = req['body']['greetings_list'][i]
 
         const img = sharp(file)
-        const textSVG = Buffer.from(`<svg width="600" height="${height}">
+        const metadata = await img.metadata()
+        const img_size = req['body']['img_size']
+        const img_width = metadata.width
+        const img_height = metadata.height
+
+        const textSVG = Buffer.from(`<svg width="${img_width}" height="${text_height}">
                                     <defs>
                                         <style>
                                             .text {

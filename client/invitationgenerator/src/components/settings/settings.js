@@ -14,6 +14,7 @@ function Settings(props) {
     const set_invitation_text = props.set_invitation_text
     const greetings_list = props.greetings_list
     const set_greetings_list = props.set_greetings_list
+    const img_size = props.img_size
 
     const [template_type, set_template_type] = useState("")
     const [invitation_texts, set_invitation_texts] = useState(null)
@@ -158,7 +159,7 @@ function Settings(props) {
                                     {
                                         invitation_text.length != 0 && greetings_list.length != 0 && permission_generating_invitations != false ?
                                             <div className="Button_container">
-                                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} folder_name={invitation_text[2]['text'][1][0]['body']} greetings_list={greetings_list} />
+                                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} folder_name={invitation_text[2]['text'][1][0]['body']} greetings_list={greetings_list} img_size={img_size} />
                                             </div>
                                             : null
                                     }

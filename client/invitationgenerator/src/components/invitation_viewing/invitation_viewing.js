@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import Edit_Template from '../edit_template/edit_template';
 import './invitation_viewing.css';
 
@@ -7,12 +8,35 @@ function Invitation_Viewing(props) {
     const background_image = props.background_image
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
+    const set_img_size = props.set_img_size
+
+    const img_Ref = useRef()
+
+    function handleLoad() {
+        if (img_Ref.current) {
+            const { width, height } = img_Ref.current
+            set_img_size({ width: width, height: height })
+        }
+    }
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (img_Ref.current) {
+                const { width, height } = img_Ref.current
+                set_img_size({ width: width, height: height })
+            }
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     return (
         background_image != "" ?
             <div className='invitation_viewing_container'>
                 <div className='invitation_viewing'>
-                    <img src={`${path_to_server}/images/backgrounds/${background_image}`} className='invitation' />
+                    <img ref={img_Ref} src={`${path_to_server}/images/backgrounds/${background_image}`} className='invitation' onLoad={() => handleLoad()} />
                 </div>
                 <Edit_Template invitation_text={invitation_text} set_invitation_text={set_invitation_text} />
             </div>
