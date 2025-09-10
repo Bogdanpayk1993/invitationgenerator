@@ -14,7 +14,6 @@ function Settings(props) {
     const set_invitation_text = props.set_invitation_text
     const greetings_list = props.greetings_list
     const set_greetings_list = props.set_greetings_list
-    const img_size = props.img_size
 
     const [template_type, set_template_type] = useState("")
     const [invitation_texts, set_invitation_texts] = useState(null)
@@ -62,22 +61,22 @@ function Settings(props) {
             buf_invitation_text.push({ text: [[{ body: greetings_list.length != 0 ? greetings_list[0] : "", type: "", placeholder: "(звернення до групи запрошених)", permission: false }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['message'], type: "", placeholder: "_____", permission: true }]], offset: 60 })
-            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['who']}, `, type: "", placeholder: "_____", permission: true }], [{ body: "", type: "inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: `, ${invitation_texts[invitation_index]['body']}`, type: "", placeholder: "_____", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['who']}, `, type: "", placeholder: "_____", permission: true }], [{ body: "Сергій та Богдана", type: "inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: `, ${invitation_texts[invitation_index]['body']}`, type: "", placeholder: "_____", permission: true }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['event_first_title'], type: "", placeholder: "_____", permission: true }]], offset: 60 })
-            buf_invitation_text.push({ text: [[{ body: "", type: "", placeholder: "(дата)", permission: true }], [{ body: " о ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(час)", permission: true }]], offset: 25 })
-            buf_invitation_text.push({ text: [[{ body: "За адресою: ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(адреса)", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "14.09.2025", type: "", placeholder: "(дата)", permission: true }], [{ body: " о ", type: "", placeholder: "_____", permission: true }], [{ body: "10:00", type: "", placeholder: "(час)", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "За адресою: ", type: "", placeholder: "_____", permission: true }], [{ body: "м.Ужгород", type: "", placeholder: "(адреса)", permission: true }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['event_second_title'], type: "", placeholder: "_____", permission: true }]], offset: 60 })
-            buf_invitation_text.push({ text: [[{ body: "", type: "", placeholder: "(дата)", permission: true }], [{ body: " о ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(час)", permission: true }]], offset: 25 })
-            buf_invitation_text.push({ text: [[{ body: "За адресою: ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(адреса)", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "14.09.2025", type: "", placeholder: "(дата)", permission: true }], [{ body: " о ", type: "", placeholder: "_____", permission: true }], [{ body: "12:00", type: "", placeholder: "(час)", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "За адресою: ", type: "", placeholder: "_____", permission: true }], [{ body: "м.Ужгород", type: "", placeholder: "(адреса)", permission: true }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['event_third_title'], type: "", placeholder: "_____", permission: true }]], offset: 60 })
-            buf_invitation_text.push({ text: [[{ body: "", placeholder: "(дата)", type: "", permission: true }], [{ body: " о ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(час)", permission: true }]], offset: 25 })
-            buf_invitation_text.push({ text: [[{ body: "За адресою: ", type: "", placeholder: "_____", permission: true }], [{ body: "", type: "", placeholder: "(адреса)", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "14.09.2025", placeholder: "(дата)", type: "", permission: true }], [{ body: " о ", type: "", placeholder: "_____", permission: true }], [{ body: "18:00", type: "", placeholder: "(час)", permission: true }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: "За адресою: ", type: "", placeholder: "_____", permission: true }], [{ body: "м.Ужгород", type: "", placeholder: "(адреса)", permission: true }]], offset: 25 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['assurance'], type: "", placeholder: '_____', permission: true }]], offset: 60 })
-            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['farewell']}, `, type: "", placeholder: "_____", permission: true }], [{ body: "", type: "inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: ".", type: "", placeholder: "_____", permission: false }]], offset: 25 })
+            buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['farewell']}, `, type: "", placeholder: "_____", permission: true }], [{ body: "Сергій та Богдана", type: "inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: ".", type: "", placeholder: "_____", permission: false }]], offset: 25 })
 
             set_invitation_text(buf_invitation_text)
         } else {
@@ -159,7 +158,7 @@ function Settings(props) {
                                     {
                                         invitation_text.length != 0 && greetings_list.length != 0 && permission_generating_invitations != false ?
                                             <div className="Button_container">
-                                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} folder_name={invitation_text[2]['text'][1][0]['body']} greetings_list={greetings_list} img_size={img_size} />
+                                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} folder_name={invitation_text[2]['text'][1][0]['body']} greetings_list={greetings_list} />
                                             </div>
                                             : null
                                     }

@@ -5,7 +5,6 @@ function Get_archive_from_server(props) {
     const invitation_text = props.invitation_text
     const folder_name = props.folder_name
     const greetings_list = props.greetings_list
-    const img_size = props.img_size
     
     let date = new Date()
     let new_folder_name = `${folder_name.replaceAll(" та ", "_та_")}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
@@ -25,7 +24,7 @@ function Get_archive_from_server(props) {
             let archive = await fetch(`${path_to_server}/invitations/getInvitations`, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ background_image: background_image, invitation_text: buf_invitation_text, folder_name: new_folder_name, greetings_list: greetings_list, img_size: img_size })
+                body: JSON.stringify({ background_image: background_image, invitation_text: buf_invitation_text, folder_name: new_folder_name, greetings_list: greetings_list })
             })
 
             if (!archive.ok) throw new Error('Помилка завантаження')

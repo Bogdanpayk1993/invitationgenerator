@@ -45,15 +45,15 @@ router.post('/getInvitations', async function (req, res) {
 
         const img = sharp(file)
         const metadata = await img.metadata()
-        const img_size = req['body']['img_size']
         const img_width = metadata.width
-        const img_height = metadata.height
+        
+        let font_size = (img_width / 100) * 3.1
 
         const textSVG = Buffer.from(`<svg width="${img_width}" height="${text_height}">
                                     <defs>
                                         <style>
                                             .text {
-                                                font-size: 20pt;
+                                                font-size: ${font_size}px;
                                             }
                                         </style>
                                     </defs>
