@@ -19,6 +19,10 @@
     justify-content: center;
 }
 
+.edit_template .edit_template_body div div .row div div span {
+    font-family: 'Times New Roman', Times, serif;
+}
+
 .edit_template .edit_template_body div div .menu {
     width: 31vw;
     margin-top: 0.5vw;
