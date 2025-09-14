@@ -12,11 +12,8 @@
     justify-content: center;
 }
 
-.edit_template .edit_template_body div div .row .with {
-    height: 60px;
-    display: flex;
-    align-items: end;
-    justify-content: center;
+.edit_template .edit_template_body div div .row div {
+    line-height: 1.2;
 }
 
 .edit_template .edit_template_body div div .row div div span {

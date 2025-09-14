@@ -40,7 +40,7 @@ function Edit_Template(props) {
 
     function add_input_row(i) {
         let new_invitation_text = invitation_text.slice()
-        new_invitation_text.splice(i + 1, 0, { text: [[{ body: "", type: "", placeholder: "_____", permission: true }]], offset: 25 })
+        new_invitation_text.splice(i + 1, 0, { text: [[{ body: "", type: "", placeholder: "_____", permission: true }]], offset: 0 })
         set_invitation_text(new_invitation_text)
         set_number_input(i + 1)
     }
@@ -55,10 +55,10 @@ function Edit_Template(props) {
     function change_offset(i) {
         let offset
         let new_invitation_text = invitation_text.slice()
-        if (new_invitation_text[i]['offset'] == 30) {
-            offset = 60
+        if (new_invitation_text[i]['offset'] == 0) {
+            offset = 2.5
         } else {
-            offset = 30
+            offset = 0
         }
         new_invitation_text[i]['offset'] = offset
         set_invitation_text(new_invitation_text)
@@ -94,11 +94,11 @@ function Edit_Template(props) {
                                 invitation_text.map((el_i, i) => (
                                     <div>
                                         <div className="row">
-                                            <div className={invitation_text[i]['offset'] == 60 ? "with" : "without"}>
+                                            <div style={{ marginTop: `${(img_size.height / 100) * el_i['offset']}px` }}>
                                                 <div>
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${(img_size.width / 100) * 2.8}px` }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${(img_size.width / 100) * 3}px` }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
                                                         ))
                                                     }
                                                 </div>
@@ -119,7 +119,7 @@ function Edit_Template(props) {
                                                                     <>
                                                                         <input type="button" className="button" onClick={() => delete_input_row(i)} value="Видалити" />
                                                                         <label>
-                                                                            <input type="checkbox" onChange={() => change_offset(i)} checked={local_invitation_text[i]['offset'] == 60 ? true : false} />
+                                                                            <input type="checkbox" onChange={() => change_offset(i)} checked={local_invitation_text[i]['offset'] == 2.5 ? true : false} />
                                                                             Відступ
                                                                         </label>
                                                                         <input type="button" className="button" onClick={() => cancel_changes()} value="Скасувати" />

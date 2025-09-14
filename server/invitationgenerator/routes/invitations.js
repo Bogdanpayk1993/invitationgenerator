@@ -28,9 +28,14 @@ router.post('/getInvitations', async function (req, res) {
 
     const file = await readFile(`${path}\\public\\images\\backgrounds\\${req['body']['background_image']}`)
 
+    const img = sharp(file)
+    const metadata = await img.metadata()
+    const img_width = metadata.width
+    const img_height = metadata.height
+
     let text_height = 0
     req['body']['invitation_text'].forEach(el => (
-        text_height += el['offset']
+        text_height += ((img_height / 100) * el['offset']) + (((img_width / 100) * 3) * 1.2)
     ))
     text_height += 5
 
@@ -39,15 +44,12 @@ router.post('/getInvitations', async function (req, res) {
 
     for (let i = 0; i < req['body']['greetings_list'].length; i++) {
         let position = 0
+
         let invitation_name = req['body']['greetings_list'][i].replaceAll(" ", "_")
 
         req['body']['invitation_text'][0]['text'] = req['body']['greetings_list'][i]
 
-        const img = sharp(file)
-        const metadata = await img.metadata()
-        const img_width = metadata.width
-
-        let font_size = (img_width / 100) * 2.8
+        let font_size = (img_width / 100) * 3
 
         const textSVG = Buffer.from(`<svg width="${img_width}" height="${text_height}">
                                     <defs>
@@ -58,7 +60,7 @@ router.post('/getInvitations', async function (req, res) {
                                             }
                                         </style>
                                     </defs>
-                                    ${req['body']['invitation_text'].map(el => `<text x="50%" y="${position += el['offset']}" text-anchor="middle" class="text"> ${el['text']} </text>`)}
+                                    ${req['body']['invitation_text'].map(el => `<text x="50%" y="${position += ((img_height / 100) * el['offset']) + (((img_width / 100) * 3) * 1.2)}" text-anchor="middle" class="text"> ${el['text']} </text>`)}
                                     </svg>`)
 
         const result = await img.composite([{ input: textSVG }]).toBuffer()
