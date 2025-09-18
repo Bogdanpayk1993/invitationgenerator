@@ -4,6 +4,7 @@ var BetterSqlite3 = require('better-sqlite3');
 var db = new BetterSqlite3('database/invitation.db');
 
 var fs = require('fs');
+var existsSync = fs.existsSync
 var fsPromises = require('fs/promises');
 var mkdir = fsPromises.mkdir;
 var readFile = fsPromises.readFile;
@@ -21,7 +22,18 @@ router.post('/getType', function (req, res) {
 })
 
 router.post('/getInvitations', async function (req, res) {
-    mkdir(`${path}/public/images/invitations/${req['body']['folder_name']}/`).then(() => {
+
+    let date = new Date()
+    let folder_name = `invitations_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}_${date.getMilliseconds}`
+    let counter = 1
+
+    while (existsSync(`${path}/public/images/invitations/${folder_name}_${counter}`)) {
+        counter++
+    }
+
+    let full_folder_name = `${folder_name}_${counter}`
+
+    mkdir(`${path}/public/images/invitations/${full_folder_name}/`).then(() => {
     }).catch((err) => {
         console.log(err)
     })
@@ -64,22 +76,22 @@ router.post('/getInvitations', async function (req, res) {
                                     </svg>`)
 
         const result = await img.composite([{ input: textSVG }]).toBuffer()
-        await writeFile(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\${invitation_name}.jpg`, result)
-        invitationPaths.push(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\${invitation_name}.jpg`)
+        await writeFile(`${path}\\public\\images\\invitations\\${full_folder_name}\\${invitation_name}.jpg`, result)
+        invitationPaths.push(`${path}\\public\\images\\invitations\\${full_folder_name}\\${invitation_name}.jpg`)
     }
 
     invitationPaths.forEach((el, i) => {
         const invitationData = fs.readFileSync(el)
-        const fileName = `запрошення\\${req['body']['greetings_list'][i]}.jpg`
+        const fileName = `invitations\\${req['body']['greetings_list'][i]}.jpg`
         zip.file(fileName, invitationData)
     })
 
     zip.generateAsync({ type: 'nodebuffer' })
         .then(el => {
-            fs.writeFileSync(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\${req['body']['folder_name']}.zip`, el)
+            fs.writeFileSync(`${path}\\public\\images\\invitations\\${full_folder_name}\\${full_folder_name}.zip`, el)
         })
         .then(() => {
-            const filePath = `${path}\\public\\images\\invitations\\${req['body']['folder_name']}\\${req['body']['folder_name']}.zip`
+            const filePath = `${path}\\public\\images\\invitations\\${full_folder_name}\\${full_folder_name}.zip`
             const fileStream = fs.createReadStream(filePath)
 
             res.setHeader('Content-Disposition', 'attachment; filename="invitations.zip"')
@@ -88,7 +100,7 @@ router.post('/getInvitations', async function (req, res) {
             fileStream.pipe(res)
         })
         .then(() => {
-            fs.rm(`${path}\\public\\images\\invitations\\${req['body']['folder_name']}`, { recursive: true, force: true }, err => {
+            fs.rm(`${path}\\public\\images\\invitations\\${full_folder_name}`, { recursive: true, force: true }, err => {
                 if (err) {
                     console.error('Помилка видалення: ', err);
                 }

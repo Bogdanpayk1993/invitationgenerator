@@ -3,13 +3,10 @@ function Get_archive_from_server(props) {
     const path_to_server = props.path_to_server
     const background_image = props.background_image
     const invitation_text = props.invitation_text
-    const folder_name = props.folder_name
     const greetings_list = props.greetings_list
-    
-    let date = new Date()
-    let new_folder_name = `${folder_name.replaceAll(" та ", "_та_")}_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`
 
     async function Download_archive() {
+        
         let buf_invitation_text = []
 
         invitation_text.forEach((el_i, i) => (
@@ -24,7 +21,7 @@ function Get_archive_from_server(props) {
             let archive = await fetch(`${path_to_server}/invitations/getInvitations`, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ background_image: background_image, invitation_text: buf_invitation_text, folder_name: new_folder_name, greetings_list: greetings_list })
+                body: JSON.stringify({ background_image: background_image, invitation_text: buf_invitation_text, greetings_list: greetings_list })
             })
 
             if (!archive.ok) throw new Error('Помилка завантаження')
@@ -34,7 +31,7 @@ function Get_archive_from_server(props) {
 
             const a = document.createElement('a')
             a.href = url
-            a.download = `${new_folder_name}.zip`
+            a.download = 'invitations.zip'
             document.body.appendChild(a)
             a.click()
             a.remove()

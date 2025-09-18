@@ -158,7 +158,7 @@ function Settings(props) {
                                     {
                                         invitation_text.length != 0 && greetings_list.length != 0 && permission_generating_invitations != false ?
                                             <div className="Button_container">
-                                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} folder_name={invitation_text[2]['text'][1][0]['body']} greetings_list={greetings_list} />
+                                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} greetings_list={greetings_list} />
                                             </div>
                                             : null
                                     }
