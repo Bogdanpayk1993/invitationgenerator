@@ -4,7 +4,6 @@ var BetterSqlite3 = require('better-sqlite3');
 var db = new BetterSqlite3('database/invitation.db');
 
 var fs = require('fs');
-var existsSync = fs.existsSync
 var fsPromises = require('fs/promises');
 var mkdir = fsPromises.mkdir;
 var readFile = fsPromises.readFile;
@@ -27,7 +26,7 @@ router.post('/getInvitations', async function (req, res) {
     let folder_name = `invitations_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}_${date.getMilliseconds()}`
     let counter = 1
 
-    while (existsSync(`${path}/public/images/invitations/${folder_name}_${counter}`)) {
+    while (fs.existsSync(`${path}/public/images/invitations/${folder_name}_${counter}`)) {
         counter++
     }
 
