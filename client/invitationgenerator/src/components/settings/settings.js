@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import Select from "react-select";
 import Get_data_from_server from '../get_data_from_server/get_data_from_server';
 import Get_archive_from_server from "../get_archive_from_server/get_archive_from_server";
-import Greetings_list_control from "../greetings_list_control";
+import Text_Settings from "../text_settings/text_settings";
 import './settings.css';
 
 function Settings(props) {
@@ -132,23 +131,7 @@ function Settings(props) {
             {
                 invitation_texts != null ?
                     <div>
-                        <div className="Text_settings">
-                            <h3> Налаштування шаблону </h3>
-                            <div className="Input_container">
-                                <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} placeholder="Оберіть тип" value={invitation_texts[invitation_texts.findIndex(el => el["label"] === template_type)]} />
-                            </div>
-                            {
-                                template_type != "" ?
-                                    <>
-                                        <div className="Button_container">
-                                            <button onClick={() => generating_invitation_text(null)}> Відмінити зміни шаблону </button>
-                                        </div>
-                                        <div className="Name_container">
-                                            <Greetings_list_control greetings_list={greetings_list} set_greetings_list={set_greetings_list} />
-                                        </div>
-                                    </> : null
-                            }
-                        </div>
+                        <Text_Settings invitation_texts={invitation_texts} template_type={template_type} set_template_type={set_template_type} greetings_list={greetings_list} set_greetings_list={set_greetings_list} generating_invitation_text={generating_invitation_text} />
                         {
                             template_type != "" ?
                                 <>

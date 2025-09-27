@@ -1,19 +1,8 @@
-.Text_settings {
-    height: 45vh;
-}
-
 .Input_container {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
     color: black;
-}
-
-.Name_container {
-    width: 96%;
-    height: 32vh;
-    margin-left: 2%;
-    margin-right: 2%;
 }
 
 .Style_settings {
