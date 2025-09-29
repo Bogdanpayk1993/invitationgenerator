@@ -4,9 +4,10 @@ function Get_archive_from_server(props) {
     const background_image = props.background_image
     const invitation_text = props.invitation_text
     const greetings_list = props.greetings_list
+    const permission_generating_invitations = props.permission_generating_invitations
 
     async function Download_archive() {
-        
+
         let buf_invitation_text = []
 
         invitation_text.forEach((el_i, i) => (
@@ -44,7 +45,12 @@ function Get_archive_from_server(props) {
     }
 
     return (
-        <button onClick={() => Download_archive()}> Завантажити {greetings_list.length} запрошення </button>
+        invitation_text.length != 0 && greetings_list.length != 0 && permission_generating_invitations != false ?
+            <div className="Button_container">
+                <button onClick={() => Download_archive()}> Завантажити {greetings_list.length} запрошення </button>
+            </div>
+            :
+            null
     )
 }
 

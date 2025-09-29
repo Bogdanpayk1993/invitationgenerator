@@ -57,7 +57,7 @@ function Settings(props) {
 
             let buf_invitation_text = []
 
-            buf_invitation_text.push({ text: [[{ body: greetings_list.length != 0 ? greetings_list[0] : "", type: "", placeholder: "(звернення до групи запрошених)", permission: false }]], offset: 0})
+            buf_invitation_text.push({ text: [[{ body: greetings_list.length != 0 ? greetings_list[0] : "", type: "", placeholder: "(звернення до групи запрошених)", permission: false }]], offset: 0 })
 
             buf_invitation_text.push({ text: [[{ body: invitation_texts[invitation_index]['message'], type: "", placeholder: "_____", permission: true }]], offset: 2.5 })
             buf_invitation_text.push({ text: [[{ body: `${invitation_texts[invitation_index]['who']}, `, type: "", placeholder: "_____", permission: true }], [{ body: "Сергій та Богдана", type: "inviting_names", placeholder: "(імена запрошуючих)", permission: true }], [{ body: `, ${invitation_texts[invitation_index]['body']}`, type: "", placeholder: "_____", permission: true }]], offset: 0 })
@@ -134,18 +134,9 @@ function Settings(props) {
                         <Text_Settings invitation_texts={invitation_texts} template_type={template_type} set_template_type={set_template_type} greetings_list={greetings_list} set_greetings_list={set_greetings_list} generating_invitation_text={generating_invitation_text} />
                         {
                             template_type != "" ?
-                                <>
-                                    <div className="Style_settings">
-
-                                    </div>
-                                    {
-                                        invitation_text.length != 0 && greetings_list.length != 0 && permission_generating_invitations != false ?
-                                            <div className="Button_container">
-                                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} greetings_list={greetings_list} />
-                                            </div>
-                                            : null
-                                    }
-                                </> : null
+                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} greetings_list={greetings_list} permission_generating_invitations={permission_generating_invitations} />
+                                :
+                                null
                         }
                     </div>
                     :
