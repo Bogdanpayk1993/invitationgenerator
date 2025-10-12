@@ -1,3 +1,8 @@
+.Header_settings {
+    height: 6vh;
+    line-height: 6vh;
+}
+
 .Input_container {
     width: 80%;
     margin-left: 10%;

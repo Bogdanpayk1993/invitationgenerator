@@ -1,5 +1,6 @@
 import Select from "react-select";
 import Greetings_list_control from "../greetings_list_control";
+import './text_settings.css'
 
 function Text_Settings(props) {
 
@@ -12,7 +13,6 @@ function Text_Settings(props) {
 
     return (
         <div className="Text_settings">
-            <h3> Налаштування шаблону </h3>
             <div className="Input_container">
                 <Select options={invitation_texts} onChange={(event) => set_template_type(event["label"])} placeholder="Оберіть тип" value={invitation_texts[invitation_texts.findIndex(el => el["label"] === template_type)]} />
             </div>

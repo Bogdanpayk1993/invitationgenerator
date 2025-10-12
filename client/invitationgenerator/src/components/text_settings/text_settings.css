@@ -1,8 +1,8 @@
 .Text_settings {
-    height: 45vh;
+    height: 39vh;
 }
 
-.Name_container {
+.Text_settings .Name_container {
     width: 96%;
     height: 32vh;
     margin-left: 2%;

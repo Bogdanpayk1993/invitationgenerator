@@ -1,3 +1,5 @@
+@import url('../styles/fonts.css');
+
 .edit_template {
     width: 60vw;
     height: 90vh;
@@ -17,7 +19,7 @@
 }
 
 .edit_template .edit_template_body div div .row div div span {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'AnastasiaScript';
 }
 
 .edit_template .edit_template_body div div .menu {

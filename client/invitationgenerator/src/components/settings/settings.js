@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Get_data_from_server from '../get_data_from_server/get_data_from_server';
 import Get_archive_from_server from "../get_archive_from_server/get_archive_from_server";
 import Text_Settings from "../text_settings/text_settings";
+import Style_Settings from "../style_settings/style_settings";
 import './settings.css';
 
 function Settings(props) {
@@ -131,7 +132,13 @@ function Settings(props) {
             {
                 invitation_texts != null ?
                     <div>
-                        <Text_Settings invitation_texts={invitation_texts} template_type={template_type} set_template_type={set_template_type} greetings_list={greetings_list} set_greetings_list={set_greetings_list} generating_invitation_text={generating_invitation_text} />
+                        <div className="Header_settings">
+                            <h3> Налаштування шаблону </h3>
+                        </div>
+                        <>
+                            <Text_Settings invitation_texts={invitation_texts} template_type={template_type} set_template_type={set_template_type} greetings_list={greetings_list} set_greetings_list={set_greetings_list} generating_invitation_text={generating_invitation_text} />
+                            <Style_Settings template_type={template_type} />
+                        </>
                         {
                             template_type != "" ?
                                 <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} greetings_list={greetings_list} permission_generating_invitations={permission_generating_invitations} />
