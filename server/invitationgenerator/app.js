@@ -28,14 +28,6 @@ app.use('/', indexRouter);
 
 app.use('/background_images', background_image);
 app.use('/invitations', invitations);
-app.use('/fonts', express.static('fonts', {
-  setHeaders: (res, path) => {
-    res.setHeader('Cache-Control', 'no-cache');
-    if (path.endsWith('.ttf')) {
-      res.setHeader('Content-Type', 'font/ttf');
-    }
-  }
-}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
