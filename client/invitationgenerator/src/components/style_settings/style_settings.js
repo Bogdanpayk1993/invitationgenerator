@@ -27,7 +27,7 @@ function Style_Settings(props) {
                 json1.push({
                     value: json[el]["Id"],
                     label: json[el]["name"],
-                    zizeCoefficient: json[el]["sizecoefficient"]
+                    sizeCoefficient: json[el]["sizecoefficient"]
                 })
             ))
 
@@ -36,7 +36,7 @@ function Style_Settings(props) {
     }
 
     if (JSON.stringify(styles) === '{}' && fonts.length != 0) {
-        set_styles({...styles, font: fonts[0]["label"], sizecoefficient: fonts[0]["zizeCoefficient"]})
+        set_styles({...styles, font: fonts[0]["label"], sizecoefficient: fonts[0]["sizeCoefficient"]})
     }
 
     return (
@@ -44,7 +44,7 @@ function Style_Settings(props) {
             {
                 template_type != "" ?
                     <div className="Input_container">
-                        <Select options={fonts} onChange={(event) => set_styles({...styles, font: event["label"], sizecoefficient: event["zizeCoefficient"]})} placeholder="Оберіть шрифт" value={fonts[fonts.findIndex(el => el["label"] === styles["font"])]} />
+                        <Select options={fonts} onChange={(event) => set_styles({...styles, font: event["label"], sizecoefficient: event["sizeCoefficient"]})} placeholder="Оберіть шрифт" value={fonts[fonts.findIndex(el => el["label"] === styles["font"])]} />
                     </div> : null
             }
         </div>
