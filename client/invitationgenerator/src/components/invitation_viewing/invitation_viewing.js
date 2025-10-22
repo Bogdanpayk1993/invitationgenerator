@@ -8,6 +8,7 @@ function Invitation_Viewing(props) {
     const background_image = props.background_image
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
+    const styles = props.styles
 
     const img_Ref = useRef()
     const [img_size, set_img_size] = useState({})
@@ -38,7 +39,7 @@ function Invitation_Viewing(props) {
                 <div className='invitation_viewing'>
                     <img ref={img_Ref} src={`${path_to_server}/images/backgrounds/${background_image}`} className='invitation' onLoad={() => handleLoad()} />
                 </div>
-                <Edit_Template invitation_text={invitation_text} set_invitation_text={set_invitation_text} img_size={img_size} />
+                <Edit_Template invitation_text={invitation_text} set_invitation_text={set_invitation_text} img_size={img_size} styles={styles} />
             </div>
             :
             <div className='invitation_message_container'>

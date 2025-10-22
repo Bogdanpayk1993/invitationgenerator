@@ -5,3 +5,11 @@
     font-style: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: 'SegoeScript';
+    src: url('http://localhost:8000/fonts/SegoeScript.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

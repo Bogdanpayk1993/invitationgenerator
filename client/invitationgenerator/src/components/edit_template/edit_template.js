@@ -6,6 +6,7 @@ function Edit_Template(props) {
     const invitation_text = props.invitation_text
     const set_invitation_text = props.set_invitation_text
     const img_size = props.img_size
+    const styles = props.styles
 
     const [local_invitation_text, set_local_invitation_text] = useState()
     const [number_input, set_number_input] = useState(-1)
@@ -34,7 +35,7 @@ function Edit_Template(props) {
                 ))
             ))
         }
-        
+
         set_local_invitation_text(new_invitation_text)
     }
 
@@ -98,7 +99,7 @@ function Edit_Template(props) {
                                                 <div>
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${(img_size.width / 100) * 3}px` }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${(img_size.width / 100) * styles['sizecoefficient']}px`, fontFamily: styles['font'] }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
                                                         ))
                                                     }
                                                 </div>

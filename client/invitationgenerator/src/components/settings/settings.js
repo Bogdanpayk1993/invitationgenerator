@@ -14,6 +14,8 @@ function Settings(props) {
     const set_invitation_text = props.set_invitation_text
     const greetings_list = props.greetings_list
     const set_greetings_list = props.set_greetings_list
+    const styles = props.styles
+    const set_styles = props.set_styles
 
     const [template_type, set_template_type] = useState("")
     const [invitation_texts, set_invitation_texts] = useState(null)
@@ -137,7 +139,7 @@ function Settings(props) {
                         </div>
                         <>
                             <Text_Settings invitation_texts={invitation_texts} template_type={template_type} set_template_type={set_template_type} greetings_list={greetings_list} set_greetings_list={set_greetings_list} generating_invitation_text={generating_invitation_text} />
-                            <Style_Settings template_type={template_type} />
+                            <Style_Settings path_to_server={path_to_server} template_type={template_type} styles={styles} set_styles={set_styles} />
                         </>
                         {
                             template_type != "" ?

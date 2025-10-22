@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 
 var background_image = require('./routes/background_images');
 var invitations = require('./routes/invitations');
+var fonts = require('./routes/fonts');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/', indexRouter);
 
 app.use('/background_images', background_image);
 app.use('/invitations', invitations);
+app.use('/fonts', fonts)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

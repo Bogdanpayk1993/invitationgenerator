@@ -11,6 +11,10 @@ function Text_Settings(props) {
     const set_greetings_list = props.set_greetings_list
     const generating_invitation_text = props.generating_invitation_text
 
+    if (template_type == "") {
+        set_template_type(invitation_texts[0]['label'])
+    }
+    
     return (
         <div className="Text_settings">
             <div className="Input_container">
