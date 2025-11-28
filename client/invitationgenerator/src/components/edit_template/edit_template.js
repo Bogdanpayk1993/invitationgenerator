@@ -99,7 +99,7 @@ function Edit_Template(props) {
                                                 <div>
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${(img_size.width / 100) * styles['sizecoefficient']}px`, fontFamily: styles['font'] }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${(img_size.width / 100) * styles['sizecoefficient']}px`, fontFamily: styles['file_name'] }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
                                                         ))
                                                     }
                                                 </div>

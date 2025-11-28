@@ -53,6 +53,8 @@ router.post('/getInvitations', async function (req, res) {
     var zip = new JSZip()
     var invitationPaths = []
 
+    var styles = req['body']['styles']
+
     for (let i = 0; i < req['body']['greetings_list'].length; i++) {
         let position = 0
 
@@ -60,14 +62,22 @@ router.post('/getInvitations', async function (req, res) {
 
         req['body']['invitation_text'][0]['text'] = req['body']['greetings_list'][i]
 
-        let font_size = (img_width / 100) * 3
+        let font_size = (img_width / 100) * styles['sizecoefficient'] 
 
         const textSVG = Buffer.from(`<svg width="${img_width}" height="${text_height}">
                                     <defs>
                                         <style>
+                                            @font-face {
+                                                font-family: 'AnastasiaScript';
+                                                src: url('/fonts/AnastasiaScript.ttf') format('ttf');
+                                            }
+                                            @font-face {
+                                                font-family: 'SegoeScript';
+                                                src: url('/fonts/SegoeScript.ttf') format('ttf');
+                                            }    
                                             .text {
                                                 font-size: ${font_size}px;
-                                                font-family: 'Times New Roman', Times, serif;
+                                                font-family: '${styles['file_name']}', sans-serif;
                                             }
                                         </style>
                                     </defs>

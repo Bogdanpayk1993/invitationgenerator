@@ -5,6 +5,7 @@ function Get_archive_from_server(props) {
     const invitation_text = props.invitation_text
     const greetings_list = props.greetings_list
     const permission_generating_invitations = props.permission_generating_invitations
+    const styles = props.styles
 
     async function Download_archive() {
 
@@ -22,7 +23,7 @@ function Get_archive_from_server(props) {
             let archive = await fetch(`${path_to_server}/invitations/getInvitations`, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ background_image: background_image, invitation_text: buf_invitation_text, greetings_list: greetings_list })
+                body: JSON.stringify({ background_image: background_image, invitation_text: buf_invitation_text, greetings_list: greetings_list, styles: styles })
             })
 
             if (!archive.ok) throw new Error('Помилка завантаження')

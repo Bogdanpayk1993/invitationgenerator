@@ -143,7 +143,7 @@ function Settings(props) {
                         </>
                         {
                             template_type != "" ?
-                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} greetings_list={greetings_list} permission_generating_invitations={permission_generating_invitations} />
+                                <Get_archive_from_server path_to_server={path_to_server} background_image={background_image} invitation_text={invitation_text} greetings_list={greetings_list} permission_generating_invitations={permission_generating_invitations} styles={styles} />
                                 :
                                 null
                         }

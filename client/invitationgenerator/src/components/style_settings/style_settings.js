@@ -26,7 +26,8 @@ function Style_Settings(props) {
             Object.keys(json).forEach(el => (
                 json1.push({
                     value: json[el]["Id"],
-                    label: json[el]["name"],
+                    label: json[el]["font_name"],
+                    file_name: json[el]["file_name"],
                     sizeCoefficient: json[el]["sizecoefficient"]
                 })
             ))
@@ -36,7 +37,7 @@ function Style_Settings(props) {
     }
 
     if (JSON.stringify(styles) === '{}' && fonts.length != 0) {
-        set_styles({...styles, font: fonts[0]["label"], sizecoefficient: fonts[0]["sizeCoefficient"]})
+        set_styles({...styles, font_name: fonts[0]["label"], file_name: fonts[0]['file_name'], sizecoefficient: fonts[0]["sizeCoefficient"]})
     }
 
     return (
@@ -44,7 +45,7 @@ function Style_Settings(props) {
             {
                 template_type != "" ?
                     <div className="Input_container">
-                        <Select options={fonts} onChange={(event) => set_styles({...styles, font: event["label"], sizecoefficient: event["sizeCoefficient"]})} placeholder="Оберіть шрифт" value={fonts[fonts.findIndex(el => el["label"] === styles["font"])]} />
+                        <Select options={fonts} onChange={(event) => set_styles({...styles, font_name: event["label"], file_name: event["file_name"], sizecoefficient: event["sizeCoefficient"]})} placeholder="Оберіть шрифт" value={fonts[fonts.findIndex(el => el["label"] === styles["font_name"])]} />
                     </div> : null
             }
         </div>
