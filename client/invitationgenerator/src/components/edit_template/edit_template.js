@@ -7,9 +7,13 @@ function Edit_Template(props) {
     const set_invitation_text = props.set_invitation_text
     const img_size = props.img_size
     const styles = props.styles
+    const set_client_font_size = props.set_client_font_size
 
     const [local_invitation_text, set_local_invitation_text] = useState()
     const [number_input, set_number_input] = useState(-1)
+
+    let fontSize = (img_size.height / 130) * styles['sizecoefficient']
+    set_client_font_size(fontSize)
 
     function change_local_invitation_text(event, number_input) {
         let new_invitation_text = local_invitation_text.slice()
@@ -57,7 +61,7 @@ function Edit_Template(props) {
         let offset
         let new_invitation_text = invitation_text.slice()
         if (new_invitation_text[i]['offset'] == 0) {
-            offset = 2.5
+            offset = 1
         } else {
             offset = 0
         }
@@ -88,18 +92,18 @@ function Edit_Template(props) {
     return (
         <div className="edit_template">
             <div className="edit_template_body">
-                <div>
+                <div style={{ marginBottom: `${fontSize}px` }}>
                     {
                         invitation_text != null ?
                             Object.keys(invitation_text).length != 0 ?
                                 invitation_text.map((el_i, i) => (
                                     <div>
                                         <div className="row">
-                                            <div style={{ marginTop: `${(img_size.height / 100) * el_i['offset']}px` }}>
+                                            <div style={{ height: `${fontSize + ((fontSize * el_i['offset']) * 1.2)}px` }}>
                                                 <div>
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${(img_size.width / 100) * styles['sizecoefficient']}px`, fontFamily: styles['file_name'] }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${fontSize}px`, fontFamily: styles['file_name'] }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
                                                         ))
                                                     }
                                                 </div>
@@ -119,14 +123,19 @@ function Edit_Template(props) {
                                                                 invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
                                                                     <>
                                                                         <input type="button" className="button" onClick={() => delete_input_row(i)} value="Видалити" />
-                                                                        <label>
-                                                                            <input type="checkbox" onChange={() => change_offset(i)} checked={local_invitation_text[i]['offset'] == 2.5 ? true : false} />
-                                                                            Відступ
-                                                                        </label>
-                                                                        <input type="button" className="button" onClick={() => cancel_changes()} value="Скасувати" />
-                                                                        <input type="button" className="button" onClick={() => change_invitation_text()} value="Зберегти" />
                                                                     </> : null
                                                             }
+                                                            <label>
+                                                                <input type="checkbox" onChange={() => change_offset(i)} checked={local_invitation_text[i]['offset'] == 1 ? true : false} />
+                                                                Відступ
+                                                            </label>
+                                                            {
+                                                                invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
+                                                                    <>
+                                                                        <input type="button" className="button" onClick={() => cancel_changes()} value="Скасувати" />
+                                                                    </> : null
+                                                            }
+                                                            <input type="button" className="button" onClick={() => change_invitation_text()} value="Зберегти" />
                                                         </div>
                                                     </div>
                                                     : null

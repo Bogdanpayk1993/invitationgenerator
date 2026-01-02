@@ -44,45 +44,50 @@ router.post('/getInvitations', async function (req, res) {
     const img_width = metadata.width
     const img_height = metadata.height
 
+    let styles = req['body']['styles']
+    let client_height = req['body']['client_height']
+    let client_font_size = req['body']['client_font_size']
+
+    let fontSize = (img_height / client_height) * client_font_size
+    
     let text_height = 0
-    req['body']['invitation_text'].forEach(el => (
-        text_height += ((img_height / 100) * el['offset']) + (((img_width / 100) * 3) * 1.2)
+    let positions = [fontSize]
+
+    req['body']['invitation_text'].forEach((el_i, i) => (
+        text_height += (fontSize + ((fontSize * el_i["offset"]) * 1.2)),
+        positions.push(positions[i] + (fontSize + ((fontSize * el_i["offset"]) * 1.2)))
     ))
-    text_height += 5
 
-    var zip = new JSZip()
-    var invitationPaths = []
+    text_height += fontSize
 
-    var styles = req['body']['styles']
+    let zip = new JSZip()
+    let invitationPaths = []
 
     for (let i = 0; i < req['body']['greetings_list'].length; i++) {
-        let position = 0
 
         let invitation_name = req['body']['greetings_list'][i].replaceAll(" ", "_")
 
         req['body']['invitation_text'][0]['text'] = req['body']['greetings_list'][i]
 
-        let font_size = (img_width / 100) * styles['sizecoefficient'] 
-
         const textSVG = Buffer.from(`<svg width="${img_width}" height="${text_height}">
-                                    <defs>
-                                        <style>
-                                            @font-face {
-                                                font-family: 'AnastasiaScript';
-                                                src: url('/fonts/AnastasiaScript.ttf') format('ttf');
-                                            }
-                                            @font-face {
-                                                font-family: 'SegoeScript';
-                                                src: url('/fonts/SegoeScript.ttf') format('ttf');
-                                            }    
-                                            .text {
-                                                font-size: ${font_size}px;
-                                                font-family: '${styles['file_name']}', sans-serif;
-                                            }
-                                        </style>
-                                    </defs>
-                                    ${req['body']['invitation_text'].map(el => `<text x="50%" y="${position += ((img_height / 100) * el['offset']) + (((img_width / 100) * 3) * 1.2)}" text-anchor="middle" class="text"> ${el['text']} </text>`)}
-                                    </svg>`)
+                                        <defs>
+                                            <style>
+                                                @font-face {
+                                                    font-family: 'AnastasiaScript';
+                                                    src: url('/fonts/AnastasiaScript.ttf') format('ttf');
+                                                }
+                                                @font-face {
+                                                    font-family: 'SegoeScript';
+                                                    src: url('/fonts/SegoeScript.ttf') format('ttf');
+                                                }    
+                                                .text {
+                                                    font-size: ${fontSize}px;
+                                                    font-family: '${styles['file_name']}', sans-serif;
+                                                }
+                                            </style>
+                                        </defs>
+                                        ${req['body']['invitation_text'].map((el_i, i) => `<text x="50%" y="${positions[i]}" text-anchor="middle" class="text"> ${el_i['text']} </text>`)}
+                                     </svg>`)
 
         const result = await img.composite([{ input: textSVG }]).toBuffer()
         await writeFile(`${path}\\public\\images\\invitations\\${full_folder_name}\\${invitation_name}.jpg`, result)
