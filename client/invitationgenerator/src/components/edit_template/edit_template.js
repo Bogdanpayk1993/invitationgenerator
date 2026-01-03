@@ -12,7 +12,7 @@ function Edit_Template(props) {
     const [local_invitation_text, set_local_invitation_text] = useState()
     const [number_input, set_number_input] = useState(-1)
 
-    let fontSize = (img_size.height / 130) * styles['sizecoefficient']
+    let fontSize = (img_size.height / 130) * styles['size_coefficient']
     set_client_font_size(fontSize)
 
     function change_local_invitation_text(event, number_input) {
@@ -92,7 +92,7 @@ function Edit_Template(props) {
     return (
         <div className="edit_template">
             <div className="edit_template_body">
-                <div style={{ marginBottom: `${fontSize}px` }}>
+                <div style={{ marginBottom: `${fontSize * styles["margin_bottom_coefficient"]}px` }}>
                     {
                         invitation_text != null ?
                             Object.keys(invitation_text).length != 0 ?
