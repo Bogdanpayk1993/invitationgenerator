@@ -2,13 +2,13 @@
 
 .edit_template {
     width: 60vw;
-    height: 90vh;
+    height: 89vh;
     position: absolute;
     color: black;
 }
 
 .edit_template .edit_template_body {
-    height: 90vh;
+    height: 89vh;
     display: flex;
     align-items: center;
     justify-content: center;

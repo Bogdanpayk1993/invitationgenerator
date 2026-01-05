@@ -4,6 +4,7 @@
 
 .invitation_viewing_container .invitation_viewing {
     width: 60vw;
+    height: 89vh;
     position: absolute;
 }
 

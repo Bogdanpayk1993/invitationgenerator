@@ -17,7 +17,7 @@ function Style_Settings(props) {
     }
 
     async function get_fonts(path_to_server, set_fonts) {
-        
+
         let json = await Get_data_from_server({ link: `${path_to_server}/fonts/getFonts` })
 
         if (JSON.stringify(json) !== '{}') {
@@ -29,8 +29,7 @@ function Style_Settings(props) {
                     label: json[el]["font_name"],
                     file_name: json[el]["file_name"],
                     size_coefficient: json[el]["size_coefficient"],
-                    margin_bottom_coefficient: json[el]["margin_bottom_coefficient"]
-                    
+
                 })
             ))
 
@@ -39,7 +38,7 @@ function Style_Settings(props) {
     }
 
     if (JSON.stringify(styles) === '{}' && fonts.length != 0) {
-        set_styles({...styles, font_name: fonts[0]["label"], file_name: fonts[0]['file_name'], size_coefficient: fonts[0]["size_coefficient"], margin_bottom_coefficient: fonts[0]["margin_bottom_coefficient"]})
+        set_styles({ ...styles, font_name: fonts[0]["label"], file_name: fonts[0]['file_name'], size_coefficient: fonts[0]["size_coefficient"] })
     }
 
     return (
@@ -47,7 +46,7 @@ function Style_Settings(props) {
             {
                 template_type != "" ?
                     <div className="Input_container">
-                        <Select options={fonts} onChange={(event) => set_styles({...styles, font_name: event["label"], file_name: event["file_name"], size_coefficient: event["size_coefficient"], margin_bottom_coefficient: event["margin_bottom_coefficient"]})} placeholder="Оберіть шрифт" value={fonts[fonts.findIndex(el => el["label"] === styles["font_name"])]} />
+                        <Select options={fonts} onChange={(event) => set_styles({ ...styles, font_name: event["label"], file_name: event["file_name"], size_coefficient: event["size_coefficient"] })} placeholder="Оберіть шрифт" value={fonts[fonts.findIndex(el => el["label"] === styles["font_name"])]} />
                     </div> : null
             }
         </div>
