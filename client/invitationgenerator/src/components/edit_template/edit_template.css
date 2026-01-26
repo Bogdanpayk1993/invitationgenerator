@@ -14,6 +14,23 @@
     justify-content: center;
 }
 
+.edit_template .edit_template_body div div .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit_template .edit_template_body div div .row .row_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit_template .edit_template_body div div .row .row_container p {
+    float: left;
+    margin: 0px;
+}
+
 .edit_template .edit_template_body div div .menu {
     width: 31vw;
     margin-top: 0.5vw;

@@ -92,54 +92,54 @@ function Edit_Template(props) {
     return (
         <div className="edit_template">
             <div className="edit_template_body">
-                <div style={{ marginBottom: `${fontSize}px` }}>
+                <div style={{ marginBottom: `5px` }}>
                     {
                         invitation_text != null ?
                             Object.keys(invitation_text).length != 0 ?
                                 invitation_text.map((el_i, i) => (
                                     <div>
                                         <div className="row">
-                                            <div style={{ height: `${fontSize + ((fontSize * el_i['offset']) * 1.2)}px` }}>
-                                                <div>
+                                            <div>
+                                                <div className="row_container">
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <span onClick={() => change_position(i, j)} style={{ fontSize: `${fontSize}px`, fontFamily: styles['file_name'] }}>{invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']}</span>
+                                                            <p onClick={() => change_position(i, j)} style={{ fontSize: `${fontSize}px`, lineHeight: `${fontSize}px`, fontFamily: styles['file_name'], marginLeft: `${invitation_text[i]['text'][j][0]['marginLeft']}ch`, marginBottom: `${fontSize * invitation_text[i]['offset']}px` }}> {invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']} </p>
                                                         ))
                                                     }
                                                 </div>
-                                            </div>
-                                            {
-                                                number_input["i"] == i ?
-                                                    <div>
-                                                        <div className="menu">
-                                                            {
-                                                                invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
-                                                                    <div>
-                                                                        <input type="input" className="input" onChange={(event) => change_local_invitation_text(event, number_input)} value={local_invitation_text[number_input["i"]]['text'][number_input["j"]][0]['body']} placeholder={local_invitation_text[number_input["i"]]['text'][number_input["j"]][0]['placeholder']} />
-                                                                    </div> : null
-                                                            }
-                                                            <input type="button" className="button" onClick={() => add_input_row(i)} value="Додати" />
-                                                            {
-                                                                invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
-                                                                    <>
-                                                                        <input type="button" className="button" onClick={() => delete_input_row(i)} value="Видалити" />
-                                                                    </> : null
-                                                            }
-                                                            <label>
-                                                                <input type="checkbox" onChange={() => change_offset(i)} checked={local_invitation_text[i]['offset'] == 1 ? true : false} />
-                                                                Відступ
-                                                            </label>
-                                                            {
-                                                                invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
-                                                                    <>
-                                                                        <input type="button" className="button" onClick={() => cancel_changes()} value="Скасувати" />
-                                                                    </> : null
-                                                            }
-                                                            <input type="button" className="button" onClick={() => change_invitation_text()} value="Зберегти" />
+                                                {
+                                                    number_input["i"] == i ?
+                                                        <div>
+                                                            <div className="menu">
+                                                                {
+                                                                    invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
+                                                                        <div>
+                                                                            <input type="input" className="input" onChange={(event) => change_local_invitation_text(event, number_input)} value={local_invitation_text[number_input["i"]]['text'][number_input["j"]][0]['body']} placeholder={local_invitation_text[number_input["i"]]['text'][number_input["j"]][0]['placeholder']} />
+                                                                        </div> : null
+                                                                }
+                                                                <input type="button" className="button" onClick={() => add_input_row(i)} value="Додати" />
+                                                                {
+                                                                    invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
+                                                                        <>
+                                                                            <input type="button" className="button" onClick={() => delete_input_row(i)} value="Видалити" />
+                                                                        </> : null
+                                                                }
+                                                                <label>
+                                                                    <input type="checkbox" onChange={() => change_offset(i)} checked={local_invitation_text[i]['offset'] == 1 ? true : false} />
+                                                                    Відступ
+                                                                </label>
+                                                                {
+                                                                    invitation_text[number_input["i"]]['text'][number_input["j"]][0]['permission'] == true ?
+                                                                        <>
+                                                                            <input type="button" className="button" onClick={() => cancel_changes()} value="Скасувати" />
+                                                                        </> : null
+                                                                }
+                                                                <input type="button" className="button" onClick={() => change_invitation_text()} value="Зберегти" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    : null
-                                            }
+                                                        : null
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                 ))

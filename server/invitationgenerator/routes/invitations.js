@@ -53,9 +53,9 @@ router.post('/getInvitations', async function (req, res) {
     let text_height = 0
     let positions = [fontSize]
 
-    req['body']['invitation_text'].forEach((el_i, i) => (
-        text_height += (fontSize + ((fontSize * el_i["offset"]) * 1.2)),
-        positions.push(positions[i] + (fontSize + ((fontSize * el_i["offset"]) * 1.2)))
+    req['body']['invitation_text' ].forEach((el_i, i) => (
+        text_height += (fontSize + ((fontSize * el_i["offset"]))),
+        positions.push(positions[i] + (fontSize + ((fontSize * el_i["offset"]))))
     ))
 
     text_height += fontSize
@@ -86,7 +86,7 @@ router.post('/getInvitations', async function (req, res) {
                                                 }
                                             </style>
                                         </defs>
-                                        ${req['body']['invitation_text'].map((el_i, i) => `<text x="50%" y="${positions[i]}" text-anchor="middle" class="text"> ${el_i['text']} </text>`)}
+                                        ${req['body']['invitation_text'].map((el_i, i) => `<text x="50%" y="${positions[i]}px" text-anchor="middle" class="text"> ${el_i['text']} </text>`)}
                                      </svg>`)
 
         const result = await img.composite([{ input: textSVG }]).toBuffer()
@@ -95,9 +95,9 @@ router.post('/getInvitations', async function (req, res) {
     }
 
     invitationPaths.forEach((el, i) => {
-        const invitationData = fs.readFileSync(el)
+        const invitationPath = fs.readFileSync(el)
         const fileName = `invitations\\${req['body']['greetings_list'][i]}.jpg`
-        zip.file(fileName, invitationData)
+        zip.file(fileName, invitationPath)
     })
 
     zip.generateAsync({ type: 'nodebuffer' })

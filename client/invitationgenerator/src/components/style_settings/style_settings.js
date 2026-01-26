@@ -28,8 +28,7 @@ function Style_Settings(props) {
                     value: json[el]["Id"],
                     label: json[el]["font_name"],
                     file_name: json[el]["file_name"],
-                    size_coefficient: json[el]["size_coefficient"],
-
+                    size_coefficient: json[el]["size_coefficient"]
                 })
             ))
 
