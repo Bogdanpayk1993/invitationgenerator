@@ -92,7 +92,7 @@ function Edit_Template(props) {
     return (
         <div className="edit_template">
             <div className="edit_template_body">
-                <div style={{ marginBottom: `5px` }}>
+                <div style={{ marginBottom: `6px` }}>
                     {
                         invitation_text != null ?
                             Object.keys(invitation_text).length != 0 ?
@@ -103,7 +103,7 @@ function Edit_Template(props) {
                                                 <div className="row_container">
                                                     {
                                                         invitation_text[i]['text'].map((el_j, j) => (
-                                                            <p onClick={() => change_position(i, j)} style={{ fontSize: `${fontSize}px`, lineHeight: `${fontSize}px`, fontFamily: styles['file_name'], marginLeft: `${invitation_text[i]['text'][j][0]['marginLeft']}ch`, marginBottom: `${fontSize * invitation_text[i]['offset']}px` }}> {invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']} </p>
+                                                            <p onClick={() => change_position(i, j)} style={{ fontSize: `${fontSize}px`, lineHeight: '1', fontFamily: styles['file_name'], marginLeft: `${invitation_text[i]['text'][j][0]['marginLeft']}ch`, marginBottom: `${fontSize * invitation_text[i]['offset']}px` }}> {invitation_text[i]['text'][j][0]['body'] != "" ? invitation_text[i]['text'][j][0]['body'] : invitation_text[i]['text'][j][0]['placeholder']} </p>
                                                         ))
                                                     }
                                                 </div>
