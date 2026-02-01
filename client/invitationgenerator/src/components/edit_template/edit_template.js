@@ -92,7 +92,7 @@ function Edit_Template(props) {
     return (
         <div className="edit_template">
             <div className="edit_template_body">
-                <div style={{ marginBottom: `6px` }}>
+                <div>
                     {
                         invitation_text != null ?
                             Object.keys(invitation_text).length != 0 ?
