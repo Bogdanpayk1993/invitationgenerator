@@ -50,10 +50,10 @@ router.post('/getInvitations', async function (req, res) {
 
     let fontSize = (img_height / client_height) * client_font_size
     
-    let text_height = 8
-    let positions = [text_height + fontSize]
+    let text_height = fontSize
+    let positions = [fontSize / 1.4 + fontSize]
 
-    req['body']['invitation_text' ].forEach((el_i, i) => (
+    req['body']['invitation_text'].forEach((el_i, i) => (
         text_height += (fontSize + ((fontSize * el_i["offset"]))),
         positions.push(positions[i] + (fontSize + ((fontSize * el_i["offset"]))))
     ))
