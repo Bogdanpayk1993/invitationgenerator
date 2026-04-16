@@ -49,16 +49,14 @@ router.post('/getInvitations', async function (req, res) {
     let client_font_size = req['body']['client_font_size']
 
     let fontSize = (img_height / client_height) * client_font_size
-    
+
     let text_height = fontSize
-    let positions = [fontSize / 1.4 + fontSize]
+    let positions = [fontSize * 1.2]
 
     req['body']['invitation_text'].forEach((el_i, i) => (
         text_height += (fontSize + ((fontSize * el_i["offset"]))),
         positions.push(positions[i] + (fontSize + ((fontSize * el_i["offset"]))))
     ))
-
-    text_height += fontSize
 
     let zip = new JSZip()
     let invitationPaths = []
